@@ -4,4 +4,13 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;IDE0049</NoWarn>
+    <DocumentationFile>C:\Users\Blood\source\repos\TrafikverketdotNET\TrafikverketdotNET\TrafikverketdotNET.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="newtonsoft.json" Version="12.0.2" />
+  </ItemGroup>
+
 </Project>
