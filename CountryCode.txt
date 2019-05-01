@@ -1,0 +1,4 @@
+'DE' - Tyskland
+'DK' - Danmark
+'NO' - Norge
+'SE' - Sverige 
