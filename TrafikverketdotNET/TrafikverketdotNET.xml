@@ -7,7 +7,7 @@
         <member name="M:TrafikverketdotNET.BaseTrafikverket.#ctor(System.String)">
             <param name="APIKey">Användarens unika nyckel.</param>
         </member>
-        <member name="M:TrafikverketdotNET.BaseTrafikverket.GETResponse(System.Net.Http.HttpContent)">
+        <member name="M:TrafikverketdotNET.BaseTrafikverket.POSTRequest(System.Net.Http.HttpContent)">
             <param name="Content">The HTTP request content sent to the server.</param>
         </member>
         <member name="M:TrafikverketdotNET.Trafikverket.#ctor(System.String)">
