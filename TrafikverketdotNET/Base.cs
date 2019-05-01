@@ -38,6 +38,7 @@ namespace TrafikverketdotNET
         public Trafikverket(String APIKey) : base(APIKey) { }
 
         public TrainMessage TrainMessage { get => new TrainMessage(base.APIKey); }
+        public TrainStation TrainStation { get => new TrainStation(base.APIKey); }
     }
 
     public sealed class TrafficImpact

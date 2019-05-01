@@ -40,7 +40,7 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public DateTime EndDateTime => _EndDateTime;
         /// <summary>
-        /// Unikt id för händelsen.
+        /// Unikt id för händelsen. Fältet är nyckel för objektet.
         /// </summary>
         [JsonIgnore] public String EventId => _EventId;
         /// <summary>
@@ -67,7 +67,13 @@ namespace TrafikverketdotNET
         /// Händelsens starttid.
         /// </summary>
         [JsonIgnore] public DateTime StartDateTime => _StartDateTime;
+        /// <summary>
+        /// Geometrisk punkt i koordinatsystem. Fältet kan användas för geo-frågor.
+        /// </summary>
         [JsonIgnore] public Geometry Geometry => _Geometry;
+        /// <summary>
+        /// Påverkade stationer.
+        /// </summary>
         [JsonIgnore] public TrafficImpact[] TrafficImpact => _TrafficImpact;
 
         internal TrainMessageResponse() { }
