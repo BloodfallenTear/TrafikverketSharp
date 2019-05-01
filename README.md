@@ -11,18 +11,18 @@ This project currently only officially supports .NET Standard 2.0.
 This project uses one third-party dependency, which is Newtonsoft.Json [Newtonsoft.Json (12.0.1) ](https://www.newtonsoft.com/) by user [JamesNK](https://github.com/JamesNK). NuGet Link: [Newtonsoft.Json (12.0.1)](https://www.nuget.org/packages/Newtonsoft.Json/12.0.1/)
 
 ## To-Do List (API Implementation):
-- [ ] TrainMessage
-- [ ] TrainStation
-- [ ] TrainAnnouncement
-- [ ] Camera
-- [ ] FerryAnnouncement
-- [ ] FerryRoute
-- [ ] Icon
-- [ ] Parking
-- [ ] RoadCondition
-- [ ] RoadConditionOverview
-- [ ] Situation
-- [ ] WeatherStation
+- [x] TrainMessage - Tågtrafikmeddelande, exempelvis information kring banarbete, tågfel, anläggningsfel och dylikt.
+- [ ] TrainStation - Trafikplatser, både med och utan resandeutbyte.
+- [ ] TrainAnnouncement - Tidtabellsinformation, d.v.s information om tåg på trafikplatser (stationer, hållplatser) varje post motsvarar ett visst tåg vid respektive trafikplats.
+- [ ] Camera - Kameror för automatisk väglag och trafikflöde.
+- [ ] FerryAnnouncement - Ankomster och avgångar.
+- [ ] FerryRoute - Information om färjeleder.
+- [ ] Icon - Ikoner, exempelvis för använding i grafiska användargränssnitt och kartor.
+- [ ] Parking 
+- [ ] RoadCondition - Väglag.
+- [ ] RoadConditionOverview - Väglagsöversikter.
+- [ ] Situation - Situationer innehållandes händelser och störningar som trafikmeddelanden, vägarbeten, olyckor, restiktioner m.m.
+- [ ] WeatherStation - Väderstationer med mätdata.
 - [ ] TrafficSafetyCamera
 
 ## Code of Conduct
