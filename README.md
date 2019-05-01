@@ -29,4 +29,4 @@ This project uses one third-party dependency, which is Newtonsoft.Json [Newtonso
 This repository's Code of Conduct can be found here: [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details. © BloodfallenTear
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details. © BloodfallenTear 2019
