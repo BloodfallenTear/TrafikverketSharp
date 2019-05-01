@@ -18,6 +18,12 @@ namespace TrafikverketdotNET
         /// <param name="APIKey">Användarens unika nyckel.</param>
         protected BaseTrafikverket(String APIKey) { this.APIKey = APIKey; }
 
+        //public virtual async Task<T> ExecuteRequest<T>(String ObjectType)
+        //{
+        //    var resp = await POSTRequest(new StringContent($"<REQUEST><LOGIN authenticationkey=\"{APIKey}\"/><QUERY objecttype=\"{ObjectType}\"/></REQUEST>"));
+        //    return JsonConvert.DeserializeObject<T>(JObject.Parse(resp)[$"{ObjectType}"].ToString());
+        //}
+
         /// <param name="Content">The HTTP request content sent to the server.</param>
         protected async Task<String> POSTRequest(HttpContent Content)
         {
@@ -37,8 +43,9 @@ namespace TrafikverketdotNET
         /// <param name="APIKey">Användarens unika nyckel.</param>
         public Trafikverket(String APIKey) : base(APIKey) { }
 
-        public TrainMessage TrainMessage { get => new TrainMessage(base.APIKey); }
-        public TrainStation TrainStation { get => new TrainStation(base.APIKey); }
+        public TrainMessage TrainMessage => new TrainMessage(base.APIKey);
+        public TrainStation TrainStation => new TrainStation(base.APIKey);
+        public TrainAnnouncement TrainAnnouncement => new TrainAnnouncement(base.APIKey);
     }
 
     public sealed class Geometry

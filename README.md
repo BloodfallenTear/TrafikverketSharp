@@ -13,7 +13,7 @@ This project uses one third-party dependency, which is Newtonsoft.Json [Newtonso
 ## To-Do List (For more detailed progress head to [Projects](https://github.com/BloodfallenTear/Trafikverket.NET/projects/1)):
 - [x] TrainMessage - Tågtrafikmeddelande, exempelvis information kring banarbete, tågfel, anläggningsfel och dylikt.
 - [x] TrainStation - Trafikplatser, både med och utan resandeutbyte.
-- [ ] TrainAnnouncement - Tidtabellsinformation, d.v.s information om tåg på trafikplatser (stationer, hållplatser) varje post motsvarar ett visst tåg vid respektive trafikplats.
+- [x] TrainAnnouncement - Tidtabellsinformation, d.v.s information om tåg på trafikplatser (stationer, hållplatser) varje post motsvarar ett visst tåg vid respektive trafikplats.
 - [ ] Camera - Kameror för automatisk väglag och trafikflöde.
 - [ ] FerryAnnouncement - Ankomster och avgångar.
 - [ ] FerryRoute - Information om färjeleder.
