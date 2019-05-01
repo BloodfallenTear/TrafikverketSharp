@@ -41,26 +41,6 @@ namespace TrafikverketdotNET
         public TrainStation TrainStation { get => new TrainStation(base.APIKey); }
     }
 
-    public sealed class TrafficImpact
-    {
-        [JsonProperty("AffectedLocation")] internal String[] _AffectedLocation { get; set; }
-        [JsonProperty("FromLocation")] internal String[] _FromLocation { get; set; }
-        [JsonProperty("ToLocation")] internal String[] _ToLocation { get; set; }
-
-        /// <summary>
-        /// Påverkade stationer.
-        /// </summary>
-        [JsonIgnore] public String[] AffectedLocation => _AffectedLocation;
-        /// <summary>
-        /// Påverkad sträckas frånstation, för att avgöra om stationen är påverkad, se fältet AffectedLocation.
-        /// </summary>
-        [JsonIgnore] public String[] FromLocation => _FromLocation;
-        /// <summary>
-        /// Påverkad sträckas tillstation, för att avgöra om stationen är påverkad, se fältet AffectedLocation.
-        /// </summary>
-        [JsonIgnore] public String[] ToLocation => _ToLocation;
-    }
-
     public sealed class Geometry
     {
         [JsonProperty("SWEREF99TM")] internal String _SWEREF99TM { get; set; }
@@ -74,5 +54,7 @@ namespace TrafikverketdotNET
         /// Geometrisk punkt i koordinatsystem WGS84
         /// </summary>
         [JsonIgnore] public String WGS84 => _WGS84;
+
+        internal Geometry() { }
     }
 }

@@ -70,6 +70,8 @@ namespace TrafikverketdotNET
         /// Geometrisk punkt i koordinatsystem. Fältet kan användas för geo-frågor.
         /// </summary>
         [JsonIgnore] public Geometry Geometry => _Geometry;
+
+        internal TrainStationResponse() { }
     }
 
     public sealed class TrainStation : BaseTrafikverket
