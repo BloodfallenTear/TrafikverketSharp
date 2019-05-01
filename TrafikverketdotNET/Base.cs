@@ -1,7 +1,9 @@
 ﻿using System;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace TrafikverketdotNET
 {
@@ -10,39 +12,66 @@ namespace TrafikverketdotNET
 
     public abstract class BaseTrafikverket
     {
-        public const String URL = "https://api.trafikinfo.trafikverket.se/v1.3/data.json";
+        protected const String URL = "https://api.trafikinfo.trafikverket.se/v1.3/data.json";
+        protected readonly String APIKey;
 
-        protected async Task<String> GETResponse()
+        /// <param name="APIKey">Användarens unika nyckel.</param>
+        protected BaseTrafikverket(String APIKey) { this.APIKey = APIKey; }
+
+        /// <param name="Content">The HTTP request content sent to the server.</param>
+        protected async Task<String> POSTRequest(HttpContent Content)
         {
-            var stringContent = new StringContent("<REQUEST>" +
-                                                    "<LOGIN authenticationkey=\"8877ef94bb724ebdb119eedbc17840c4\" />" +
-                                                    "<QUERY objecttype=\"WeatherStation\">" +
-                                                        "<FILTER>" +
-                                                            "<EQ name=\"Name\" value=\"Högakustenbron Topp\" />" +
-                                                        "</FILTER>" +
-                                                        "<INCLUDE>Measurement.Air.Temp</INCLUDE>" +
-                                                        "<INCLUDE>Measurement.MeasureTime</INCLUDE>" +
-                                                    "</QUERY>" +
-                                                  "</REQUEST> ");
-
             using (var http = new HttpClient())
             {
-                HttpResponseMessage resp = null;
+                var resp = await http.PostAsync(URL, Content);
+                var respString = await resp.Content.ReadAsStringAsync();
 
-                try { resp = await http.PostAsync(URL, stringContent); }
-                catch (Exception e) { Console.WriteLine(e.Message); }
-                Console.WriteLine(await resp.Content.ReadAsStringAsync());
+                var data = JObject.Parse(respString);
+                return data["RESPONSE"]["RESULT"][0].ToString();
             }
-
-            return null;
         }
     }
-
-    public class X : BaseTrafikverket
+        
+    public sealed class Trafikverket : BaseTrafikverket
     {
-        public async Task Y()
-        {
-            await base.GETResponse();
-        }
+        /// <param name="APIKey">Användarens unika nyckel.</param>
+        public Trafikverket(String APIKey) : base(APIKey) { }
+
+        public TrainMessage TrainMessage { get => new TrainMessage(base.APIKey); }
+    }
+
+    public sealed class TrafficImpact
+    {
+        [JsonProperty("AffectedLocation")] internal String[] _AffectedLocation { get; set; }
+        [JsonProperty("FromLocation")] internal String[] _FromLocation { get; set; }
+        [JsonProperty("ToLocation")] internal String[] _ToLocation { get; set; }
+
+        /// <summary>
+        /// Påverkade stationer.
+        /// </summary>
+        [JsonIgnore] public String[] AffectedLocation => _AffectedLocation;
+        /// <summary>
+        /// Påverkad sträckas frånstation, för att avgöra om stationen är påverkad, se fältet AffectedLocation.
+        /// </summary>
+        [JsonIgnore] public String[] FromLocation => _FromLocation;
+        /// <summary>
+        /// Påverkad sträckas tillstation, för att avgöra om stationen är påverkad, se fältet AffectedLocation.
+        /// </summary>
+        [JsonIgnore] public String[] ToLocation => _ToLocation;
+    }
+
+    public sealed class Geometry
+    {
+        [JsonProperty("SWEREF99TM")] internal String _SWEREF99TM { get; set; }
+        [JsonProperty("WGS84")] internal String _WGS84 { get; set; }
+
+        /// <summary>
+        /// Geometrisk punkt i koordinatsystem SWEREF99TM.
+        /// </summary>
+        [JsonIgnore] public String SWEREF99TM => _SWEREF99TM;
+        /// <summary>
+        /// Geometrisk punkt i koordinatsystem WGS84
+        /// </summary>
+        [JsonIgnore] public String WGS84 => _WGS84;
     }
 }
