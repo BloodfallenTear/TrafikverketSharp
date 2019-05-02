@@ -10,6 +10,11 @@ namespace TrafikverketdotNET
     //SWEREF 99 TM
     //WGS 84
 
+    public interface IBaseTrafikverket<T>
+    {
+        Task<T> ExecuteRequest();
+    }
+
     public abstract class BaseTrafikverket
     {
         protected const String URL = "https://api.trafikinfo.trafikverket.se/v1.3/data.json";

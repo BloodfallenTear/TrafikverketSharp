@@ -269,7 +269,7 @@ namespace TrafikverketdotNET
         internal TrainAnnouncementResponse() { }
     }
 
-    public sealed class TrainAnnouncement : BaseTrafikverket
+    public sealed class TrainAnnouncement : BaseTrafikverket, IBaseTrafikverket<TrainAnnouncementResponse[]>
     {
         public TrainAnnouncement(String APIKey) : base(APIKey) { }
 

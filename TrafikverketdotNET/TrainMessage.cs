@@ -101,7 +101,7 @@ namespace TrafikverketdotNET
         internal TrainMessageResponse() { }
     }
 
-    public sealed class TrainMessage : BaseTrafikverket
+    public sealed class TrainMessage : BaseTrafikverket, IBaseTrafikverket<TrainMessageResponse[]>
     {
         public TrainMessage(string APIKey) : base(APIKey) { }
 

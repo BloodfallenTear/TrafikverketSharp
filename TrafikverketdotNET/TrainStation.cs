@@ -74,7 +74,7 @@ namespace TrafikverketdotNET
         internal TrainStationResponse() { }
     }
 
-    public sealed class TrainStation : BaseTrafikverket
+    public sealed class TrainStation : BaseTrafikverket, IBaseTrafikverket<TrainStationResponse[]>
     {
         public TrainStation(String APIKey) : base(APIKey) { }
 
