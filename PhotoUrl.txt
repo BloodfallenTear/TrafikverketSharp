@@ -1,4 +1,3 @@
-Ytterligare funktionalitet:
 Följande queryparametrar kan användas efter urlen till bilden.
 maxage - Ange hur gamla bilder i minuter du tillåter. Är bilden äldre än det du anger returneras istället en bild med texten en "aktuell bild saknas". Ex: maxage=15 visar endast bilden om den är nyare än 15 minuter
 type=fullsize - Om bilden har en högupplöst bild (anges i HasFullSizePhoto) kan man få den genom att ange type=fullsize
