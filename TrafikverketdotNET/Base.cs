@@ -51,6 +51,8 @@ namespace TrafikverketdotNET
         public TrainMessage TrainMessage => new TrainMessage(base.APIKey);
         public TrainStation TrainStation => new TrainStation(base.APIKey);
         public TrainAnnouncement TrainAnnouncement => new TrainAnnouncement(base.APIKey);
+
+        public Camera Camera => new Camera(base.APIKey);
     }
 
     public sealed class Geometry
