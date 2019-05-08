@@ -113,9 +113,9 @@ namespace TrafikverketdotNET
     {
         public Camera(String APIKey) : base(APIKey) { }
 
-        public async Task<CameraResponse[]> ExecuteRequest()
+        public CameraResponse[] ExecuteRequest()
         {
-            var resp = await base.POSTRequest(new StringContent($"<REQUEST><LOGIN authenticationkey=\"{base.APIKey}\"/><QUERY objecttype=\"Camera\" schemaversion=\"1\"/></REQUEST>"));
+            var resp = base.POSTRequest($"<REQUEST><LOGIN authenticationkey=\"{base.APIKey}\"/><QUERY objecttype=\"Camera\" schemaversion=\"1\"/></REQUEST>");
             return JsonConvert.DeserializeObject<CameraResponse[]>(JObject.Parse(resp)["Camera"].ToString());
         }
     }

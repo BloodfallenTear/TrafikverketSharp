@@ -293,9 +293,9 @@ namespace TrafikverketdotNET
     {
         public TrainAnnouncement(String APIKey) : base(APIKey) { }
 
-        public async Task<TrainAnnouncementResponse[]> ExecuteRequest() 
+        public TrainAnnouncementResponse[] ExecuteRequest() 
         {
-            var resp = await base.POSTRequest(new StringContent($"<REQUEST><LOGIN authenticationkey=\"{base.APIKey}\"/><QUERY objecttype=\"TrainAnnouncement\" schemaversion=\"1.4\"/></REQUEST>"));
+            var resp = base.POSTRequest($"<REQUEST><LOGIN authenticationkey=\"{base.APIKey}\"/><QUERY objecttype=\"TrainAnnouncement\" schemaversion=\"1.4\"/></REQUEST>");
             return JsonConvert.DeserializeObject<TrainAnnouncementResponse[]>(JObject.Parse(resp)["TrainAnnouncement"].ToString());
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 using Newtonsoft.Json;
@@ -15,24 +16,25 @@ namespace TrafikverketdotNET
         /// <param name="APIKey">Användarens unika nyckel.</param>
         protected BaseTrafikverket(String APIKey) { this.APIKey = APIKey; }
 
-        public virtual async Task<T> ExecuteRequest(String ObjectType, String SchemaVersion)
+        public virtual T ExecuteRequest(String ObjectType, String SchemaVersion)
         {
-            var resp = await POSTRequest(new StringContent($"<REQUEST>" +
-                                                            $"<LOGIN authenticationkey=\"{APIKey}\"/>" +
-                                                            $"<QUERY objecttype=\"{ObjectType}\" schemaversion=\"{SchemaVersion}\"/>" +
-                                                           $"</REQUEST>"));
+            var resp = POSTRequest($"<REQUEST>" +
+                                            $"<LOGIN authenticationkey=\"{APIKey}\"/>" +
+                                            $"<QUERY objecttype=\"{ObjectType}\" schemaversion=\"{SchemaVersion}\"/>" +
+                                         $"</REQUEST>");
             return JsonConvert.DeserializeObject<T>(JObject.Parse(resp)[$"{ObjectType}"].ToString());
         }
 
-        /// <param name="Content">The HTTP request content sent to the server.</param>
-        protected async Task<String> POSTRequest(HttpContent Content)
+        /// <param name="RequestQuery">The HTTP request content sent to the server.</param>
+        protected String POSTRequest(String RequestQuery)
         {
             try
             {
+                var content = new StringContent(RequestQuery, Encoding.UTF8, "application/xml");
                 using (var http = new HttpClient())
                 {
-                    var resp = http.PostAsync(URL, Content).Result;
-                    var respString = await resp.Content.ReadAsStringAsync();
+                    var resp = http.PostAsync(URL, content).Result;
+                    var respString = resp.Content.ReadAsStringAsync().Result;
 
                     var data = JObject.Parse(respString);
                     return data["RESPONSE"]["RESULT"][0].ToString();

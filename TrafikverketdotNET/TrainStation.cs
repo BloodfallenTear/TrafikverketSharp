@@ -78,9 +78,9 @@ namespace TrafikverketdotNET
     {
         public TrainStation(String APIKey) : base(APIKey) { }
 
-        public async Task<TrainStationResponse[]> ExecuteRequest()
+        public TrainStationResponse[] ExecuteRequest()
         {
-            var resp = await base.POSTRequest(new StringContent($"<REQUEST><LOGIN authenticationkey=\"{base.APIKey}\"/><QUERY objecttype=\"TrainStation\" schemaversion=\"1\"/></REQUEST>"));
+            var resp = base.POSTRequest($"<REQUEST><LOGIN authenticationkey=\"{base.APIKey}\"/><QUERY objecttype=\"TrainStation\" schemaversion=\"1\"/></REQUEST>");
             return JsonConvert.DeserializeObject<TrainStationResponse[]>(JObject.Parse(resp)["TrainStation"].ToString());
         }
     }
