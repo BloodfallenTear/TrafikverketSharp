@@ -123,5 +123,8 @@ namespace TrafikverketdotNET
         public TrainMessage(string APIKey) : base(APIKey) { }
 
         public override TrainMessageResponse[] ExecuteRequest() => ExecuteRequest("TrainMessage", "1.4");
+
+        /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
+        public override TrainMessageResponse[] ExecuteRequest(String XMLRequest) => ExecuteRequest("TrainMessage", "1.4", XMLRequest);
     }
 }

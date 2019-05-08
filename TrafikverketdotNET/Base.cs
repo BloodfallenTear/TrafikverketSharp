@@ -8,6 +8,16 @@ using Newtonsoft.Json.Linq;
 
 namespace TrafikverketdotNET
 {
+    public abstract class TrafikverketRequest
+    {
+
+    }
+
+    public class TrainStationRequest : TrafikverketRequest
+    {
+
+    }
+
     public abstract class BaseTrafikverket<T> where T : class
     {
         protected const String URL = "https://api.trafikinfo.trafikverket.se/v2/data.json";
@@ -17,12 +27,21 @@ namespace TrafikverketdotNET
         protected BaseTrafikverket(String APIKey) { this.APIKey = APIKey; }
 
         public abstract T ExecuteRequest();
+        public abstract T ExecuteRequest(String XMLRequest);
+        //public abstract T ExecuteRequest(TrafikverketRequest Request);
+
         protected virtual T ExecuteRequest(String ObjectType, String SchemaVersion)
         {
             var resp = POSTRequest($"<REQUEST>" +
                                     $"<LOGIN authenticationkey=\"{APIKey}\"/>" +
                                     $"<QUERY objecttype=\"{ObjectType}\" schemaversion=\"{SchemaVersion}\"/>" +
                                    $"</REQUEST>");
+            return JsonConvert.DeserializeObject<T>(JObject.Parse(resp)[$"{ObjectType}"].ToString());
+        }
+
+        protected virtual T ExecuteRequest(String ObjectType, String SchemaVersion, String RequestQuery)
+        {
+            var resp = POSTRequest(RequestQuery);
             return JsonConvert.DeserializeObject<T>(JObject.Parse(resp)[$"{ObjectType}"].ToString());
         }
 

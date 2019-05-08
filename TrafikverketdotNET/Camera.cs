@@ -121,5 +121,8 @@ namespace TrafikverketdotNET
         public Camera(String APIKey) : base(APIKey) { }
 
         public override CameraResponse[] ExecuteRequest() => ExecuteRequest("Camera", "1");
+
+        /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
+        public override CameraResponse[] ExecuteRequest(String XMLRequest) => ExecuteRequest("Camera", "1", XMLRequest);
     }
 }
