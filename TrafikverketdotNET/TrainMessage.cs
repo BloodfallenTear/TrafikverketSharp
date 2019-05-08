@@ -111,8 +111,15 @@ namespace TrafikverketdotNET
         internal TrainMessageResponse() { }
     }
 
+    /// <summary>
+    /// Tågtrafikmeddelande, exempelvis information kring banarbete, tågfel, anläggningsfel och dylikt.
+    /// </summary>
     public sealed class TrainMessage : BaseTrafikverket<TrainMessageResponse[]>
     {
+        /// <summary>
+        /// Tågtrafikmeddelande, exempelvis information kring banarbete, tågfel, anläggningsfel och dylikt.
+        /// </summary>
+        /// <param name="APIKey">Användarens unika nyckel.</param>
         public TrainMessage(string APIKey) : base(APIKey) { }
 
         public TrainMessageResponse[] ExecuteRequest()

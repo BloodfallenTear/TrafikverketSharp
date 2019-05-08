@@ -109,8 +109,15 @@ namespace TrafikverketdotNET
         internal CameraResponse() { }
     }
 
+    /// <summary>
+    /// Kameror för automatisk väglag och trafikflöde.
+    /// </summary>
     public sealed class Camera : BaseTrafikverket<CameraResponse[]>
     {
+        /// <summary>
+        /// Kameror för automatisk väglag och trafikflöde.
+        /// </summary>
+        /// <param name="APIKey">Användarens unika nyckel.</param>
         public Camera(String APIKey) : base(APIKey) { }
 
         public CameraResponse[] ExecuteRequest()

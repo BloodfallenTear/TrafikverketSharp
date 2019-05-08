@@ -289,8 +289,15 @@ namespace TrafikverketdotNET
         internal TrainAnnouncementResponse() { }
     }
 
+    /// <summary>
+    /// Tidtabellsinformation, d.v.s information om tåg på trafikplatser (stationer, hållplatser) varje post motsvarar ett visst tåg vid respektive trafikplats.
+    /// </summary>
     public sealed class TrainAnnouncement : BaseTrafikverket<TrainAnnouncementResponse[]>
     {
+        /// <summary>
+        /// Tidtabellsinformation, d.v.s information om tåg på trafikplatser (stationer, hållplatser) varje post motsvarar ett visst tåg vid respektive trafikplats.
+        /// </summary>
+        /// <param name="APIKey">Användarens unika nyckel.</param>
         public TrainAnnouncement(String APIKey) : base(APIKey) { }
 
         public TrainAnnouncementResponse[] ExecuteRequest() 

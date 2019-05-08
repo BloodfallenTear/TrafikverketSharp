@@ -19,9 +19,9 @@ namespace TrafikverketdotNET
         public virtual T ExecuteRequest(String ObjectType, String SchemaVersion)
         {
             var resp = POSTRequest($"<REQUEST>" +
-                                            $"<LOGIN authenticationkey=\"{APIKey}\"/>" +
-                                            $"<QUERY objecttype=\"{ObjectType}\" schemaversion=\"{SchemaVersion}\"/>" +
-                                         $"</REQUEST>");
+                                    $"<LOGIN authenticationkey=\"{APIKey}\"/>" +
+                                    $"<QUERY objecttype=\"{ObjectType}\" schemaversion=\"{SchemaVersion}\"/>" +
+                                   $"</REQUEST>");
             return JsonConvert.DeserializeObject<T>(JObject.Parse(resp)[$"{ObjectType}"].ToString());
         }
 

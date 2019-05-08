@@ -74,8 +74,15 @@ namespace TrafikverketdotNET
         internal TrainStationResponse() { }
     }
 
+    /// <summary>
+    /// Trafikplatser, både med och utan resandeutbyte.
+    /// </summary>
     public sealed class TrainStation : BaseTrafikverket<TrainStationResponse[]>
     {
+        /// <summary>
+        /// Trafikplatser, både med och utan resandeutbyte.
+        /// </summary>
+        /// <param name="APIKey">Användarens unika nyckel.</param>
         public TrainStation(String APIKey) : base(APIKey) { }
 
         public TrainStationResponse[] ExecuteRequest()
