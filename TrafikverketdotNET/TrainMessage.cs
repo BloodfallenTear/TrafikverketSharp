@@ -36,10 +36,12 @@ namespace TrafikverketdotNET
         [JsonProperty("Deleted")] internal Boolean _Deleted { get; set; }
         [JsonProperty("EndDateTime")] internal DateTime _EndDateTime { get; set; }
         [JsonProperty("EventId")] internal String _EventId { get; set; }
+        [JsonProperty("ExpectTrafficImpact")] internal Boolean _ExpectTrafficImpact { get; set; }
         [JsonProperty("ExternalDescription")] internal String _ExternalDescription { get; set; }
         [JsonProperty("Header")] internal String _Header { get; set; }
         [JsonProperty("LastUpdateDateTime")] internal DateTime _LastUpdateDateTime { get; set; }
         [JsonProperty("ModifiedTime")] internal DateTime _ModifiedTime { get; set; }
+        [JsonProperty("PrognosticatedEndDateTimeTrafficImpact")] internal DateTime _PrognosticatedEndDateTimeTrafficImpact { get; set; }
         [JsonProperty("ReasonCodeText")] internal String _ReasonCodeText { get; set; }
         [JsonProperty("StartDateTime")] internal DateTime _StartDateTime { get; set; }
         [JsonProperty("Geometry")] internal Geometry _Geometry { get; set; }
@@ -66,6 +68,10 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public String EventId => _EventId;
         /// <summary>
+        /// Händelse kommer förmodligen att påverka trafiken, men trafikpåverkan och prognostiserad sluttidpunkt för trafikpåverkan är ännu inte specificerad.
+        /// </summary>
+        [JsonIgnore] public Boolean ExpectTrafficImpact => _ExpectTrafficImpact;
+        /// <summary>
         /// Informationstext.
         /// </summary>
         [JsonIgnore] public String ExternalDescription => _ExternalDescription;
@@ -81,6 +87,10 @@ namespace TrafikverketdotNET
         /// Tidpunkt då dataposten ändrades.
         /// </summary>
         [JsonIgnore] public DateTime ModifiedTime => _ModifiedTime;
+        /// <summary>
+        /// Prognos för då händelsen inte längre väntas påverka trafiken.
+        /// </summary>
+        [JsonIgnore] public DateTime PrognosticatedEndDateTimeTrafficImpact => _PrognosticatedEndDateTimeTrafficImpact;
         /// <summary>
         /// Händelsens eventuella orsak.
         /// </summary>
@@ -101,13 +111,13 @@ namespace TrafikverketdotNET
         internal TrainMessageResponse() { }
     }
 
-    public sealed class TrainMessage : BaseTrafikverket, IBaseTrafikverket<TrainMessageResponse[]>
+    public sealed class TrainMessage : BaseTrafikverket<TrainMessageResponse[]>
     {
         public TrainMessage(string APIKey) : base(APIKey) { }
 
         public async Task<TrainMessageResponse[]> ExecuteRequest()
         {
-            var resp = await base.POSTRequest(new StringContent($"<REQUEST><LOGIN authenticationkey=\"{base.APIKey}\"/><QUERY objecttype=\"TrainMessage\"/></REQUEST>"));
+            var resp = await base.POSTRequest(new StringContent($"<REQUEST><LOGIN authenticationkey=\"{base.APIKey}\"/><QUERY objecttype=\"TrainMessage\" schemaversion=\"1.4\"/></REQUEST>"));
             return JsonConvert.DeserializeObject<TrainMessageResponse[]>(JObject.Parse(resp)["TrainMessage"].ToString());
         }
     }

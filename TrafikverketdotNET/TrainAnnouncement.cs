@@ -125,16 +125,20 @@ namespace TrafikverketdotNET
         [JsonProperty("MobileWebLink")] internal String _MobileWebLink { get; set; }
         [JsonProperty("ModifiedTime")] internal DateTime _ModifiedTime { get; set; }
         [JsonProperty("NewEquipment")] internal Int32 _NewEquipment { get; set; }
+        [JsonProperty("Operator")] internal String _Operator { get; set; }
         [JsonProperty("OtherInformation")] internal String[] _OtherInformation { get; set; }
         [JsonProperty("PlannedEstimatedTimeAtLocation")] internal DateTime _PlannedEstimatedTimeAtLocation { get; set; }
         [JsonProperty("PlannedEstimatedTimeAtLocationIsValid")] internal Boolean _PlannedEstimatedTimeAtLocationIsValid { get; set; }
         [JsonProperty("ProductInformation")] internal String[] _ProductInformation { get; set; }
         [JsonProperty("ScheduledDepartureDateTime")] internal DateTime _ScheduledDepartureDateTime { get; set; }
         [JsonProperty("Service")] internal String[] _Service { get; set; }
+        [JsonProperty("TechnicalDateTime")] internal DateTime _TechnicalDateTime { get; set; }
         [JsonProperty("TechnicalTrainIdent")] internal String _TechnicalTrainIdent { get; set; }
         [JsonProperty("TimeAtLocation")] internal DateTime _TimeAtLocation { get; set; }
+        [JsonProperty("TimeAtLocationWithSeconds")] internal DateTime _TimeAtLocationWithSeconds { get; set; }
         [JsonProperty("TrackAtLocation")] internal String _TrackAtLocation { get; set; }
         [JsonProperty("TrainComposition")] internal String[] _TrainComposition { get; set; }
+        [JsonProperty("TrainOwner")] internal String _TrainOwner { get; set; }
         [JsonProperty("TypeOfTraffic")] internal String _TypeOfTraffic { get; set; }
         [JsonProperty("WebLink")] internal String _WebLink { get; set; }
         [JsonProperty("WebLinkName")] internal String _WebLinkName { get; set; }
@@ -210,6 +214,10 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public Int32 NewEquipment => _NewEquipment;
         /// <summary>
+        /// Det järnvägsföretag som utför järnvägstrafik, alltså kör tåget, för en trafikorganisatör.
+        /// </summary>
+        [JsonIgnore] public String Operator => _Operator;
+        /// <summary>
         /// Övrig annonseringsinformation, ex. "Trevlig resa!", "Bakre fordon går låst!", "Ingen påstigning".
         /// </summary>
         [JsonIgnore] public String[] OtherInformation => _OtherInformation;
@@ -234,6 +242,10 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public String[] Service => _Service;
         /// <summary>
+        /// Teknisk tid
+        /// </summary>
+        [JsonIgnore] public DateTime TechnicalDateTime => _TechnicalDateTime;
+        /// <summary>
         /// Tekniskt tågnummer.
         /// </summary>
         [JsonIgnore] public String TechnicalTrainIdent => _TechnicalTrainIdent;
@@ -242,6 +254,10 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public DateTime TimeAtLocation => _TimeAtLocation;
         /// <summary>
+        /// När tåget har ankommit eller avgått, med sekunder
+        /// </summary>
+        [JsonIgnore] public DateTime TimeAtLocationWithSeconds => _TimeAtLocationWithSeconds;
+        /// <summary>
         /// Spår.
         /// </summary>
         [JsonIgnore] public String TrackAtLocation => _TrackAtLocation;
@@ -249,6 +265,10 @@ namespace TrafikverketdotNET
         /// Tågsammansättning, ex: "Vagnsordning 7, 6, 5, 4, 2, 1".
         /// </summary>
         [JsonIgnore] public String[] TrainComposition => _TrainComposition;
+        /// <summary>
+        /// Ägaren av det aktuella tågläget.
+        /// </summary>
+        [JsonIgnore] public String TrainOwner => _TrainOwner;
         /// <summary>
         /// Trafiktypen, ex. "Tåg", "Direktbuss", "Extrabuss", "Ersättningsbuss", "Taxi".
         /// </summary>
@@ -269,13 +289,13 @@ namespace TrafikverketdotNET
         internal TrainAnnouncementResponse() { }
     }
 
-    public sealed class TrainAnnouncement : BaseTrafikverket, IBaseTrafikverket<TrainAnnouncementResponse[]>
+    public sealed class TrainAnnouncement : BaseTrafikverket<TrainAnnouncementResponse[]>
     {
         public TrainAnnouncement(String APIKey) : base(APIKey) { }
 
         public async Task<TrainAnnouncementResponse[]> ExecuteRequest() 
         {
-            var resp = await base.POSTRequest(new StringContent($"<REQUEST><LOGIN authenticationkey=\"{base.APIKey}\"/><QUERY objecttype=\"TrainAnnouncement\"/></REQUEST>"));
+            var resp = await base.POSTRequest(new StringContent($"<REQUEST><LOGIN authenticationkey=\"{base.APIKey}\"/><QUERY objecttype=\"TrainAnnouncement\" schemaversion=\"1.4\"/></REQUEST>"));
             return JsonConvert.DeserializeObject<TrainAnnouncementResponse[]>(JObject.Parse(resp)["TrainAnnouncement"].ToString());
         }
     }

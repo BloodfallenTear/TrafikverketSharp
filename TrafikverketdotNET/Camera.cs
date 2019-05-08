@@ -109,13 +109,13 @@ namespace TrafikverketdotNET
         internal CameraResponse() { }
     }
 
-    public sealed class Camera : BaseTrafikverket, IBaseTrafikverket<CameraResponse[]>
+    public sealed class Camera : BaseTrafikverket<CameraResponse[]>
     {
         public Camera(String APIKey) : base(APIKey) { }
 
         public async Task<CameraResponse[]> ExecuteRequest()
         {
-            var resp = await base.POSTRequest(new StringContent($"<REQUEST><LOGIN authenticationkey=\"{base.APIKey}\"/><QUERY objecttype=\"Camera\"/></REQUEST>"));
+            var resp = await base.POSTRequest(new StringContent($"<REQUEST><LOGIN authenticationkey=\"{base.APIKey}\"/><QUERY objecttype=\"Camera\" schemaversion=\"1\"/></REQUEST>"));
             return JsonConvert.DeserializeObject<CameraResponse[]>(JObject.Parse(resp)["Camera"].ToString());
         }
     }

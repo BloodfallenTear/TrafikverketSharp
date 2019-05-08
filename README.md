@@ -1,4 +1,4 @@
-# Trafikverket.NET
+# Trafikverket.NET v0.5.0
 A C# .NET Standard library for Trafikverket.
 
 ## Documentation
@@ -11,19 +11,26 @@ This project currently only officially supports .NET Standard 2.0.
 This project uses one third-party dependency, which is Newtonsoft.Json [Newtonsoft.Json (12.0.2)](https://www.newtonsoft.com/) by user [JamesNK](https://github.com/JamesNK). NuGet Link: [Newtonsoft.Json (12.0.2)](https://www.nuget.org/packages/Newtonsoft.Json/12.0.2/). [Insight](https://github.com/BloodfallenTear/Trafikverket.NET/network/dependencies).
 
 ## To-Do List (For more detailed progress head to [Projects](https://github.com/BloodfallenTear/Trafikverket.NET/projects/1)):
+- [x] TrainAnnouncement - Tidtabellsinformation, d.v.s information om tåg på trafikplatser (stationer, hållplatser) varje post motsvarar ett visst tåg vid respektive trafikplats.
 - [x] TrainMessage - Tågtrafikmeddelande, exempelvis information kring banarbete, tågfel, anläggningsfel och dylikt.
 - [x] TrainStation - Trafikplatser, både med och utan resandeutbyte.
-- [x] TrainAnnouncement - Tidtabellsinformation, d.v.s information om tåg på trafikplatser (stationer, hållplatser) varje post motsvarar ett visst tåg vid respektive trafikplats.
 - [x] Camera - Kameror för automatisk väglag och trafikflöde.
 - [ ] FerryAnnouncement - Ankomster och avgångar.
 - [ ] FerryRoute - Information om färjeleder.
 - [ ] Icon - Ikoner, exempelvis för använding i grafiska användargränssnitt och kartor.
-- [ ] Parking 
-- [ ] RoadCondition - Väglag.
+- [ ] Parking - Information om rastplatser och parkeringar.
+- [ ] RoadCondition - Information om väglag.
 - [ ] RoadConditionOverview - Väglagsöversikter.
 - [ ] Situation - Situationer innehållandes händelser och störningar som trafikmeddelanden, vägarbeten, olyckor, restiktioner m.m.
+- [ ] TrafficFlow - Uppmätta eller härledda värden relaterat till trafik eller enskilda fordonets rörelser på en viss sektion eller vid en specifik punkt på vägnätet.
+- [ ] TrafficSafetyCamera - Trafiksäkerhetskameror.
+- [ ] TravelTimeRoute - Restider i större städer eller i högbelastade trafiksystem. Beräkning av restid baseras på data från detektorer som är utplacerade längs bestämda rutter.
 - [ ] WeatherStation - Väderstationer med mätdata.
-- [ ] TrafficSafetyCamera
+- [ ] MeasurementData100 - Mätdata per 100 meter. Ett medelvärde har räknats fram för 100 meter baserat på de ingående 20-metersvärdena (se mer info i MeasurementData20). Observera att det inte finns 100-metersdata för alla våra 20-metersvariabler. Källsystem är PMS-systemen.
+- [ ] MeasurementData20 - Mätdata per 20 meter. Data från vägytemätningar med laserscanning alternativt som beräknats fram baserat på dem. Mätningarna utförs årligen eller vartannat år beroende på trafikmängd. Senast gällande mätdata finns att hämta dvs ej historik. Källsystem är PMS-systemen.
+- [ ] PavementData - Beläggningsdata från PMS-systemen kombinerat med relevant vägdata från NVDB. Vi kan ej garantera att det är helt aktuellt data från NVDB. Datum för när data hämtades framgår av posten TimeStamp. För att se källa för respektive data, gå till fliken Om variabler i systemet PMSV3.
+- [ ] RoadData - Vägdata från NVDB som är relevant tillsammans med PMS-systemens beläggnings och mätdata. Vi kan ej garantera att det är dagsaktuell data från NVDB. Datum för när data hämtades framgår av posten TimeStamp. För att se källa för respektive data, gå till fliken Om variabler i systemet PMSV3.
+- [ ] RoadGeometry - Vägens geometri relaterat till det data vi tillhandahåller från PMS-systemen med data om beläggningar och mätdata. Vi kan ej garantera att geometrin är dagsaktuell från NVDB. Datum för när data hämtades framgår av posten TimeStamp. 
 
 ## Code of Conduct
 This repository's Code of Conduct can be found here: [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)

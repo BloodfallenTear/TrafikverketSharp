@@ -74,13 +74,13 @@ namespace TrafikverketdotNET
         internal TrainStationResponse() { }
     }
 
-    public sealed class TrainStation : BaseTrafikverket, IBaseTrafikverket<TrainStationResponse[]>
+    public sealed class TrainStation : BaseTrafikverket<TrainStationResponse[]>
     {
         public TrainStation(String APIKey) : base(APIKey) { }
 
         public async Task<TrainStationResponse[]> ExecuteRequest()
         {
-            var resp = await base.POSTRequest(new StringContent($"<REQUEST><LOGIN authenticationkey=\"{base.APIKey}\"/><QUERY objecttype=\"TrainStation\"/></REQUEST>"));
+            var resp = await base.POSTRequest(new StringContent($"<REQUEST><LOGIN authenticationkey=\"{base.APIKey}\"/><QUERY objecttype=\"TrainStation\" schemaversion=\"1\"/></REQUEST>"));
             return JsonConvert.DeserializeObject<TrainStationResponse[]>(JObject.Parse(resp)["TrainStation"].ToString());
         }
     }

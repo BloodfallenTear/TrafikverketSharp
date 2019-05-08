@@ -7,52 +7,53 @@ using Newtonsoft.Json.Linq;
 
 namespace TrafikverketdotNET
 {
-    //SWEREF 99 TM
-    //WGS 84
-
-    public interface IBaseTrafikverket<T>
+    public abstract class BaseTrafikverket<T> where T : class
     {
-        Task<T> ExecuteRequest();
-    }
-
-    public abstract class BaseTrafikverket
-    {
-        protected const String URL = "https://api.trafikinfo.trafikverket.se/v1.3/data.json";
+        protected const String URL = "https://api.trafikinfo.trafikverket.se/v2/data.json";
         protected readonly String APIKey;
 
         /// <param name="APIKey">Användarens unika nyckel.</param>
         protected BaseTrafikverket(String APIKey) { this.APIKey = APIKey; }
 
-        //public virtual async Task<T> ExecuteRequest<T>(String ObjectType)
-        //{
-        //    var resp = await POSTRequest(new StringContent($"<REQUEST><LOGIN authenticationkey=\"{APIKey}\"/><QUERY objecttype=\"{ObjectType}\"/></REQUEST>"));
-        //    return JsonConvert.DeserializeObject<T>(JObject.Parse(resp)[$"{ObjectType}"].ToString());
-        //}
+        public virtual async Task<T> ExecuteRequest(String ObjectType, String SchemaVersion)
+        {
+            var resp = await POSTRequest(new StringContent($"<REQUEST>" +
+                                                            $"<LOGIN authenticationkey=\"{APIKey}\"/>" +
+                                                            $"<QUERY objecttype=\"{ObjectType}\" schemaversion=\"{SchemaVersion}\"/>" +
+                                                           $"</REQUEST>"));
+            return JsonConvert.DeserializeObject<T>(JObject.Parse(resp)[$"{ObjectType}"].ToString());
+        }
 
         /// <param name="Content">The HTTP request content sent to the server.</param>
         protected async Task<String> POSTRequest(HttpContent Content)
         {
-            using (var http = new HttpClient())
+            try
             {
-                var resp = await http.PostAsync(URL, Content);
-                var respString = await resp.Content.ReadAsStringAsync();
+                using (var http = new HttpClient())
+                {
+                    var resp = http.PostAsync(URL, Content).Result;
+                    var respString = await resp.Content.ReadAsStringAsync();
 
-                var data = JObject.Parse(respString);
-                return data["RESPONSE"]["RESULT"][0].ToString();
+                    var data = JObject.Parse(respString);
+                    return data["RESPONSE"]["RESULT"][0].ToString();
+                }
             }
+            catch (HttpRequestException err) { throw new Exception(err.Message, err.InnerException); }
         }
     }
         
-    public sealed class Trafikverket : BaseTrafikverket
+    public sealed class Trafikverket
     {
+        private readonly String APIKey;
+
         /// <param name="APIKey">Användarens unika nyckel.</param>
-        public Trafikverket(String APIKey) : base(APIKey) { }
+        public Trafikverket(String APIKey) { this.APIKey = APIKey; }
 
-        public TrainMessage TrainMessage => new TrainMessage(base.APIKey);
-        public TrainStation TrainStation => new TrainStation(base.APIKey);
-        public TrainAnnouncement TrainAnnouncement => new TrainAnnouncement(base.APIKey);
+        public TrainMessage TrainMessage => new TrainMessage(APIKey);
+        public TrainStation TrainStation => new TrainStation(APIKey);
+        public TrainAnnouncement TrainAnnouncement => new TrainAnnouncement(APIKey);
 
-        public Camera Camera => new Camera(base.APIKey);
+        public Camera Camera => new Camera(APIKey);
     }
 
     public sealed class Geometry
