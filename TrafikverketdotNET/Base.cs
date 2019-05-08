@@ -16,7 +16,8 @@ namespace TrafikverketdotNET
         /// <param name="APIKey">Användarens unika nyckel.</param>
         protected BaseTrafikverket(String APIKey) { this.APIKey = APIKey; }
 
-        public virtual T ExecuteRequest(String ObjectType, String SchemaVersion)
+        public abstract T ExecuteRequest();
+        protected virtual T ExecuteRequest(String ObjectType, String SchemaVersion)
         {
             var resp = POSTRequest($"<REQUEST>" +
                                     $"<LOGIN authenticationkey=\"{APIKey}\"/>" +
@@ -51,10 +52,22 @@ namespace TrafikverketdotNET
         /// <param name="APIKey">Användarens unika nyckel.</param>
         public Trafikverket(String APIKey) { this.APIKey = APIKey; }
 
-        public TrainMessage TrainMessage => new TrainMessage(APIKey);
-        public TrainStation TrainStation => new TrainStation(APIKey);
+        /// <summary>
+        /// Tidtabellsinformation, d.v.s information om tåg på trafikplatser (stationer, hållplatser) varje post motsvarar ett visst tåg vid respektive trafikplats.
+        /// </summary>
         public TrainAnnouncement TrainAnnouncement => new TrainAnnouncement(APIKey);
-
+        /// <summary>
+        /// Tågtrafikmeddelande, exempelvis information kring banarbete, tågfel, anläggningsfel och dylikt.
+        /// </summary>
+        public TrainMessage TrainMessage => new TrainMessage(APIKey);
+        /// <summary>
+        /// Trafikplatser, både med och utan resandeutbyte.
+        /// </summary>
+        public TrainStation TrainStation => new TrainStation(APIKey);
+        
+        /// <summary>
+        /// Kameror för automatisk väglag och trafikflöde.
+        /// </summary>
         public Camera Camera => new Camera(APIKey);
     }
 

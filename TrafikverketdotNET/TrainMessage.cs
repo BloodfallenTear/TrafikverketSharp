@@ -122,10 +122,6 @@ namespace TrafikverketdotNET
         /// <param name="APIKey">Användarens unika nyckel.</param>
         public TrainMessage(string APIKey) : base(APIKey) { }
 
-        public TrainMessageResponse[] ExecuteRequest()
-        {
-            var resp = base.POSTRequest($"<REQUEST><LOGIN authenticationkey=\"{base.APIKey}\"/><QUERY objecttype=\"TrainMessage\" schemaversion=\"1.4\"/></REQUEST>");
-            return JsonConvert.DeserializeObject<TrainMessageResponse[]>(JObject.Parse(resp)["TrainMessage"].ToString());
-        }
+        public override TrainMessageResponse[] ExecuteRequest() => ExecuteRequest("TrainMessage", "1.4");
     }
 }

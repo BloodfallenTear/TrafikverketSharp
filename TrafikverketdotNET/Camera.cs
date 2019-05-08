@@ -120,10 +120,6 @@ namespace TrafikverketdotNET
         /// <param name="APIKey">Användarens unika nyckel.</param>
         public Camera(String APIKey) : base(APIKey) { }
 
-        public CameraResponse[] ExecuteRequest()
-        {
-            var resp = base.POSTRequest($"<REQUEST><LOGIN authenticationkey=\"{base.APIKey}\"/><QUERY objecttype=\"Camera\" schemaversion=\"1\"/></REQUEST>");
-            return JsonConvert.DeserializeObject<CameraResponse[]>(JObject.Parse(resp)["Camera"].ToString());
-        }
+        public override CameraResponse[] ExecuteRequest() => ExecuteRequest("Camera", "1");
     }
 }
