@@ -71,6 +71,8 @@ namespace TrafikverketdotNET
         /// <param name="APIKey">Användarens unika nyckel.</param>
         public Trafikverket(String APIKey) { this.APIKey = APIKey; }
 
+        public const String XMLRequestTemplate = "<REQUEST><LOGIN authenticationkey=\"\"/><QUERY objecttype=\"\"><FILTER></FILTER></QUERY></REQUEST>";
+
         /// <summary>
         /// Tidtabellsinformation, d.v.s information om tåg på trafikplatser (stationer, hållplatser) varje post motsvarar ett visst tåg vid respektive trafikplats.
         /// </summary>
