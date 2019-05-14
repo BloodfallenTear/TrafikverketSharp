@@ -54,6 +54,9 @@ namespace TrafikverketdotNET
                 using (var http = new HttpClient())
                 {
                     var resp = http.PostAsync(URL, content).Result;
+                    if (!resp.IsSuccessStatusCode)
+                        throw new Exception($"Status Code: {resp.StatusCode}");
+
                     var respString = resp.Content.ReadAsStringAsync().Result;
 
                     var data = JObject.Parse(respString);

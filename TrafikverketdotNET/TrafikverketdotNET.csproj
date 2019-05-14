@@ -2,12 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.6.1.1</Version>
+    <Version>0.6.1.2</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company>BloodfallenTear</Company>
     <Authors>BloodfallenTear</Authors>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <Copyright>Copyright (c) BloodfallenTear 2019</Copyright>
+    <Product>Trafikverket.NET</Product>
+    <PackageId>Trafikverket.NET</PackageId>
+    <RepositoryUrl>https://github.com/BloodfallenTear/Trafikverket.NET</RepositoryUrl>
+    <AssemblyVersion>0.6.1.2</AssemblyVersion>
+    <Description>A C# .NET Standard library for Trafikverket.</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
