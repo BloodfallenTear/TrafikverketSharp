@@ -7,6 +7,9 @@ All of the XML documentation found in this API library comes from [Trafikverket]
 ## Support
 This project currently only officially supports .NET Standard 2.0.
 
+## NuGet
+For simplicity, you can now download the library via [NuGet](https://www.nuget.org/packages/Trafikverket.NET/)!
+
 ## Dependencies
 This project uses one third-party dependency, which is [Newtonsoft.Json (12.0.2)](https://www.newtonsoft.com/) by user [JamesNK](https://github.com/JamesNK). NuGet Link: [Newtonsoft.Json (12.0.2)](https://www.nuget.org/packages/Newtonsoft.Json/12.0.2/). [Insight](https://github.com/BloodfallenTear/Trafikverket.NET/network/dependencies).
 
