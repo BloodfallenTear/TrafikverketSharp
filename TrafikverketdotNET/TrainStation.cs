@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace TrafikverketdotNET
 {
@@ -84,6 +80,11 @@ namespace TrafikverketdotNET
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
         public TrainStation(String APIKey) : base(APIKey) { }
+
+        /// <summary>
+        /// SchemaVersion versionen som biblioteken använder.
+        /// </summary>
+        public override String CurrentSchemaVersion => "1";
 
         public override TrainStationResponse[] ExecuteRequest() => ExecuteRequest("TrainStation", "1");
 

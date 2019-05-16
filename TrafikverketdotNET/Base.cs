@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -25,6 +24,8 @@ namespace TrafikverketdotNET
 
         /// <param name="APIKey">Användarens unika nyckel.</param>
         protected BaseTrafikverket(String APIKey) { this.APIKey = APIKey; }
+
+        public abstract String CurrentSchemaVersion { get; }
 
         public abstract T ExecuteRequest();
         public abstract T ExecuteRequest(String XMLRequest);
@@ -93,6 +94,10 @@ namespace TrafikverketdotNET
         /// Kameror för automatisk väglag och trafikflöde.
         /// </summary>
         public Camera Camera => new Camera(APIKey);
+        /// <summary>
+        /// Ankomster och avgångar.
+        /// </summary>
+        public FerryAnnouncement FerryAnnouncement => new FerryAnnouncement(APIKey);
     }
 
     public sealed class Geometry

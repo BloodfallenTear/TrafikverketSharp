@@ -1,112 +1,8 @@
 ﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace TrafikverketdotNET
 {
-    public sealed class FromLocation
-    {
-        [JsonProperty("LocationName")] internal String _LocationName { get; set; }
-        [JsonProperty("Order")] internal Int32 _Order { get; set; }
-        [JsonProperty("Priority")] internal Int32 _Priority { get; set; }
-
-        /// <summary>
-        /// Namn på frånstation. 
-        /// Notera att det avser vad som ska annonseras för resenärerna, det vill säga vad som ska visas på skyltar o.dyl. 
-        /// FromLocation kan med andra ord ha olika innehåll för samma tåg vid olika stationer och olika innehåll vad ankomster respektive avgångar. 
-        /// Fältet anger hur från-stationer ska annonseras.
-        /// </summary>
-        [JsonIgnore] public String LocationName => _LocationName;
-        /// <summary>
-        /// Vilken ordning stationer ska visas.
-        /// </summary>
-        [JsonIgnore] public Int32 Order => _Order;
-        /// <summary>
-        /// Prioritet för vilka stationer som ska visas.
-        /// </summary>
-        [JsonIgnore] public Int32 Priority => _Priority;
-
-        internal FromLocation() { }
-    }
-
-    public sealed class ToLocation
-    {
-        [JsonProperty("LocationName")] internal String _LocationName { get; set; }
-        [JsonProperty("Order")] internal Int32 _Order { get; set; }
-        [JsonProperty("Priority")] internal Int32 _Priority { get; set; }
-
-        /// <summary>
-        /// Tillstation för tåget. 
-        /// Notera att det avser vad som ska annonseras för resenärerna, det vill säga vad som ska visas på skyltar o.dyl. 
-        /// ToLocation kan med andra ord ha olika innehåll för samma tåg vid olika stationer och olika innehåll vad ankomster respektive avgångar. 
-        /// Fältet anger hur till-stationer ska annonseras.
-        /// </summary>
-        [JsonIgnore] public String LocationName => _LocationName;
-        /// <summary>
-        /// Vilken ordning stationer ska visas.
-        /// </summary>
-        [JsonIgnore] public Int32 Order => _Order;
-        /// <summary>
-        /// Prioritet för vilka stationer som ska visas.
-        /// </summary>
-        [JsonIgnore] public Int32 Priority => _Priority;
-
-        internal ToLocation() { }
-    }
-
-    public sealed class ViaFromLocation
-    {
-        [JsonProperty("LocationName")] internal String _LocationName { get; set; }
-        [JsonProperty("Order")] internal Int32 _Order { get; set; }
-        [JsonProperty("Priority")] internal Int32 _Priority { get; set; }
-
-        /// <summary>
-        /// Namn på via frånstation. 
-        /// Notera att det avser vad som ska annonseras för resenärerna, det vill säga vad som ska visas på skyltar o.dyl.
-        /// ViaFromLocation kan med andra ord ha olika innehåll för samma tåg vid olika stationer och olika innehåll vad ankomster respektive avgångar.
-        /// Fältet anger hur från-stationer ska annonseras.
-        /// </summary>
-        [JsonIgnore] public String LocationName => _LocationName;
-        /// <summary>
-        /// Vilken ordning stationer ska visas.
-        /// </summary>
-        [JsonIgnore] public Int32 Order => _Order;
-        /// <summary>
-        /// Prioritet för vilka stationer som ska visas.
-        /// </summary>
-        [JsonIgnore] public Int32 Priority => _Priority;
-
-        internal ViaFromLocation() { }
-    }
-
-    public sealed class ViaToLocation
-    {
-        [JsonProperty("LocationName")] internal String _LocationName { get; set; }
-        [JsonProperty("Order")] internal Int32 _Order { get; set; }
-        [JsonProperty("Priority")] internal Int32 _Priority { get; set; }
-
-        /// <summary>
-        /// Namn på vi. 
-        /// Notera att det avser vad som ska annonseras för resenärerna, det vill säga vad som ska visas på skyltar o.dyl. 
-        /// ViaToLocation kan med andra ord ha olika innehåll för samma tåg vid olika stationer och olika innehåll vad ankomster respektive avgångar. 
-        /// Fältet anger hur till-stationer ska annonseras.
-        /// </summary>
-        [JsonIgnore] public String LocationName => _LocationName;
-        /// <summary>
-        /// Vilken ordning stationer ska visas.
-        /// </summary>
-        [JsonIgnore] public Int32 Order => _Order;
-        /// <summary>
-        /// Prioritet för vilka stationer som ska visas.
-        /// </summary>
-        [JsonIgnore] public Int32 Priority => _Priority;
-
-        internal ViaToLocation() { }
-    }
-
     public sealed class TrainAnnouncementResponse
     {
         [JsonProperty("ActivityId")] internal String _ActivityId { get; set; }
@@ -142,10 +38,10 @@ namespace TrafikverketdotNET
         [JsonProperty("TypeOfTraffic")] internal String _TypeOfTraffic { get; set; }
         [JsonProperty("WebLink")] internal String _WebLink { get; set; }
         [JsonProperty("WebLinkName")] internal String _WebLinkName { get; set; }
-        [JsonProperty("FromLocation")] internal FromLocation[] _FromLocation { get; set; }
-        [JsonProperty("ToLocation")] internal ToLocation[] _ToLocation { get; set; }
-        [JsonProperty("ViaFromLocation")] internal ViaFromLocation[] _ViaFromLocation { get; set; }
-        [JsonProperty("ViaToLocation")] internal ViaToLocation[] _ViaToLocation { get; set; }
+        [JsonProperty("FromLocation")] internal FromLocationResp[] _FromLocation { get; set; }
+        [JsonProperty("ToLocation")] internal ToLocationResp[] _ToLocation { get; set; }
+        [JsonProperty("ViaFromLocation")] internal ViaFromLocationResp[] _ViaFromLocation { get; set; }
+        [JsonProperty("ViaToLocation")] internal ViaToLocationResp[] _ViaToLocation { get; set; }
 
         /// <summary>
         /// Aktivitetens unika id. Fältet är nyckel för objektet.
@@ -281,10 +177,110 @@ namespace TrafikverketdotNET
         /// Namn på trafikinfoägaren att använda i länkar.
         /// </summary>
         [JsonIgnore] public String WebLinkName => _WebLinkName;
-        [JsonIgnore] public FromLocation[] FromLocation => _FromLocation;
-        [JsonIgnore] public ToLocation[] ToLocation => _ToLocation;
-        [JsonIgnore] public ViaFromLocation[] ViaFromLocation => _ViaFromLocation;
-        [JsonIgnore] public ViaToLocation[] ViaToLocation => _ViaToLocation;
+        [JsonIgnore] public FromLocationResp[] FromLocation => _FromLocation;
+        [JsonIgnore] public ToLocationResp[] ToLocation => _ToLocation;
+        [JsonIgnore] public ViaFromLocationResp[] ViaFromLocation => _ViaFromLocation;
+        [JsonIgnore] public ViaToLocationResp[] ViaToLocation => _ViaToLocation;
+
+        public sealed class FromLocationResp
+        {
+            [JsonProperty("LocationName")] internal String _LocationName { get; set; }
+            [JsonProperty("Order")] internal Int32 _Order { get; set; }
+            [JsonProperty("Priority")] internal Int32 _Priority { get; set; }
+
+            /// <summary>
+            /// Namn på frånstation. 
+            /// Notera att det avser vad som ska annonseras för resenärerna, det vill säga vad som ska visas på skyltar o.dyl. 
+            /// FromLocation kan med andra ord ha olika innehåll för samma tåg vid olika stationer och olika innehåll vad ankomster respektive avgångar. 
+            /// Fältet anger hur från-stationer ska annonseras.
+            /// </summary>
+            [JsonIgnore] public String LocationName => _LocationName;
+            /// <summary>
+            /// Vilken ordning stationer ska visas.
+            /// </summary>
+            [JsonIgnore] public Int32 Order => _Order;
+            /// <summary>
+            /// Prioritet för vilka stationer som ska visas.
+            /// </summary>
+            [JsonIgnore] public Int32 Priority => _Priority;
+
+            internal FromLocationResp() { }
+        }
+
+        public sealed class ToLocationResp
+        {
+            [JsonProperty("LocationName")] internal String _LocationName { get; set; }
+            [JsonProperty("Order")] internal Int32 _Order { get; set; }
+            [JsonProperty("Priority")] internal Int32 _Priority { get; set; }
+
+            /// <summary>
+            /// Tillstation för tåget. 
+            /// Notera att det avser vad som ska annonseras för resenärerna, det vill säga vad som ska visas på skyltar o.dyl. 
+            /// ToLocation kan med andra ord ha olika innehåll för samma tåg vid olika stationer och olika innehåll vad ankomster respektive avgångar. 
+            /// Fältet anger hur till-stationer ska annonseras.
+            /// </summary>
+            [JsonIgnore] public String LocationName => _LocationName;
+            /// <summary>
+            /// Vilken ordning stationer ska visas.
+            /// </summary>
+            [JsonIgnore] public Int32 Order => _Order;
+            /// <summary>
+            /// Prioritet för vilka stationer som ska visas.
+            /// </summary>
+            [JsonIgnore] public Int32 Priority => _Priority;
+
+            internal ToLocationResp() { }
+        }
+
+        public sealed class ViaFromLocationResp
+        {
+            [JsonProperty("LocationName")] internal String _LocationName { get; set; }
+            [JsonProperty("Order")] internal Int32 _Order { get; set; }
+            [JsonProperty("Priority")] internal Int32 _Priority { get; set; }
+
+            /// <summary>
+            /// Namn på via frånstation. 
+            /// Notera att det avser vad som ska annonseras för resenärerna, det vill säga vad som ska visas på skyltar o.dyl.
+            /// ViaFromLocation kan med andra ord ha olika innehåll för samma tåg vid olika stationer och olika innehåll vad ankomster respektive avgångar.
+            /// Fältet anger hur från-stationer ska annonseras.
+            /// </summary>
+            [JsonIgnore] public String LocationName => _LocationName;
+            /// <summary>
+            /// Vilken ordning stationer ska visas.
+            /// </summary>
+            [JsonIgnore] public Int32 Order => _Order;
+            /// <summary>
+            /// Prioritet för vilka stationer som ska visas.
+            /// </summary>
+            [JsonIgnore] public Int32 Priority => _Priority;
+
+            internal ViaFromLocationResp() { }
+        }
+
+        public sealed class ViaToLocationResp
+        {
+            [JsonProperty("LocationName")] internal String _LocationName { get; set; }
+            [JsonProperty("Order")] internal Int32 _Order { get; set; }
+            [JsonProperty("Priority")] internal Int32 _Priority { get; set; }
+
+            /// <summary>
+            /// Namn på vi. 
+            /// Notera att det avser vad som ska annonseras för resenärerna, det vill säga vad som ska visas på skyltar o.dyl. 
+            /// ViaToLocation kan med andra ord ha olika innehåll för samma tåg vid olika stationer och olika innehåll vad ankomster respektive avgångar. 
+            /// Fältet anger hur till-stationer ska annonseras.
+            /// </summary>
+            [JsonIgnore] public String LocationName => _LocationName;
+            /// <summary>
+            /// Vilken ordning stationer ska visas.
+            /// </summary>
+            [JsonIgnore] public Int32 Order => _Order;
+            /// <summary>
+            /// Prioritet för vilka stationer som ska visas.
+            /// </summary>
+            [JsonIgnore] public Int32 Priority => _Priority;
+
+            internal ViaToLocationResp() { }
+        }
 
         internal TrainAnnouncementResponse() { }
     }
@@ -299,6 +295,11 @@ namespace TrafikverketdotNET
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
         public TrainAnnouncement(String APIKey) : base(APIKey) { }
+
+        /// <summary>
+        /// SchemaVersion versionen som biblioteken använder.
+        /// </summary>
+        public override String CurrentSchemaVersion => "1.4";
 
         public override TrainAnnouncementResponse[] ExecuteRequest() => ExecuteRequest("TrainAnnouncement", "1.4");
 

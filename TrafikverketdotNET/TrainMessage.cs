@@ -1,34 +1,8 @@
 ﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace TrafikverketdotNET
 {
-    public sealed class TrafficImpact
-    {
-        [JsonProperty("AffectedLocation")] internal String[] _AffectedLocation { get; set; }
-        [JsonProperty("FromLocation")] internal String[] _FromLocation { get; set; }
-        [JsonProperty("ToLocation")] internal String[] _ToLocation { get; set; }
-
-        /// <summary>
-        /// Påverkade stationer.
-        /// </summary>
-        [JsonIgnore] public String[] AffectedLocation => _AffectedLocation;
-        /// <summary>
-        /// Påverkad sträckas frånstation, för att avgöra om stationen är påverkad, se fältet AffectedLocation.
-        /// </summary>
-        [JsonIgnore] public String[] FromLocation => _FromLocation;
-        /// <summary>
-        /// Påverkad sträckas tillstation, för att avgöra om stationen är påverkad, se fältet AffectedLocation.
-        /// </summary>
-        [JsonIgnore] public String[] ToLocation => _ToLocation;
-
-        internal TrafficImpact() { }
-    }
-
     public sealed class TrainMessageResponse
     {
         [JsonProperty("AffectedLocation")] internal String[] _AffectedLocation { get; set; }
@@ -45,7 +19,7 @@ namespace TrafikverketdotNET
         [JsonProperty("ReasonCodeText")] internal String _ReasonCodeText { get; set; }
         [JsonProperty("StartDateTime")] internal DateTime _StartDateTime { get; set; }
         [JsonProperty("Geometry")] internal Geometry _Geometry { get; set; }
-        [JsonProperty("TrafficImpact")] internal TrafficImpact[] _TrafficImpact { get; set; }
+        [JsonProperty("TrafficImpact")] internal TrafficImpactResp[] _TrafficImpact { get; set; }
 
         /// <summary>
         /// Påverkade trafikplatser (stationssignatur).
@@ -106,7 +80,29 @@ namespace TrafikverketdotNET
         /// <summary>
         /// Påverkade stationer.
         /// </summary>
-        [JsonIgnore] public TrafficImpact[] TrafficImpact => _TrafficImpact;
+        [JsonIgnore] public TrafficImpactResp[] TrafficImpact => _TrafficImpact;
+
+        public sealed class TrafficImpactResp
+        {
+            [JsonProperty("AffectedLocation")] internal String[] _AffectedLocation { get; set; }
+            [JsonProperty("FromLocation")] internal String[] _FromLocation { get; set; }
+            [JsonProperty("ToLocation")] internal String[] _ToLocation { get; set; }
+
+            /// <summary>
+            /// Påverkade stationer.
+            /// </summary>
+            [JsonIgnore] public String[] AffectedLocation => _AffectedLocation;
+            /// <summary>
+            /// Påverkad sträckas frånstation, för att avgöra om stationen är påverkad, se fältet AffectedLocation.
+            /// </summary>
+            [JsonIgnore] public String[] FromLocation => _FromLocation;
+            /// <summary>
+            /// Påverkad sträckas tillstation, för att avgöra om stationen är påverkad, se fältet AffectedLocation.
+            /// </summary>
+            [JsonIgnore] public String[] ToLocation => _ToLocation;
+
+            internal TrafficImpactResp() { }
+        }
 
         internal TrainMessageResponse() { }
     }
@@ -120,7 +116,12 @@ namespace TrafikverketdotNET
         /// Tågtrafikmeddelande, exempelvis information kring banarbete, tågfel, anläggningsfel och dylikt.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
-        public TrainMessage(string APIKey) : base(APIKey) { }
+        public TrainMessage(String APIKey) : base(APIKey) { }
+
+        /// <summary>
+        /// SchemaVersion versionen som biblioteken använder.
+        /// </summary>
+        public override String CurrentSchemaVersion => "1.4";
 
         public override TrainMessageResponse[] ExecuteRequest() => ExecuteRequest("TrainMessage", "1.4");
 
