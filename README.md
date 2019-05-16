@@ -36,7 +36,7 @@ This project uses one third-party dependency, which is [Newtonsoft.Json (12.0.2)
 - [ ] RoadGeometry - Vägens geometri relaterat till det data vi tillhandahåller från PMS-systemen med data om beläggningar och mätdata. Vi kan ej garantera att geometrin är dagsaktuell från NVDB. Datum för när data hämtades framgår av posten TimeStamp. 
 
 ## Code of Conduct
-This repository's Code of Conduct can be found here: [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+This repository's Code of Conduct can be found here: [CODE_OF_CONDUCT.md](https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/CODE_OF_CONDUCT.md)
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details. © BloodfallenTear 2019
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/LICENSE.md) file for details. © BloodfallenTear 2019
