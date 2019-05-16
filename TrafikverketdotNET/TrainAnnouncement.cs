@@ -301,7 +301,7 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => "1.4";
 
-        public override TrainAnnouncementResponse[] ExecuteRequest() => ExecuteRequest("TrainAnnouncement", "1.4");
+        public override TrainAnnouncementResponse[] ExecuteRequest() => ExecuteRequest("TrainAnnouncement", CurrentSchemaVersion);
 
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         public override TrainAnnouncementResponse[] ExecuteRequest(String XMLRequest) => ExecuteRequest("TrainAnnouncement", "1.4", XMLRequest);

@@ -121,7 +121,7 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => "1";
 
-        public override CameraResponse[] ExecuteRequest() => ExecuteRequest("Camera", "1");
+        public override CameraResponse[] ExecuteRequest() => ExecuteRequest("Camera", CurrentSchemaVersion);
 
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         public override CameraResponse[] ExecuteRequest(String XMLRequest) => ExecuteRequest("Camera", "1", XMLRequest);

@@ -28,8 +28,17 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public String DeviationId => _DeviationId;
         [JsonIgnore] public FromHarborResp FromHarbor => _FromHarbor;
+        /// <summary>
+        /// Avgångens id. Fältet är nyckel för objektet.
+        /// </summary>
         [JsonIgnore] public Int64 Id => _Id;
+        /// <summary>
+        /// Information om avgången.
+        /// </summary>
         [JsonIgnore] public String[] Info => _Info;
+        /// <summary>
+        /// Tidpunkt då dataposten ändrades
+        /// </summary>
         [JsonIgnore] public DateTime ModifiedTime => _ModifiedTime;
         [JsonIgnore] public RouteResp Route => _Route;
         [JsonIgnore] public ToHarborResp ToHarbor => _ToHarbor;
@@ -57,7 +66,7 @@ namespace TrafikverketdotNET
             [JsonProperty("Id")] internal Int32 _Id { get; set; }
             [JsonProperty("Name")] internal String _Name { get; set; }
             [JsonProperty("Shortname")] internal String _Shortname { get; set; }
-            [JsonProperty("Type")] internal TypeResp _Type { get; set; }
+            [JsonProperty("Type")] internal TrafikverketdotNET.Type _Type { get; set; }
 
             /// <summary>
             /// Beskrivande text om rutten.
@@ -78,24 +87,7 @@ namespace TrafikverketdotNET
             /// <summary>
             /// Id för ledtypen.
             /// </summary>
-            [JsonIgnore] public TypeResp Type => _Type;
-
-            public sealed class TypeResp
-            {
-                [JsonProperty("Id")] internal Int32 _Id { get; set; }
-                [JsonProperty("Name")] internal String _Name { get; set; }
-
-                /// <summary>
-                /// Id för ledtypen.
-                /// </summary>
-                [JsonIgnore] public Int32 Id => _Id;
-                /// <summary>
-                /// Namn för ledtypen (ex. Vändande).
-                /// </summary>
-                [JsonIgnore] public String Name => _Name;
-
-                internal TypeResp() { }
-            }
+            [JsonIgnore] public TrafikverketdotNET.Type Type => _Type;
 
             internal RouteResp() { }
         }

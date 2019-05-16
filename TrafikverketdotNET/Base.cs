@@ -98,6 +98,27 @@ namespace TrafikverketdotNET
         /// Ankomster och avgångar.
         /// </summary>
         public FerryAnnouncement FerryAnnouncement => new FerryAnnouncement(APIKey);
+        /// <summary>
+        /// Information om färjeleder.
+        /// </summary>
+        public FerryRoute FerryRoute => new FerryRoute(APIKey);
+    }
+
+    public sealed class Type
+    {
+        [JsonProperty("Id")] internal Int32 _Id { get; set; }
+        [JsonProperty("Name")] internal String _Name { get; set; }
+
+        /// <summary>
+        /// Id för ledtypen.
+        /// </summary>
+        [JsonIgnore] public Int32 Id => _Id;
+        /// <summary>
+        /// Namn för ledtypen (ex. Vändande).
+        /// </summary>
+        [JsonIgnore] public String Name => _Name;
+
+        internal Type() { }
     }
 
     public sealed class Geometry
