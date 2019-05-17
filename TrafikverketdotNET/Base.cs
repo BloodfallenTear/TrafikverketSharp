@@ -102,6 +102,10 @@ namespace TrafikverketdotNET
         /// Information om färjeleder.
         /// </summary>
         public FerryRoute FerryRoute => new FerryRoute(APIKey);
+        /// <summary>
+        /// Ikoner, exempelvis för använding i grafiska användargränssnitt och kartor.
+        /// </summary>
+        public Icon Icon => new Icon(APIKey);
     }
 
     public sealed class Type

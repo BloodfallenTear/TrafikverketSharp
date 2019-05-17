@@ -31,11 +31,11 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public String AdvertisedShortLocationName => _AdvertisedShortLocationName;
         /// <summary>
-        /// Beteckning för i vilket land stationen finns (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/CountryCode.txt).
+        /// Beteckning för i vilket land stationen finns (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/CountryCode.txt).
         /// </summary>
         [JsonIgnore] public String CountryCode => _CountryCode;
         /// <summary>
-        /// Länsnummer (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/Lansnummer.txt).
+        /// Länsnummer (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Lansnummer.txt).
         /// </summary>
         [JsonIgnore] public Int32[] CountyNo => _CountyNo;
         /// <summary>
