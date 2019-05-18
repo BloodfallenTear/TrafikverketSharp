@@ -106,6 +106,10 @@ namespace TrafikverketdotNET
         /// Ikoner, exempelvis för använding i grafiska användargränssnitt och kartor.
         /// </summary>
         public Icon Icon => new Icon(APIKey);
+        /// <summary>
+        /// Information om rastplatser och parkeringar.
+        /// </summary>
+        public Parking Parking => new Parking(APIKey);
     }
 
     public sealed class Type

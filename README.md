@@ -1,4 +1,4 @@
-# Trafikverket.NET v0.9.0
+# Trafikverket.NET v0.10.0
 A C# .NET Standard library for Trafikverket.
 
 ## Documentation
@@ -22,7 +22,7 @@ This project uses one third-party dependency, which is [Newtonsoft.Json (12.0.2)
 - [x] FerryAnnouncement - Ankomster och avgångar.
 - [x] FerryRoute - Information om färjeleder.
 - [x] Icon - Ikoner, exempelvis för använding i grafiska användargränssnitt och kartor.
-- [ ] Parking - Information om rastplatser och parkeringar.
+- [x] Parking - Information om rastplatser och parkeringar.
 - [ ] RoadCondition - Information om väglag.
 - [ ] RoadConditionOverview - Väglagsöversikter.
 - [ ] Situation - Situationer innehållandes händelser och störningar som trafikmeddelanden, vägarbeten, olyckor, restiktioner m.m.

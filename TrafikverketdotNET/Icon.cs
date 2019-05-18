@@ -39,6 +39,8 @@ namespace TrafikverketdotNET
         /// https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Icon_Url.md
         /// </summary>
         [JsonIgnore] public String Url => _Url;
+
+        internal IconResponse() { }
     }
 
     public sealed class Icon : BaseTrafikverket<IconResponse[]>
