@@ -1,0 +1,12 @@
+https://api.trafikinfo.trafikverket.se/API/Model
+
+Serviceanläggningens tillgänglighet
+>barrierFreeAccessible
+>handicappedAccessible
+>wheelChairAccessible
+>handicappedEasements
+>orientationSystemForBlindPeople
+>handicappedMarked
+>none
+>unknown
+>other
