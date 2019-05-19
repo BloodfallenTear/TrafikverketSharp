@@ -1,0 +1,10 @@
+https://api.trafikinfo.trafikverket.se/API/Model
+
+Meddelandetyp, ex: Vägarbete
+>Viktig trafikinformation
+>Färjor
+>Hinder
+>Olycka
+>Restriktion
+>Trafikmeddelande
+>Vägarbete
