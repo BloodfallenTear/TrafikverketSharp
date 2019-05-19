@@ -122,6 +122,10 @@ namespace TrafikverketdotNET
         /// Situationer innehållandes händelser och störningar som trafikmeddelanden, vägarbeten, olyckor, restiktioner m.m.
         /// </summary>
         public Situation Situation => new Situation(APIKey);
+        /// <summary>
+        /// Uppmätta eller härledda värden relaterat till trafik eller enskilda fordonets rörelser på en viss sektion eller vid en specifik punkt på vägnätet.
+        /// </summary>
+        public TrafficFlow TrafficFlow => new TrafficFlow(APIKey);
     }
 
     public sealed class Type
