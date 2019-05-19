@@ -110,6 +110,10 @@ namespace TrafikverketdotNET
         /// Information om rastplatser och parkeringar.
         /// </summary>
         public Parking Parking => new Parking(APIKey);
+        /// <summary>
+        /// Information om väglag.
+        /// </summary>
+        public RoadCondition RoadCondition => new RoadCondition(APIKey);
     }
 
     public sealed class Type
