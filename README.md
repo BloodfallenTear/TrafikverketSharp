@@ -1,4 +1,4 @@
-# Trafikverket.NET v0.12.0
+# Trafikverket.NET v0.13.0
 A C# .NET Standard library for Trafikverket.
 
 ## Documentation
@@ -28,7 +28,7 @@ This project uses one third-party dependency, which is [Newtonsoft.Json (12.0.2)
 - [x] Parking - Information om rastplatser och parkeringar.
 - [x] RoadCondition - Information om väglag.
 - [x] RoadConditionOverview - Väglagsöversikter.
-- [ ] Situation - Situationer innehållandes händelser och störningar som trafikmeddelanden, vägarbeten, olyckor, restiktioner m.m.
+- [x] Situation - Situationer innehållandes händelser och störningar som trafikmeddelanden, vägarbeten, olyckor, restiktioner m.m.
 - [ ] TrafficFlow - Uppmätta eller härledda värden relaterat till trafik eller enskilda fordonets rörelser på en viss sektion eller vid en specifik punkt på vägnätet.
 - [ ] TrafficSafetyCamera - Trafiksäkerhetskameror.
 - [ ] TravelTimeRoute - Restider i större städer eller i högbelastade trafiksystem. Beräkning av restid baseras på data från detektorer som är utplacerade längs bestämda rutter.

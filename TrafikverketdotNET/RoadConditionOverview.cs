@@ -56,6 +56,8 @@ namespace TrafikverketdotNET
         /// Väglagsöversikten gäller på obestämd framtid.
         /// </summary>
         [JsonIgnore] public Boolean ValidUntilFurtherNotice => _ValidUntilFurtherNotice;
+
+        internal RoadConditionOverviewResponse() { }
     }
 
     public sealed class RoadConditionOverview : BaseTrafikverket<RoadConditionOverviewResponse[]>

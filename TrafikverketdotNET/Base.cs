@@ -118,6 +118,10 @@ namespace TrafikverketdotNET
         /// Information om väglagsöversikt.
         /// </summary>
         public RoadConditionOverview RoadConditionOverview => new RoadConditionOverview(APIKey);
+        /// <summary>
+        /// Situationer innehållandes händelser och störningar som trafikmeddelanden, vägarbeten, olyckor, restiktioner m.m.
+        /// </summary>
+        public Situation Situation => new Situation(APIKey);
     }
 
     public sealed class Type
