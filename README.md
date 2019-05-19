@@ -5,7 +5,7 @@ A C# .NET Standard library for Trafikverket.
 All of the XML documentation found in this API library comes from [Trafikverket](https://api.trafikinfo.trafikverket.se/API/Model).
 
 ## Changelog 
-For every release, you can find the changelog to see what has changed from the previous release to that one under the said release.
+For every release, you can find the changelog to see what has changed from the previous release to that one under the said release. If a release contains nothing but the 'Included APIs' tab, that means nothing that should concern the user has been changed and a few APIs have been added. If you still are curious for all the things which have been changed from version x to version y, you can check out the commit history since I try to document everything I do there.
 
 ## Support
 This project currently only officially supports .NET Standard 2.0.
