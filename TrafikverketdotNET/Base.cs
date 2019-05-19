@@ -114,6 +114,10 @@ namespace TrafikverketdotNET
         /// Information om väglag.
         /// </summary>
         public RoadCondition RoadCondition => new RoadCondition(APIKey);
+        /// <summary>
+        /// Information om väglagsöversikt.
+        /// </summary>
+        public RoadConditionOverview RoadConditionOverview => new RoadConditionOverview(APIKey);
     }
 
     public sealed class Type

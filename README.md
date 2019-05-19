@@ -23,8 +23,8 @@ This project uses one third-party dependency, which is [Newtonsoft.Json (12.0.2)
 - [x] FerryRoute - Information om färjeleder.
 - [x] Icon - Ikoner, exempelvis för använding i grafiska användargränssnitt och kartor.
 - [x] Parking - Information om rastplatser och parkeringar.
-- [ ] RoadCondition - Information om väglag.
-- [ ] RoadConditionOverview - Väglagsöversikter.
+- [x] RoadCondition - Information om väglag.
+- [x] RoadConditionOverview - Väglagsöversikter.
 - [ ] Situation - Situationer innehållandes händelser och störningar som trafikmeddelanden, vägarbeten, olyckor, restiktioner m.m.
 - [ ] TrafficFlow - Uppmätta eller härledda värden relaterat till trafik eller enskilda fordonets rörelser på en viss sektion eller vid en specifik punkt på vägnätet.
 - [ ] TrafficSafetyCamera - Trafiksäkerhetskameror.

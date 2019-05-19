@@ -66,7 +66,7 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public String IconId => _IconId;
         /// <summary>
-        /// Datapostens id.
+        /// Datapostens id. Fältet är nyckel för objektet.
         /// </summary>
         [JsonIgnore] public String Id => _Id;
         /// <summary>
