@@ -26,11 +26,11 @@ namespace TrafikverketdotNET
         [JsonProperty("Warning")] internal String[] _Warning { get; set; }
 
         /// <summary>
-        /// Orsak (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Cause.txt).
+        /// Orsak (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/RoadCondition.Cause.txt).
         /// </summary>
         [JsonIgnore] public String[] Cause => _Cause;
         /// <summary>
-        /// Väglagskod (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/ConditionCode.txt).
+        /// Väglagskod (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/RoadCondition.ConditionCode.txt).
         /// </summary>
         [JsonIgnore] public Int32 ConditionCode => _ConditionCode;
         /// <summary>
@@ -42,7 +42,7 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public String ConditionText => _ConditionText;
         /// <summary>
-        /// Länsnummer (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Lansnummer.txt). 
+        /// Länsnummer (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Trafikverket.Lansnummer.txt). 
         /// </summary>
         [JsonIgnore] public Int32[] CountyNo => _CountyNo;
         /// <summary>
@@ -74,7 +74,7 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public String LocationText => _LocationText;
         /// <summary>
-        /// Åtgärd (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Measurement.txt).
+        /// Åtgärd (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/RoadCondition.Measurement.txt).
         /// </summary>
         [JsonIgnore] public String[] Measurement => _Measurement;
         /// <summary>
@@ -100,7 +100,7 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public DateTime StartTime => _StartTime;
         /// <summary>
-        /// Varning (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Warning.txt).
+        /// Varning (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/RoadCondition.Warning.txt).
         /// </summary>
         [JsonIgnore] public String[] Warning => _Warning;
 

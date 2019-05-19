@@ -15,7 +15,7 @@ namespace TrafikverketdotNET
         /// <summary>
         /// Förhandsgranskning av ikon där bilden representeras som en Base64-enkodad sträng. 
         /// En webbläsare kan direkt visa en Base64-enkodad bild utan att behöva göra ett anrop till servern.
-        /// https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Icon_Base64.md
+        /// https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Icon.Base64.md
         /// </summary>
         [JsonIgnore] public String Base64 => _Base64;
         /// <summary>
@@ -36,7 +36,7 @@ namespace TrafikverketdotNET
         [JsonIgnore] public DateTime ModifiedTime => _ModifiedTime;
         /// <summary>
         /// Url till ikonbilden. Notera att det finns tre olika ikonbilder vilka specifieras med Url-parametern 'type'. Om ingen typ specificeras returneras png32x32.
-        /// https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Icon_Url.md
+        /// https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Icon.Url.md
         /// </summary>
         [JsonIgnore] public String Url => _Url;
 

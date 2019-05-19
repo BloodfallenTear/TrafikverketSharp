@@ -31,7 +31,7 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public String AdvertisedShortLocationName => _AdvertisedShortLocationName;
         /// <summary>
-        /// Beteckning för i vilket land stationen finns (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/CountryCode.txt).
+        /// Beteckning för i vilket land stationen finns (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Trafikverket.CountryCode.txt).
         /// </summary>
         [JsonIgnore] public String CountryCode => _CountryCode;
         /// <summary>

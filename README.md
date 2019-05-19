@@ -1,4 +1,4 @@
-# Trafikverket.NET v0.11.1
+# Trafikverket.NET v0.11.2
 A C# .NET Standard library for Trafikverket.
 
 ## Documentation

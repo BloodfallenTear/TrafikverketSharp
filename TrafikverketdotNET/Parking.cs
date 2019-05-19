@@ -27,7 +27,7 @@ namespace TrafikverketdotNET
         [JsonProperty("VehicleCharacteristics")] internal VehicleCharacteristicsResp[] _VehicleCharacteristics { get; set; }
 
         /// <summary>
-        /// Länsnummer (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Lansnummer.txt). 
+        /// Länsnummer (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Trafikverket.Lansnummer.txt). 
         /// </summary>
         [JsonIgnore] public Int32[] CountyNo => _CountyNo;
         /// <summary>
@@ -107,11 +107,11 @@ namespace TrafikverketdotNET
             [JsonProperty("Type")] internal String _Type { get; set; }
 
             /// <summary>
-            /// Utrustningens tillgänglighet (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Equipment.Accessibility.txt).
+            /// Utrustningens tillgänglighet (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Parking.Equipment.Accessibility.txt).
             /// </summary>
             [JsonIgnore] public String Accessibility => _Accessibility;
             /// <summary>
-            /// Typ av utrustning (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Equipment.Type.txt).
+            /// Typ av utrustning (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Parking.Equipment.Type.txt).
             /// </summary>
             [JsonIgnore] public String Type => _Type;
 
@@ -124,11 +124,11 @@ namespace TrafikverketdotNET
             [JsonProperty("Type")] internal String _Type { get; set; }
 
             /// <summary>
-            /// Serviceanläggningens tillgänglighet (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Facility.Accessibility.txt).
+            /// Serviceanläggningens tillgänglighet (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Parking.Facility.Accessibility.txt).
             /// </summary>
             [JsonIgnore] public String Accessibility => _Accessibility;
             /// <summary>
-            /// Serviceanläggningar vid parkeringen (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Facility.Type.txt).
+            /// Serviceanläggningar vid parkeringen (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Parking.Facility.Type.txt).
             /// </summary>
             [JsonIgnore] public String Type => _Type;
 

@@ -127,8 +127,14 @@ namespace TrafikverketdotNET
                 [JsonProperty("SortOrder")] internal Int32 _SortOrder { get; set; }
                 [JsonProperty("Weekday")] internal WeekdayResp[] _Weekday { get; set; }
 
+                /// <summary>
+                /// Periodens namn.
+                /// </summary>
                 [JsonIgnore] public String Name => _Name;
                 [JsonIgnore] public ScheduleResp[] Schedule => _Schedule;
+                /// <summary>
+                /// Periodens sorteringsordning
+                /// </summary>
                 [JsonIgnore] public Int32 SortOrder => _SortOrder;
                 [JsonIgnore] public WeekdayResp[] Weekday => _Weekday;
 

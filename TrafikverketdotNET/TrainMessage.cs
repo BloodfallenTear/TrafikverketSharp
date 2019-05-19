@@ -26,7 +26,7 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public String[] AffectedLocation => _AffectedLocation;
         /// <summary>
-        /// Länsnummer (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Lansnummer.txt).
+        /// Länsnummer (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Trafikverket.Lansnummer.txt).
         /// </summary>
         [JsonIgnore] public Int32[] CountyNo => _CountyNo;
         /// <summary>

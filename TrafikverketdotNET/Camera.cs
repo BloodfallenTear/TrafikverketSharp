@@ -38,7 +38,7 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public String ContentType => _ContentType;
         /// <summary>
-        /// Länsnummer (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/Lansnummer.txt).
+        /// Länsnummer (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Trafikverket.Lansnummer.txt).
         /// </summary>
         [JsonIgnore] public Int32[] CountyNo => _CountyNo;
         /// <summary>
@@ -86,7 +86,7 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public DateTime PhotoTime => _PhotoTime;
         /// <summary>
-        /// Url till bild 385px*290px (Ytterligare funktionalitet: https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/PhotoUrl.txt).
+        /// Url till bild 385px*290px (Ytterligare funktionalitet: https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/Camera.PhotoUrl.txt).
         /// </summary>
         [JsonIgnore] public String PhotoUrl => _PhotoUrl;
         /// <summary>
