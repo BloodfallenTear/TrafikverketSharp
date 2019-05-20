@@ -68,7 +68,7 @@ namespace TrafikverketdotNET
         }
     }
         
-    public sealed class Trafikverket
+    public sealed class Trafikverket 
     {
         private readonly String APIKey;
 
@@ -126,6 +126,10 @@ namespace TrafikverketdotNET
         /// Uppmätta eller härledda värden relaterat till trafik eller enskilda fordonets rörelser på en viss sektion eller vid en specifik punkt på vägnätet.
         /// </summary>
         public TrafficFlow TrafficFlow => new TrafficFlow(APIKey);
+        /// <summary>
+        /// Trafiksäkerhetskameror.
+        /// </summary>
+        public TrafficSafetyCamera TrafficSafetyCamera => new TrafficSafetyCamera(APIKey);
     }
 
     public sealed class Type
