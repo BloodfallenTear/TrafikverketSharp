@@ -68,12 +68,14 @@ namespace TrafikverketdotNET
         }
     }
         
-    public sealed class Trafikverket 
+    public sealed class Trafikverket : IDisposable
     {
         private readonly String APIKey;
 
         /// <param name="APIKey">Användarens unika nyckel.</param>
         public Trafikverket(String APIKey) { this.APIKey = APIKey; }
+
+        ~Trafikverket() { Dispose(); }
 
         public String XMLRequestTemplate => "<REQUEST><LOGIN authenticationkey=\"\"/><QUERY objecttype=\"\"><FILTER></FILTER></QUERY></REQUEST>";
 
@@ -130,6 +132,13 @@ namespace TrafikverketdotNET
         /// Trafiksäkerhetskameror.
         /// </summary>
         public TrafficSafetyCamera TrafficSafetyCamera => new TrafficSafetyCamera(APIKey);
+        /// <summary>
+        /// Restider i större städer eller i högbelastade trafiksystem. 
+        /// Beräkning av restid baseras på data från detektorer som är utplacerade längs bestämda rutter.
+        /// </summary>
+        public TravelTimeRoute TravelTimeRoute => new TravelTimeRoute(APIKey);
+
+        public void Dispose() { GC.SuppressFinalize(this); }
     }
 
     public sealed class Type

@@ -1,4 +1,4 @@
-# Trafikverket.NET v0.15.0
+# Trafikverket.NET v0.16.0
 A C# .NET Standard library for Trafikverket.
 
 ## Documentation
@@ -31,7 +31,7 @@ This project uses one third-party dependency, which is [Newtonsoft.Json (12.0.2)
 - [x] Situation - Situationer innehållandes händelser och störningar som trafikmeddelanden, vägarbeten, olyckor, restiktioner m.m.
 - [x] TrafficFlow - Uppmätta eller härledda värden relaterat till trafik eller enskilda fordonets rörelser på en viss sektion eller vid en specifik punkt på vägnätet.
 - [x] TrafficSafetyCamera - Trafiksäkerhetskameror.
-- [ ] TravelTimeRoute - Restider i större städer eller i högbelastade trafiksystem. Beräkning av restid baseras på data från detektorer som är utplacerade längs bestämda rutter.
+- [x] TravelTimeRoute - Restider i större städer eller i högbelastade trafiksystem. Beräkning av restid baseras på data från detektorer som är utplacerade längs bestämda rutter.
 - [ ] WeatherStation - Väderstationer med mätdata.
 - [ ] MeasurementData100 - Mätdata per 100 meter. Ett medelvärde har räknats fram för 100 meter baserat på de ingående 20-metersvärdena (se mer info i MeasurementData20). Observera att det inte finns 100-metersdata för alla våra 20-metersvariabler. Källsystem är PMS-systemen.
 - [ ] MeasurementData20 - Mätdata per 20 meter. Data från vägytemätningar med laserscanning alternativt som beräknats fram baserat på dem. Mätningarna utförs årligen eller vartannat år beroende på trafikmängd. Senast gällande mätdata finns att hämta dvs ej historik. Källsystem är PMS-systemen.
