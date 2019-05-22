@@ -1,0 +1,10 @@
+https://api.trafikinfo.trafikverket.se/API/Model
+
+Typ av nederbörd
+>Duggregn
+>Hagel
+>Ingen nederbörd
+>Regn
+>Snö
+>Snöblandat regn
+>Underkylt regn
