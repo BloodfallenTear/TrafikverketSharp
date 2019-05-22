@@ -1,4 +1,5 @@
 ﻿using System;
+using TrafikverketdotNET.Subs;
 using Newtonsoft.Json;
 
 namespace TrafikverketdotNET

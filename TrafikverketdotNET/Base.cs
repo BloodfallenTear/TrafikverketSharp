@@ -77,7 +77,8 @@ namespace TrafikverketdotNET
 
         ~Trafikverket() { Dispose(); }
 
-        public String XMLRequestTemplate => "<REQUEST><LOGIN authenticationkey=\"\"/><QUERY objecttype=\"\"><FILTER></FILTER></QUERY></REQUEST>";
+        public String XMLRequestTemplate => $"<REQUEST><LOGIN authenticationkey=\"{APIKey}\"/><QUERY objecttype=\"{{ObjectType}}\"><FILTER></FILTER></QUERY></REQUEST>";
+        public String XMLRequestTemplateLegacy => "<REQUEST><LOGIN authenticationkey=\"\"/><QUERY objecttype=\"\"><FILTER></FILTER></QUERY></REQUEST>";
 
         /// <summary>
         /// Tidtabellsinformation, d.v.s information om tåg på trafikplatser (stationer, hållplatser) varje post motsvarar ett visst tåg vid respektive trafikplats.
@@ -143,39 +144,5 @@ namespace TrafikverketdotNET
         public WeatherStation WeatherStation => new WeatherStation(APIKey);
 
         public void Dispose() { GC.SuppressFinalize(this); }
-    }
-
-    public sealed class Type
-    {
-        [JsonProperty("Id")] internal Int32 _Id { get; set; }
-        [JsonProperty("Name")] internal String _Name { get; set; }
-
-        /// <summary>
-        /// Id för ledtypen.
-        /// </summary>
-        [JsonIgnore] public Int32 Id => _Id;
-        /// <summary>
-        /// Namn för ledtypen (ex. Vändande).
-        /// </summary>
-        [JsonIgnore] public String Name => _Name;
-
-        internal Type() { }
-    }
-
-    public sealed class Geometry
-    {
-        [JsonProperty("SWEREF99TM")] internal String _SWEREF99TM { get; set; }
-        [JsonProperty("WGS84")] internal String _WGS84 { get; set; }
-
-        /// <summary>
-        /// Geometrisk punkt i koordinatsystem SWEREF99TM.
-        /// </summary>
-        [JsonIgnore] public String SWEREF99TM => _SWEREF99TM;
-        /// <summary>
-        /// Geometrisk punkt i koordinatsystem WGS84
-        /// </summary>
-        [JsonIgnore] public String WGS84 => _WGS84;
-
-        internal Geometry() { }
     }
 }

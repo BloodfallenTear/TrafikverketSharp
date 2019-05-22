@@ -1,4 +1,5 @@
 ﻿using System;
+using TrafikverketdotNET.Subs;
 using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
@@ -51,6 +52,8 @@ namespace TrafikverketdotNET
         /// Vägnummer som mätplatsen står vid
         /// </summary>
         [JsonIgnore] public String RoadNumber => _RoadNumber;
+
+        internal TrafficSafetyCameraResponse() { }
     }
 
     public sealed class TrafficSafetyCamera : BaseTrafikverket<TrafficSafetyCameraResponse[]>

@@ -1,4 +1,5 @@
 ﻿using System;
+using TrafikverketdotNET.Subs;
 using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
@@ -72,6 +73,8 @@ namespace TrafikverketdotNET
         /// Fordonets typ (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/TrafficFlow.VehicleType.md). Fältet är nyckel för objektet.
         /// </summary>
         [JsonIgnore] public String VehicleType => _VehicleType;
+
+        internal TrafficFlowResponse() { }
     }
 
     public sealed class TrafficFlow : BaseTrafikverket<TrafficFlowResponse[]>

@@ -1,4 +1,5 @@
 ﻿using System;
+using TrafikverketdotNET.Subs.TravelTimeRouteResponse;
 using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
@@ -11,7 +12,7 @@ namespace TrafikverketdotNET
         [JsonProperty("Deleted")] internal Boolean _Deleted { get; set; }
         [JsonProperty("ExpectedFreeFlowTravelTime")] internal Int32 _ExpectedFreeFlowTravelTime { get; set; }
         [JsonProperty("FreeFlowTravelTime")] internal Int32 _FreeFlowTravelTime { get; set; }
-        [JsonProperty("Geometry")] internal GeometryResp _Geometry { get; set; }
+        [JsonProperty("Geometry")] internal Geometry _Geometry { get; set; }
         [JsonProperty("Id")] internal String _Id { get; set; }
         [JsonProperty("Length")] internal Int32 _Length { get; set; }
         [JsonProperty("MeasureTime")] internal DateTime _MeasureTime { get; set; }
@@ -52,7 +53,7 @@ namespace TrafikverketdotNET
         /// <summary>
         /// Geometrisk punkt i koordinatsystem. Fältet kan användas för geo-frågor.
         /// </summary>
-        [JsonIgnore] public GeometryResp Geometry => _Geometry;
+        [JsonIgnore] public Geometry Geometry => _Geometry;
         /// <summary>
         /// Anger id för sträckan. Fältet är nyckel för objektet.
         /// </summary>
@@ -90,27 +91,7 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public Int32 TravelTime => _TravelTime;
 
-        public sealed class GeometryResp
-        {
-            [JsonProperty("ModifiedTime")] internal DateTime _ModifiedTime { get; set; }
-            [JsonProperty("SWEREF99TM")] internal String _SWEREF99TM { get; set; }
-            [JsonProperty("WGS84")] internal String _WGS84 { get; set; }
-
-            /// <summary>
-            /// Tidpunkt då elementet ändrades.
-            /// </summary>
-            [JsonIgnore] public DateTime ModifiedTime => _ModifiedTime;
-            /// <summary>
-            /// Geometrisk punkt i koordinatsystem SWEREF99TM.
-            /// </summary>
-            [JsonIgnore] public String SWEREF99TM => _SWEREF99TM;
-            /// <summary>
-            /// Geometrisk punkt i koordinatsystem WGS84
-            /// </summary>
-            [JsonIgnore] public String WGS84 => _WGS84;
-
-            internal GeometryResp() { }
-        }
+        internal TravelTimeRouteResponse() { }
     }
 
     public sealed class TravelTimeRoute : BaseTrafikverket<TravelTimeRouteResponse[]>

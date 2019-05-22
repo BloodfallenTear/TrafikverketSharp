@@ -1,4 +1,5 @@
 ﻿using System;
+using TrafikverketdotNET.Subs.RoadConditionResponse;
 using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
@@ -13,7 +14,7 @@ namespace TrafikverketdotNET
         [JsonProperty("Creator")] internal String _Creator { get; set; }
         [JsonProperty("Deleted")] internal Boolean _Deleted { get; set; }
         [JsonProperty("EndTime")] internal DateTime _EndTime { get; set; }
-        [JsonProperty("Geometry")] internal GeometryResp _Geometry { get; set; }
+        [JsonProperty("Geometry")] internal Geometry _Geometry { get; set; }
         [JsonProperty("IconId")] internal String _IconId { get; set; }
         [JsonProperty("Id")] internal String _Id { get; set; }
         [JsonProperty("LocationText")] internal String _LocationText { get; set; }
@@ -60,7 +61,7 @@ namespace TrafikverketdotNET
         /// <summary>
         /// Geometrisk punkt i koordinatsystem. Fältet kan användas för geo-frågor.
         /// </summary>
-        [JsonIgnore] public GeometryResp Geometry => _Geometry;
+        [JsonIgnore] public Geometry Geometry => _Geometry;
         /// <summary>
         /// Ikonid.
         /// </summary>
@@ -103,28 +104,6 @@ namespace TrafikverketdotNET
         /// Varning (https://github.com/BloodfallenTear/Trafikverket.NET/blob/master/docs/RoadCondition.Warning.txt).
         /// </summary>
         [JsonIgnore] public String[] Warning => _Warning;
-
-        public sealed class GeometryResp
-        {
-            [JsonProperty("ModifiedTime")] internal DateTime _ModifiedTime { get; set; }
-            [JsonProperty("SWEREF99TM")] internal String _SWEREF99TM { get; set; }
-            [JsonProperty("WGS84")] internal String _WGS84 { get; set; }
-
-            /// <summary>
-            /// Tidpunkt då elementet ändrades.
-            /// </summary>
-            [JsonIgnore] public DateTime ModifiedTime => _ModifiedTime;
-            /// <summary>
-            /// Geometrisk punkt i koordinatsystem SWEREF99TM.
-            /// </summary>
-            [JsonIgnore] public String SWEREF99TM => _SWEREF99TM;
-            /// <summary>
-            /// Geometrisk punkt i koordinatsystem WGS84
-            /// </summary>
-            [JsonIgnore] public String WGS84 => _WGS84;
-
-            internal GeometryResp() { }
-        }
 
         internal RoadConditionResponse() { }
     }

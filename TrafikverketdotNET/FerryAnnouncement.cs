@@ -1,4 +1,5 @@
 ﻿using System;
+using TrafikverketdotNET.Subs.FerryAnnouncementResponse;
 using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
@@ -8,12 +9,12 @@ namespace TrafikverketdotNET
         [JsonProperty("Deleted")] internal Boolean _Deleted { get; set; }
         [JsonProperty("DepartureTime")] internal DateTime _DepartureTime { get; set; }
         [JsonProperty("DeviationId")] internal String _DeviationId { get; set; }
-        [JsonProperty("FromHarbor")] internal FromHarborResp _FromHarbor { get; set; }
+        [JsonProperty("FromHarbor")] internal FromHarbor _FromHarbor { get; set; }
         [JsonProperty("Id")] internal Int64 _Id { get; set; }
         [JsonProperty("Info")] internal String[] _Info { get; set; }
         [JsonProperty("ModifiedTime")] internal DateTime _ModifiedTime { get; set; }
-        [JsonProperty("Route")] internal RouteResp _Route { get; set; }
-        [JsonProperty("ToHarbor")] internal ToHarborResp _ToHarbor { get; set; }
+        [JsonProperty("Route")] internal Route _Route { get; set; }
+        [JsonProperty("ToHarbor")] internal ToHarbor _ToHarbor { get; set; }
 
         /// <summary>
         /// Anger att dataposten raderats.
@@ -27,7 +28,7 @@ namespace TrafikverketdotNET
         /// Referens till Deviation.Id i objektet Situation.
         /// </summary>
         [JsonIgnore] public String DeviationId => _DeviationId;
-        [JsonIgnore] public FromHarborResp FromHarbor => _FromHarbor;
+        [JsonIgnore] public FromHarbor FromHarbor => _FromHarbor;
         /// <summary>
         /// Avgångens id. Fältet är nyckel för objektet.
         /// </summary>
@@ -40,74 +41,8 @@ namespace TrafikverketdotNET
         /// Tidpunkt då dataposten ändrades
         /// </summary>
         [JsonIgnore] public DateTime ModifiedTime => _ModifiedTime;
-        [JsonIgnore] public RouteResp Route => _Route;
-        [JsonIgnore] public ToHarborResp ToHarbor => _ToHarbor;
-
-        public sealed class FromHarborResp
-        {
-            [JsonProperty("Id")] internal Int32 _Id { get; set; }
-            [JsonProperty("Name")] internal String _Name { get; set; }
-
-            /// <summary>
-            /// Avgår från (id).
-            /// </summary>
-            [JsonIgnore] public Int32 Id => _Id;
-            /// <summary>
-            /// Avgår från (namn).
-            /// </summary>
-            [JsonIgnore] public String Name => _Name;
-
-            internal FromHarborResp() { }
-        }
-
-        public sealed class RouteResp
-        {
-            [JsonProperty("Description")] internal String _Description { get; set; }
-            [JsonProperty("Id")] internal Int32 _Id { get; set; }
-            [JsonProperty("Name")] internal String _Name { get; set; }
-            [JsonProperty("Shortname")] internal String _Shortname { get; set; }
-            [JsonProperty("Type")] internal TrafikverketdotNET.Type _Type { get; set; }
-
-            /// <summary>
-            /// Beskrivande text om rutten.
-            /// </summary>
-            [JsonIgnore] public String Description => _Description;
-            /// <summary>
-            /// Ruttens id.
-            /// </summary>
-            [JsonIgnore] public Int32 Id => _Id;
-            /// <summary>
-            /// Ruttens namn
-            /// </summary>
-            [JsonIgnore] public String Name => _Name;
-            /// <summary>
-            /// Ruttens korntamn.
-            /// </summary>
-            [JsonIgnore] public String Shortname => _Shortname;
-            /// <summary>
-            /// Id för ledtypen.
-            /// </summary>
-            [JsonIgnore] public TrafikverketdotNET.Type Type => _Type;
-
-            internal RouteResp() { }
-        }
-
-        public sealed class ToHarborResp
-        {
-            [JsonProperty("Id")] internal Int32 _Id { get; set; }
-            [JsonProperty("Name")] internal String _Name { get; set; }
-
-            /// <summary>
-            /// Ankommer till (id).
-            /// </summary>
-            [JsonIgnore] public Int32 Id => _Id;
-            /// <summary>
-            /// Ankommer till (namn).
-            /// </summary>
-            [JsonIgnore] public String Name => _Name;
-
-            internal ToHarborResp() { }
-        }
+        [JsonIgnore] public Route Route => _Route;
+        [JsonIgnore] public ToHarbor ToHarbor => _ToHarbor;
 
         internal FerryAnnouncementResponse() { }
     }
