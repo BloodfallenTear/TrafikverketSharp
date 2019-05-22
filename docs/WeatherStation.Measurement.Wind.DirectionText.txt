@@ -1,0 +1,15 @@
+https://api.trafikinfo.trafikverket.se/API/Model
+
+Vindriktning
+>Öst
+>Nordöst
+>Östsydöst
+>Norr
+>Nordnordöst
+>Nordnordväst
+>Nordväst
+>Söder
+>Sydöst
+>Sydsydväst
+>Sydväst
+>Väst 
