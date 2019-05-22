@@ -137,6 +137,10 @@ namespace TrafikverketdotNET
         /// Beräkning av restid baseras på data från detektorer som är utplacerade längs bestämda rutter.
         /// </summary>
         public TravelTimeRoute TravelTimeRoute => new TravelTimeRoute(APIKey);
+        /// <summary>
+        /// Väderstationer med mätdata.
+        /// </summary>
+        public WeatherStation WeatherStation => new WeatherStation(APIKey);
 
         public void Dispose() { GC.SuppressFinalize(this); }
     }

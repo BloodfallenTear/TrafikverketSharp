@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.16.0</Version>
+    <Version>0.17.0</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company>BloodfallenTear</Company>
     <Authors>BloodfallenTear</Authors>
@@ -13,27 +12,22 @@
     <RepositoryUrl>https://github.com/BloodfallenTear/Trafikverket.NET</RepositoryUrl>
     <Description>A C# .NET Standard library for Trafikverket.</Description>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <NoWarn>1701;1702;IDE0002;IDE0049;IDE0060;CS1591</NoWarn>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <DocumentationFile />
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <NoWarn>1701;1702;IDE0002;IDE0049;IDE0060;IDE1006;CS1591</NoWarn>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="newtonsoft.json" Version="12.0.2" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="..\LICENSE.md">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
   </ItemGroup>
-
 </Project>
