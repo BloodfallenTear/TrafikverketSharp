@@ -143,6 +143,14 @@ namespace TrafikverketdotNET
         /// </summary>
         public WeatherStation WeatherStation => new WeatherStation(APIKey);
 
+        /// <summary>
+        /// Mätdata per 100 meter. 
+        /// Ett medelvärde har räknats fram för 100 meter baserat på de ingående 20-metersvärdena (se mer info i MeasurementData20). 
+        /// Observera att det inte finns 100-metersdata för alla våra 20-metersvariabler. 
+        /// Källsystem är PMS-systemen.
+        /// </summary>
+        public MeasurementData100 MeasurementData100 => new MeasurementData100(APIKey);
+
         public void Dispose() { GC.SuppressFinalize(this); }
     }
 }
