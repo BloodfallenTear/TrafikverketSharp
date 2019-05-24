@@ -30,7 +30,4 @@
       <PackagePath></PackagePath>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Subs\**" />
-  </ItemGroup>
 </Project>
