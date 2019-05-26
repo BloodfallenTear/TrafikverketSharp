@@ -80,6 +80,7 @@ namespace TrafikverketdotNET
         public String XMLRequestTemplate => $"<REQUEST><LOGIN authenticationkey=\"{APIKey}\"/><QUERY objecttype=\"{{ObjectType}}\"><FILTER></FILTER></QUERY></REQUEST>";
         public String XMLRequestTemplateLegacy => "<REQUEST><LOGIN authenticationkey=\"\"/><QUERY objecttype=\"\"><FILTER></FILTER></QUERY></REQUEST>";
 
+        #region Järnväg - Trafikinformation
         /// <summary>
         /// Tidtabellsinformation, d.v.s information om tåg på trafikplatser (stationer, hållplatser) varje post motsvarar ett visst tåg vid respektive trafikplats.
         /// </summary>
@@ -92,7 +93,9 @@ namespace TrafikverketdotNET
         /// Trafikplatser, både med och utan resandeutbyte.
         /// </summary>
         public TrainStation TrainStation => new TrainStation(APIKey);
-        
+        #endregion
+
+        #region Väg - Trafikinformation
         /// <summary>
         /// Kameror för automatisk väglag och trafikflöde.
         /// </summary>
@@ -142,7 +145,9 @@ namespace TrafikverketdotNET
         /// Väderstationer med mätdata.
         /// </summary>
         public WeatherStation WeatherStation => new WeatherStation(APIKey);
+        #endregion
 
+        #region Väg - Beläggningsinformation
         /// <summary>
         /// Mätdata per 100 meter. 
         /// Ett medelvärde har räknats fram för 100 meter baserat på de ingående 20-metersvärdena (se mer info i MeasurementData20). 
@@ -162,6 +167,12 @@ namespace TrafikverketdotNET
         /// För att se källa för respektive data, gå till fliken Om variabler i systemet PMSV3.
         /// </summary>
         public PavementData PavementData => new PavementData(APIKey);
+        /// <summary>
+        /// Vägens geometri relaterat till det data vi tillhandahåller från PMS-systemen med data om beläggningar och mätdata.
+        /// Vi kan ej garantera att geometrin är dagsaktuell från NVDB. Datum för när data hämtades framgår av posten TimeStamp. 
+        /// </summary>
+        public RoadGeometry RoadGeometry => new RoadGeometry(APIKey); 
+        #endregion
 
         public void Dispose() { GC.SuppressFinalize(this); }
     }

@@ -133,6 +133,8 @@ namespace TrafikverketdotNET
         /// Vinter2003. Vinter2003/Klassificering map vinterväghållningstandard. 
         /// </summary>
         [JsonIgnore] public Winter2003 Winter2003 => _Winter2003;
+
+        internal RoadDataResponse() { }
     }
 
     public sealed class RoadData : BaseTrafikverket<RoadDataResponse[]>
