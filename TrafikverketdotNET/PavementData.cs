@@ -134,6 +134,8 @@ namespace TrafikverketdotNET
         /// Garantitid förfaller år. Datum då garantin för åtgärden förfaller.
         /// </summary>
         [JsonIgnore] public DateTime WarrantyIsDue => _WarrantyIsDue;
+
+        internal PavementDataResponse() { }
     }
 
     public sealed class PavementData : BaseTrafikverket<PavementDataResponse[]>
