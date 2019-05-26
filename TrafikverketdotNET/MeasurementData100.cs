@@ -1,4 +1,5 @@
 ﻿using System;
+using TrafikverketdotNET.Subs;
 using TrafikverketdotNET.Subs.MeasurementDataResponse;
 using Newtonsoft.Json;
 

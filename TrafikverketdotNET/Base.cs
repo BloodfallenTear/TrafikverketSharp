@@ -156,6 +156,12 @@ namespace TrafikverketdotNET
         /// Senast gällande mätdata finns att hämta dvs ej historik. Källsystem är PMS-systemen.
         /// </summary>
         public MeasurementData20 MeasurementData20 => new MeasurementData20(APIKey);
+        /// <summary>
+        /// Beläggningsdata från PMS-systemen kombinerat med relevant vägdata från NVDB. 
+        /// Vi kan ej garantera att det är helt aktuellt data från NVDB. Datum för när data hämtades framgår av posten TimeStamp. 
+        /// För att se källa för respektive data, gå till fliken Om variabler i systemet PMSV3.
+        /// </summary>
+        public PavementData PavementData => new PavementData(APIKey);
 
         public void Dispose() { GC.SuppressFinalize(this); }
     }
