@@ -150,6 +150,12 @@ namespace TrafikverketdotNET
         /// Källsystem är PMS-systemen.
         /// </summary>
         public MeasurementData100 MeasurementData100 => new MeasurementData100(APIKey);
+        /// <summary>
+        /// Mätdata per 20 meter. Data från vägytemätningar med laserscanning alternativt som beräknats fram baserat på dem. 
+        /// Mätningarna utförs årligen eller vartannat år beroende på trafikmängd. 
+        /// Senast gällande mätdata finns att hämta dvs ej historik. Källsystem är PMS-systemen.
+        /// </summary>
+        public MeasurementData20 MeasurementData20 => new MeasurementData20(APIKey);
 
         public void Dispose() { GC.SuppressFinalize(this); }
     }

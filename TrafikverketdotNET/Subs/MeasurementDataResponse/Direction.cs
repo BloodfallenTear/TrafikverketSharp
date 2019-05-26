@@ -1,22 +1,22 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace TrafikverketdotNET.Subs.MeasurementData100Response
+namespace TrafikverketdotNET.Subs.MeasurementDataResponse
 {
-    public sealed class MeasurementDataType
+    public sealed class Direction
     {
         [JsonProperty("Code")] internal Int32 _Code { get; set; }
         [JsonProperty("Value")] internal String _Value { get; set; }
 
         /// <summary>
-        /// Mätdatatyp. Värde.
+        /// Riktning. Värde.Fältet är nyckel för objektet.
         /// </summary>
         [JsonIgnore] public Int32 Code => _Code;
         /// <summary>
-        /// Mätdatatyp. Beskrivning.
+        /// Riktning. Beskrivning. Fältet är nyckel för objektet.
         /// </summary>
         [JsonIgnore] public String Value => _Value;
 
-        internal MeasurementDataType() { }
+        internal Direction() { }
     }
 }

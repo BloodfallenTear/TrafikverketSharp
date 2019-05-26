@@ -1,5 +1,5 @@
 ﻿using System;
-using TrafikverketdotNET.Subs.MeasurementData100Response;
+using TrafikverketdotNET.Subs.MeasurementDataResponse;
 using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
