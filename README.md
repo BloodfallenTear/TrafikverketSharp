@@ -1,5 +1,5 @@
 # Trafikverket.NET v0.23.1
-A C# .NET Standard library for Trafikverket.
+A C# .NET Standard library for Trafikverket. This is **not** an official Trafikverket library.
 
 ## Documentation
 All of the XML documentation found in this API library comes from [Trafikverket](https://api.trafikinfo.trafikverket.se/API/Model).
@@ -17,7 +17,10 @@ For simplicity, you can now download the library via [NuGet](https://www.nuget.o
 ## Dependencies
 This project uses one third-party dependency, which is [Newtonsoft.Json (12.0.2)](https://www.newtonsoft.com/) by user [JamesNK](https://github.com/JamesNK). NuGet Link: [Newtonsoft.Json (12.0.2)](https://www.nuget.org/packages/Newtonsoft.Json/12.0.2/). [Insight](https://github.com/BloodfallenTear/Trafikverket.NET/network/dependencies).
 
-## To-Do List (For more detailed progress head to [Projects](https://github.com/BloodfallenTear/Trafikverket.NET/projects/1)):
+## Current Focus
+Currently working on creating custom requests making as well as making it easy for users to use.
+
+## API Implementation List (For more detailed progress head to [Projects](https://github.com/BloodfallenTear/Trafikverket.NET/projects/1)):
 - [x] TrainAnnouncement - Tidtabellsinformation, d.v.s information om tåg på trafikplatser (stationer, hållplatser) varje post motsvarar ett visst tåg vid respektive trafikplats.
 - [x] TrainMessage - Tågtrafikmeddelande, exempelvis information kring banarbete, tågfel, anläggningsfel och dylikt.
 - [x] TrainStation - Trafikplatser, både med och utan resandeutbyte.
