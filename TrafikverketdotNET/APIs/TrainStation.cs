@@ -71,6 +71,8 @@ namespace TrafikverketdotNET
         internal TrainStationResponse() { }
     }
 
+    public class TrainStationRequest : BaseTrafikverketRequest, ITrafikverketRequest { public TrainStationRequest(Query Query) : base(Query) { } }
+
     /// <summary>
     /// Trafikplatser, både med och utan resandeutbyte.
     /// </summary>

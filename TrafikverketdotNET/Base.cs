@@ -45,15 +45,27 @@ using Newtonsoft.Json.Linq;
 
 namespace TrafikverketdotNET
 {
+    public interface ITrafikverketRequest { String CreateXMLString(); }
+
     public abstract class BaseTrafikverketRequest
     {
-        protected abstract List<Query> _Queries { get; set; }
-        public abstract List<Query> Queries { get; }
+        protected Query _Query { get; set; }
+        public Query Query => _Query;
 
-        protected BaseTrafikverketRequest() { }
-        protected BaseTrafikverketRequest(List<Query> Queries) { }
+        protected BaseTrafikverketRequest(Query Query) { this._Query = Query; }
 
-        protected String CreateXMLString()
+        public String CreateXMLString() => $"<REQUEST><LOGIN authenticationkey=\"AUTHKEY\"/>{Query.CreateXMLString()}</REQUEST>";
+    }
+
+    public class TrafikverketRequest : ITrafikverketRequest
+    {
+        private List<Query> _Queries { get; set; }
+        public List<Query> Queries => _Queries;
+
+        public TrafikverketRequest(Query Query) { this._Queries = new List<Query>() { Query }; }
+        public TrafikverketRequest(List<Query> Queries) { this._Queries = Queries; }
+
+        public String CreateXMLString()
         {
             var xmlString = $"<REQUEST><LOGIN authenticationkey=\"AUTHKEY\"/>";
             foreach (var query in Queries)
@@ -66,38 +78,6 @@ namespace TrafikverketdotNET
             _Queries.Add(Query);
             return Query;
         }
-    }
-
-    //public class TrafikverketRequest : BaseTrafikverketRequest
-    //{
-    //    private List<Query> _Queries { get; set; }
-    //    public List<Query> Queries => _Queries;
-
-    //    public TrafikverketRequest() { this._Queries = new List<Query>(); }
-    //    public TrafikverketRequest(List<Query> Queries) {  this._Queries = Queries; }
-
-    //    public String CreateXMLString()
-    //    {
-    //        var xmlString = $"<REQUEST><LOGIN authenticationkey=\"AUTHKEY\"/>";
-    //        foreach (var query in Queries)
-    //            xmlString += $"{query.CreateXMLString()}";
-    //        return $"{xmlString}</REQUEST>";
-    //    }
-
-    //    public Query AddQuery(Query Query)
-    //    {
-    //        _Queries.Add(Query);
-    //        return Query;
-    //    }
-    //}
-
-    public class TrainStationRequest : BaseTrafikverketRequest
-    {
-        public TrainStationRequest() { }
-        public TrainStationRequest(List<Query> Queries) : base(Queries) { }
-
-        protected override List<Query> _Queries { get; set; }
-        public override List<Query> Queries => _Queries;
     }
 
     public abstract class BaseTrafikverket<T> where T : class
@@ -135,9 +115,9 @@ namespace TrafikverketdotNET
         //    return null;
         //}
 
-        protected T ExecuteRequest(String ObjectType, String SchemaVersion, BaseTrafikverketRequest Request)
+        protected T ExecuteRequest(String ObjectType, String SchemaVersion, ITrafikverketRequest Request)
         {
-
+            var resp = POSTRequest(Request.CreateXMLString(), true);
             return null;
         }
 
@@ -147,7 +127,7 @@ namespace TrafikverketdotNET
             try
             {
                 if (CustomRequest)
-                    RequestQuery = RequestQuery.Replace("<LOGIN authenticationkey=\"AUTHKEY\"/>", $"<LOGIN authenticationkey=\"{APIKey}\"/>");
+                    RequestQuery = RequestQuery.Replace("<LOGIN authenticationkey=\"AUTHKEY\"/>", $"<LOGIN authenticationkey=\"{APIKey}\"/>"); //Normally, I would've just replaced 'AUTHKEY', but this is a measure in case the user writes AUTHKEY somewhere else in their request, even though it makes no sense for them to do so.
 
                 Console.WriteLine($"RequestQuery: \"{RequestQuery}\", CustomRequest: {CustomRequest}");
 
@@ -276,6 +256,11 @@ namespace TrafikverketdotNET
         /// </summary>
         public RoadGeometry RoadGeometry => new RoadGeometry(APIKey); 
         #endregion
+
+        public void ExecuteRequest(TrafikverketRequest Request)
+        {
+
+        }
 
         public void Dispose() { }
     }
