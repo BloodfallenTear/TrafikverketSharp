@@ -90,6 +90,6 @@ namespace TrafikverketdotNET
         public override TrainStationResponse[] ExecuteRequest() => ExecuteRequest("TrainStation", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         public override TrainStationResponse[] ExecuteRequest(String XMLRequest) => ExecuteRequest("TrainStation", CurrentSchemaVersion, XMLRequest);
-        public TrainStationResponse[] ExecuteRequest(TrafikverketRequest Request) => ExecuteRequest("TrainStation", CurrentSchemaVersion, Request);
+        public TrainStationResponse[] ExecuteRequest(TrainStationRequest Request) => ExecuteRequest("TrainStation", CurrentSchemaVersion, Request);
     }
 }

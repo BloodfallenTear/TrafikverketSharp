@@ -45,25 +45,17 @@ using Newtonsoft.Json.Linq;
 
 namespace TrafikverketdotNET
 {
-    public abstract class TrafikverketRequest
+    public abstract class BaseTrafikverketRequest
     {
+        protected abstract List<Query> _Queries { get; set; }
+        public abstract List<Query> Queries { get; }
 
-    }
+        protected BaseTrafikverketRequest() { }
+        protected BaseTrafikverketRequest(List<Query> Queries) { }
 
-    public class TrainStationRequest : TrafikverketRequest
-    {
-        private Login _Login { get; set; }
-        private List<Query> _Queries { get; set; }
-
-        public Login Login => _Login;
-        public List<Query> Queries => _Queries;
-
-        public TrainStationRequest(Login Login) { this._Login = Login; this._Queries = new List<Query>(); }
-        public TrainStationRequest(Login Login, List<Query> Queries) { this._Login = Login; this._Queries = Queries; }
-
-        public String CreateXMLString()
+        protected String CreateXMLString()
         {
-            var xmlString = $"<REQUEST><LOGIN authenticationkey=\"xxx\"/>";
+            var xmlString = $"<REQUEST><LOGIN authenticationkey=\"AUTHKEY\"/>";
             foreach (var query in Queries)
                 xmlString += $"{query.CreateXMLString()}";
             return $"{xmlString}</REQUEST>";
@@ -76,96 +68,36 @@ namespace TrafikverketdotNET
         }
     }
 
-    public class Login
+    //public class TrafikverketRequest : BaseTrafikverketRequest
+    //{
+    //    private List<Query> _Queries { get; set; }
+    //    public List<Query> Queries => _Queries;
+
+    //    public TrafikverketRequest() { this._Queries = new List<Query>(); }
+    //    public TrafikverketRequest(List<Query> Queries) {  this._Queries = Queries; }
+
+    //    public String CreateXMLString()
+    //    {
+    //        var xmlString = $"<REQUEST><LOGIN authenticationkey=\"AUTHKEY\"/>";
+    //        foreach (var query in Queries)
+    //            xmlString += $"{query.CreateXMLString()}";
+    //        return $"{xmlString}</REQUEST>";
+    //    }
+
+    //    public Query AddQuery(Query Query)
+    //    {
+    //        _Queries.Add(Query);
+    //        return Query;
+    //    }
+    //}
+
+    public class TrainStationRequest : BaseTrafikverketRequest
     {
-        String AuthenticationKey;
-    }
+        public TrainStationRequest() { }
+        public TrainStationRequest(List<Query> Queries) : base(Queries) { }
 
-    public class Query
-    {
-        public ObjectType ObjectType;
-        public String SchemaVersion;
-        public String ID;
-        public Boolean IncludeDeletedObjects;
-        public UInt32 Limit;
-        public String OrderBy;
-        public UInt32 Skip;
-        public Boolean LastModified;
-        public Int32 ChangeID;
-
-        public Filter Filter;
-
-        public List<String> Include;
-        public List<String> Exclude;
-        public String Distinct;
-
-        public Query(ObjectType ObjectType, String SchemaVersion) { this.ObjectType = ObjectType; this.SchemaVersion = SchemaVersion; Filter = new Filter(); }
-        public Query(ObjectType ObjectType, String SchemaVersion, Filter Filter) { this.ObjectType = ObjectType; this.SchemaVersion = SchemaVersion; this.Filter = Filter; }
-
-        public String CreateXMLString()
-        {
-            var xmlString = $"<QUERY objecttype=\"{ObjectType}\" schemaversion=\"{SchemaVersion}\"";
-
-            if (ID?.Length > 0)
-                xmlString += $" id=\"{ID}\"";
-            if(IncludeDeletedObjects)
-                xmlString += $" includedeletedobjects=\"{IncludeDeletedObjects}\"";
-            if (Limit != 0)
-                xmlString += $" limit=\"{Limit}\"";
-            if (OrderBy?.Length > 0)
-                xmlString += $" orderby=\"{OrderBy}\"";
-            if (Skip != 0)
-                xmlString += $" skip=\"{Skip}\"";
-            if (LastModified)
-                xmlString += $" lastmodified=\"{LastModified}\"";
-            if (ChangeID != 0)
-                xmlString += $" changeid=\"{ChangeID}\"";
-
-            return $"{xmlString}>{Filter.CreateXMLString()}</QUERY>";
-        }
-
-        public void SetFilter(Filter Filter) { this.Filter = Filter; }
-    }
-
-    public class Filter
-    {
-        private List<FilterOperator> _FilterOperators { get; set; }
-        private List<FilterGroup> _FilterGroups { get; set; }
-
-        public List<FilterOperator> FilterOperators => _FilterOperators;
-        public List<FilterGroup> FilterGroups => _FilterGroups;
-
-        public Filter() { _FilterOperators = new List<FilterOperator>(); _FilterGroups = new List<FilterGroup>(); }
-
-        public Filter AddOperator(FilterOperator FilterOperator)
-        {
-            _FilterOperators.Add(FilterOperator);
-            return this;
-        }
-
-        public Filter AddGroup(FilterGroup FilterGroup)
-        {
-            _FilterGroups.Add(FilterGroup);
-            return this;
-        }
-
-        public String CreateXMLString()
-        {
-            String xmlString = null;
-
-            foreach (var group in FilterGroups)
-                xmlString += $"{group.CreateXMLString()}";
-
-            foreach (var oper in FilterOperators)
-                xmlString += $"{oper.CreateXMLString()}";
-
-            if (xmlString.Length > 0)
-                return $"<FILTER>{xmlString}</FILTER>";
-            return null;
-        }
-
-        public void SetFilterOperators(List<FilterOperator> FilterOperators) { this._FilterOperators = FilterOperators; }
-        public void SetFilterGroups(List<FilterGroup> FilterGroups) { this._FilterGroups = FilterGroups; }
+        protected override List<Query> _Queries { get; set; }
+        public override List<Query> Queries => _Queries;
     }
 
     public abstract class BaseTrafikverket<T> where T : class
@@ -197,13 +129,13 @@ namespace TrafikverketdotNET
             return JsonConvert.DeserializeObject<T>(JObject.Parse(resp)[$"{ObjectType}"].ToString());
         }
 
-        //protected virtual T ExecuteRequest(String ObjectType, String SchemaVersion, TrafikverketRequest Request)
+        //protected virtual T ExecuteRequest(String ObjectType, String SchemaVersion, BaseTrafikverketRequest Request)
         //{
 
         //    return null;
         //}
 
-        protected T ExecuteRequest(String ObjectType, String SchemaVersion, TrafikverketRequest Request)
+        protected T ExecuteRequest(String ObjectType, String SchemaVersion, BaseTrafikverketRequest Request)
         {
 
             return null;
@@ -214,6 +146,11 @@ namespace TrafikverketdotNET
         {
             try
             {
+                if (CustomRequest)
+                    RequestQuery = RequestQuery.Replace("<LOGIN authenticationkey=\"AUTHKEY\"/>", $"<LOGIN authenticationkey=\"{APIKey}\"/>");
+
+                Console.WriteLine($"RequestQuery: \"{RequestQuery}\", CustomRequest: {CustomRequest}");
+
                 var content = new StringContent(RequestQuery, Encoding.UTF8, "application/xml");
                 using (var http = new HttpClient())
                 {
@@ -340,6 +277,6 @@ namespace TrafikverketdotNET
         public RoadGeometry RoadGeometry => new RoadGeometry(APIKey); 
         #endregion
 
-        public void Dispose() { GC.SuppressFinalize(this); }
+        public void Dispose() { }
     }
 }
