@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
 {
-    public sealed class CameraResponse
+    public sealed class CameraResponse : BaseTrafikverketResponse
     {
         [JsonProperty("Active")] internal Boolean _Active { get; set; }
         [JsonProperty("CameraGroup")] internal String _CameraGroup { get; set; }

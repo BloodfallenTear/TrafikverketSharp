@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
 {
-    public sealed class TravelTimeRouteResponse
+    public sealed class TravelTimeRouteResponse : BaseTrafikverketResponse
     {
         [JsonProperty("AverageFunctionalRoadClass")] internal Int32 _AverageFunctionalRoadClass { get; set; }
         [JsonProperty("CountryCode")] internal String _CountryCode { get; set; }

@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
 {
-    public sealed class RoadDataResponse
+    public sealed class RoadDataResponse : BaseTrafikverketResponse
     {
         [JsonProperty("AADT")] internal Int32 _AADT { get; set; }
         [JsonProperty("AADTHeavyVehicles")] internal Int32 _AADTHeavyVehicles { get; set; }

@@ -82,13 +82,46 @@ namespace TrafikverketdotNET
         }
     }
 
-    public abstract class BaseTrafikverket<T> where T : class
+    public abstract class TrafikverketUtils
     {
         protected const String URL = "https://api.trafikinfo.trafikverket.se/v2/data.json";
         protected readonly String APIKey;
 
-        /// <param name="APIKey">Användarens unika nyckel.</param>
-        protected BaseTrafikverket(String APIKey) { this.APIKey = APIKey; }
+        protected TrafikverketUtils(String APIKey) { this.APIKey = APIKey; }
+
+        /// <param name="RequestQuery">The HTTP request content sent to the server.</param>
+        /// <param name="CustomRequest">True if this is a custom made request.</param>
+        /// <param name="TrafikverketRequest">True if this is a 'TrafikverketRequest' (a general request with multiple queries).</param>
+        protected String POSTRequest(String RequestQuery, Boolean CustomRequest = false, Boolean TrafikverketRequest = false)
+        {
+            try
+            {
+                if (CustomRequest)
+                    RequestQuery = RequestQuery.Replace("<LOGIN authenticationkey=\"AUTHKEY\"/>", $"<LOGIN authenticationkey=\"{APIKey}\"/>"); //Normally, I would've just replaced 'AUTHKEY', but this is a measure in case the user writes AUTHKEY somewhere else in their request, even though it makes no sense for them to do so.
+
+                var content = new StringContent(RequestQuery, Encoding.UTF8, "application/xml");
+                using (var http = new HttpClient())
+                {
+                    var resp = http.PostAsync(URL, content).Result;
+                    if (!resp.IsSuccessStatusCode)
+                        throw new Exception($"Status Code: {resp.StatusCode}");
+
+                    var respString = resp.Content.ReadAsStringAsync().Result;
+                    var data = JObject.Parse(respString);
+
+                    if (TrafikverketRequest)
+                        return data["RESPONSE"]["RESULT"].ToString();
+                    else
+                        return data["RESPONSE"]["RESULT"][0].ToString();
+                }
+            }
+            catch (HttpRequestException err) { throw new Exception(err.Message, err.InnerException); }
+        }
+    }
+
+    public abstract class BaseTrafikverket<T> : TrafikverketUtils where T : class
+    {
+        protected BaseTrafikverket(String APIKey) : base(APIKey) { }
 
         public abstract String CurrentSchemaVersion { get; }
 
@@ -116,45 +149,12 @@ namespace TrafikverketdotNET
             var resp = POSTRequest(Request.CreateXMLString(), true);
             return JsonConvert.DeserializeObject<T>(JObject.Parse(resp)[$"{Request.Query.ObjectType}"].ToString());
         }
-
-        /// <param name="RequestQuery">The HTTP request content sent to the server.</param>
-        /// <param name="CustomRequest">True if this is a custom made request.</param>
-        /// <param name="TrafikverketRequest">True if this is a 'TrafikverketRequest' (a general request with multiple queries).</param>
-        protected String POSTRequest(String RequestQuery, Boolean CustomRequest = false, Boolean TrafikverketRequest = false)
-        {
-            try
-            {
-                if (CustomRequest)
-                    RequestQuery = RequestQuery.Replace("<LOGIN authenticationkey=\"AUTHKEY\"/>", $"<LOGIN authenticationkey=\"{APIKey}\"/>"); //Normally, I would've just replaced 'AUTHKEY', but this is a measure in case the user writes AUTHKEY somewhere else in their request, even though it makes no sense for them to do so.
-
-                //Console.WriteLine($"\r\nRequestQuery: \"{RequestQuery}\", CustomRequest: {CustomRequest}\r\n");
-
-                var content = new StringContent(RequestQuery, Encoding.UTF8, "application/xml");
-                using (var http = new HttpClient())
-                {
-                    var resp = http.PostAsync(URL, content).Result;
-                    if (!resp.IsSuccessStatusCode)
-                        throw new Exception($"Status Code: {resp.StatusCode}");
-
-                    var respString = resp.Content.ReadAsStringAsync().Result;
-                    var data = JObject.Parse(respString);
-
-                    if (TrafikverketRequest)
-                        return data["RESPONSE"]["RESULT"].ToString();
-                    else
-                        return data["RESPONSE"]["RESULT"][0].ToString();
-                }
-            }
-            catch (HttpRequestException err) { throw new Exception(err.Message, err.InnerException); }
-        }
     }
-        
-    public sealed class Trafikverket : IDisposable
+    
+    public sealed class Trafikverket : TrafikverketUtils, IDisposable
     {
-        private readonly String APIKey;
-
         /// <param name="APIKey">Användarens unika nyckel.</param>
-        public Trafikverket(String APIKey) { this.APIKey = APIKey; }
+        public Trafikverket(String APIKey) : base(APIKey) { }
 
         ~Trafikverket() { Dispose(); }
 
@@ -255,13 +255,62 @@ namespace TrafikverketdotNET
         public RoadGeometry RoadGeometry => new RoadGeometry(APIKey); 
         #endregion
 
-        public List<BaseTrafikverketResponse[]> ExecuteRequest(TrafikverketRequest Request)
+        public List<BaseTrafikverketResponse> ExecuteRequest(TrafikverketRequest Request)
         {
-            //List<BaseTrafikverketResponse[]> x = new List<BaseTrafikverketResponse[]>
-            //{
-            //    TrainStation.ExecuteRequest(),
-            //    TrainMessage.ExecuteRequest()
-            //};
+            var list = new List<BaseTrafikverketResponse>();
+            var resp = base.POSTRequest(Request.CreateXMLString(), true, true);
+
+            Console.WriteLine(resp);
+
+            var array = JArray.Parse(resp);
+
+            for(int i = 0; i < array.Count; i++)
+            {
+                switch(Request.Queries[i].ObjectType)
+                {
+                    case ObjectType.TrainAnnouncement:
+                        list.Add(JsonConvert.DeserializeObject<TrainAnnouncementResponse>(array[i].ToString());
+                        break;
+                    case ObjectType.TrainMessage:
+                        break;
+                    case ObjectType.TrainStation:
+                        break;
+                    case ObjectType.Camera:
+                        break;
+                    case ObjectType.FerryAnnouncement:
+                        break;
+                    case ObjectType.FerryRoute:
+                        break;
+                    case ObjectType.Icon:
+                        break;
+                    case ObjectType.Parking:
+                        break;
+                    case ObjectType.RoadCondition:
+                        break;
+                    case ObjectType.RoadConditionOverview:
+                        break;
+                    case ObjectType.Situation:
+                        break;
+                    case ObjectType.TrafficFlow:
+                        break;
+                    case ObjectType.TrafficSafetyCamera:
+                        break;
+                    case ObjectType.TravelTimeRoute:
+                        break;
+                    case ObjectType.WeatherStation:
+                        break;
+                    case ObjectType.MeasurementData100:
+                        break;
+                    case ObjectType.MeasurementData20:
+                        break;
+                    case ObjectType.PavementData:
+                        break;
+                    case ObjectType.RoadData:
+                        break;
+                    case ObjectType.RoadGeometry:
+                        break;
+                }
+            }
 
             return null;
         }

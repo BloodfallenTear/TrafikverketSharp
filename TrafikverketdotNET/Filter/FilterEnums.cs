@@ -2,7 +2,7 @@
 
 namespace TrafikverketdotNET
 {
-    public enum ObjectType
+    public enum ObjectType 
     {
         /// <summary>
         /// Tidtabellsinformation, d.v.s information om tåg på trafikplatser (stationer, hållplatser) varje post motsvarar ett visst tåg vid respektive trafikplats.

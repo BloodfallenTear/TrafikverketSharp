@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
 {
-    public sealed class FerryRouteResponse
+    public sealed class FerryRouteResponse : BaseTrafikverketResponse
     {
         [JsonProperty("Deleted")] internal Boolean _Deleted { get; set; }
         [JsonProperty("DeviationId")] internal String _DeviationId { get; set; }

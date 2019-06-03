@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
 {
-    public sealed class MeasurementData100Response
+    public sealed class MeasurementData100Response : BaseTrafikverketResponse
     {
         [JsonProperty("County")] internal Int32 _County { get; set; }
         [JsonProperty("Deleted")] internal Boolean _Deleted { get; set; }

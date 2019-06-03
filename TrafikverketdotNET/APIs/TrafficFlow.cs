@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
 {
-    public sealed class TrafficFlowResponse
+    public sealed class TrafficFlowResponse : BaseTrafikverketResponse
     {
         [JsonProperty("AverageVehicleSpeed")] internal Int32 _AverageVehicleSpeed { get; set; }
         [JsonProperty("CountyNo")] internal Int32[] _CountyNo { get; set; }

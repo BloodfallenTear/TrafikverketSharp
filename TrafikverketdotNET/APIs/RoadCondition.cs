@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
 {
-    public sealed class RoadConditionResponse
+    public sealed class RoadConditionResponse : BaseTrafikverketResponse
     {
         [JsonProperty("Cause")] internal String[] _Cause { get; set; }
         [JsonProperty("ConditionCode")] internal Int32 _ConditionCode { get; set; }

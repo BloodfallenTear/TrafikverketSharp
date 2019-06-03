@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
 {
-    public sealed class TrainAnnouncementResponse
+    public sealed class TrainAnnouncementResponse : BaseTrafikverketResponse
     {
         [JsonProperty("ActivityId")] internal String _ActivityId { get; set; }
         [JsonProperty("ActivityType")] internal String _ActivityType { get; set; }

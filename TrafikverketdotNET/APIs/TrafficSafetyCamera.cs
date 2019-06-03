@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
 {
-    public sealed class TrafficSafetyCameraResponse
+    public sealed class TrafficSafetyCameraResponse : BaseTrafikverketResponse
     {
         [JsonProperty("Bearing")] internal Int32 _Bearing { get; set; }
         [JsonProperty("CountyNo")] internal Int32[] _CountyNo { get; set; }

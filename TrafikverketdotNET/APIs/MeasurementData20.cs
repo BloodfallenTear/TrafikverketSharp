@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
 {
-    public sealed class MeasurementData20Response
+    public sealed class MeasurementData20Response : BaseTrafikverketResponse
     {
         [JsonProperty("County")] internal Int32 _County { get; set; }
         [JsonProperty("CrossfallRutBottom")] internal Double _CrossfallRutBottom { get; set; }

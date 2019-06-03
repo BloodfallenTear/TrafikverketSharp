@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
 {
-    public sealed class WeatherStationResponse
+    public sealed class WeatherStationResponse : BaseTrafikverketResponse
     {
         [JsonProperty("Active")] internal Boolean _Active { get; set; }
         [JsonProperty("CountyNo")] internal Int32[] _CountyNo { get; set; }

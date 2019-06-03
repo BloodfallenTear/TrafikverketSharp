@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
 {
-    public sealed class PavementDataResponse
+    public sealed class PavementDataResponse : BaseTrafikverketResponse
     {
         [JsonProperty("BallMillValue")] internal Double _BallMillValue { get; set; }
         [JsonProperty("Binder")] internal String _Binder { get; set; }

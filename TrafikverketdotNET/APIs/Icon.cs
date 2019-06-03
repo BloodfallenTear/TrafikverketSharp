@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
 {
-    public sealed class IconResponse
+    public sealed class IconResponse : BaseTrafikverketResponse
     {
         [JsonProperty("Base64")] internal String _Base64 { get; set; }
         [JsonProperty("Deleted")] internal Boolean _Deleted { get; set; }

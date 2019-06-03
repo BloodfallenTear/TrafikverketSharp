@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
 { 
-    public sealed class FerryAnnouncementResponse
+    public sealed class FerryAnnouncementResponse : BaseTrafikverketResponse
     {
         [JsonProperty("Deleted")] internal Boolean _Deleted { get; set; }
         [JsonProperty("DepartureTime")] internal DateTime _DepartureTime { get; set; }

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
 {
-    public sealed class SituationResponse
+    public sealed class SituationResponse : BaseTrafikverketResponse
     {
         [JsonProperty("CountryCode")] internal String _CountryCode { get; set; }
         [JsonProperty("Deleted")] internal Boolean _Deleted { get; set; }
