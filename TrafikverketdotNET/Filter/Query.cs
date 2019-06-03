@@ -73,7 +73,6 @@ namespace TrafikverketdotNET
                 xmlString += $" lastmodified=\"{LastModified}\"";
             if (ChangeID != 0)
                 xmlString += $" changeid=\"{ChangeID}\"";
-            xmlString += $"{xmlString}>{Filter.CreateXMLString()}";
 
             return $"{xmlString}>{Filter.CreateXMLString()}</QUERY>";
         }

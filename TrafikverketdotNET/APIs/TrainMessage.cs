@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
 {
-    public sealed class TrainMessageResponse
+    public sealed class TrainMessageResponse : BaseTrafikverketResponse
     {
         [JsonProperty("AffectedLocation")] internal String[] _AffectedLocation { get; set; }
         [JsonProperty("CountyNo")] internal Int32[] _CountyNo { get; set; }

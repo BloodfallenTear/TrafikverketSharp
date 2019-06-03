@@ -45,7 +45,9 @@ using Newtonsoft.Json.Linq;
 
 namespace TrafikverketdotNET
 {
-    public interface ITrafikverketRequest { String CreateXMLString(); }
+    public abstract class BaseTrafikverketResponse { }
+
+    public class RequestQueryInvalidException : Exception { public RequestQueryInvalidException(String message) : base(message) { } }
 
     public abstract class BaseTrafikverketRequest
     {
@@ -57,7 +59,7 @@ namespace TrafikverketdotNET
         public String CreateXMLString() => $"<REQUEST><LOGIN authenticationkey=\"AUTHKEY\"/>{Query.CreateXMLString()}</REQUEST>";
     }
 
-    public class TrafikverketRequest : ITrafikverketRequest
+    public class TrafikverketRequest 
     {
         private List<Query> _Queries { get; set; }
         public List<Query> Queries => _Queries;
@@ -115,21 +117,26 @@ namespace TrafikverketdotNET
         //    return null;
         //}
 
-        protected T ExecuteRequest(String ObjectType, String SchemaVersion, ITrafikverketRequest Request)
+        protected T ExecuteRequest(BaseTrafikverketRequest Request)
         {
             var resp = POSTRequest(Request.CreateXMLString(), true);
             return null;
         }
 
+        public static void ExecuteRequest(TrafikverketRequest Request)
+        {
+            
+        }
+
         /// <param name="RequestQuery">The HTTP request content sent to the server.</param>
-        protected String POSTRequest(String RequestQuery, Boolean CustomRequest = false)
+        protected String POSTRequest(String RequestQuery, Boolean CustomRequest = false, Boolean TrafikverketRequest = false)
         {
             try
             {
                 if (CustomRequest)
                     RequestQuery = RequestQuery.Replace("<LOGIN authenticationkey=\"AUTHKEY\"/>", $"<LOGIN authenticationkey=\"{APIKey}\"/>"); //Normally, I would've just replaced 'AUTHKEY', but this is a measure in case the user writes AUTHKEY somewhere else in their request, even though it makes no sense for them to do so.
 
-                Console.WriteLine($"RequestQuery: \"{RequestQuery}\", CustomRequest: {CustomRequest}");
+                Console.WriteLine($"\r\nRequestQuery: \"{RequestQuery}\", CustomRequest: {CustomRequest}\r\n".PadLeft(50, '=').PadRight(50, '='));
 
                 var content = new StringContent(RequestQuery, Encoding.UTF8, "application/xml");
                 using (var http = new HttpClient())
@@ -141,7 +148,7 @@ namespace TrafikverketdotNET
                     var respString = resp.Content.ReadAsStringAsync().Result;
                     var data = JObject.Parse(respString);
 
-                    if (CustomRequest)
+                    if (TrafikverketRequest)
                         return data["RESPONSE"]["RESULT"].ToString();
                     else
                         return data["RESPONSE"]["RESULT"][0].ToString();
@@ -257,9 +264,17 @@ namespace TrafikverketdotNET
         public RoadGeometry RoadGeometry => new RoadGeometry(APIKey); 
         #endregion
 
-        public void ExecuteRequest(TrafikverketRequest Request)
+        public List<BaseTrafikverketResponse[]> ExecuteRequest(TrafikverketRequest Request)
         {
+            //List<BaseTrafikverketResponse[]> x = new List<BaseTrafikverketResponse[]>
+            //{
+            //    TrainStation.ExecuteRequest(),
+            //    TrainMessage.ExecuteRequest()
+            //};
 
+            BaseTrafikverket<BaseTrafikverketResponse[]>.ExecuteRequest(Request);
+
+            return null;
         }
 
         public void Dispose() { }

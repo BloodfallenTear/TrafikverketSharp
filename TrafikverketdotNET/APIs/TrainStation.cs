@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
 {
-    public sealed class TrainStationResponse
+    public sealed class TrainStationResponse : BaseTrafikverketResponse
     {
         [JsonProperty("Advertised")] internal Boolean _Advertised { get; set; }
         [JsonProperty("AdvertisedLocationName")] internal String _AdvertisedLocationName { get; set; }
@@ -71,7 +71,7 @@ namespace TrafikverketdotNET
         internal TrainStationResponse() { }
     }
 
-    public class TrainStationRequest : BaseTrafikverketRequest, ITrafikverketRequest { public TrainStationRequest(Query Query) : base(Query) { } }
+    public class TrainStationRequest : BaseTrafikverketRequest { public TrainStationRequest(Query Query) : base(Query) { } }
 
     /// <summary>
     /// Trafikplatser, både med och utan resandeutbyte.
@@ -92,6 +92,6 @@ namespace TrafikverketdotNET
         public override TrainStationResponse[] ExecuteRequest() => ExecuteRequest("TrainStation", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         public override TrainStationResponse[] ExecuteRequest(String XMLRequest) => ExecuteRequest("TrainStation", CurrentSchemaVersion, XMLRequest);
-        public TrainStationResponse[] ExecuteRequest(TrainStationRequest Request) => ExecuteRequest("TrainStation", CurrentSchemaVersion, Request);
+        public TrainStationResponse[] ExecuteRequest(TrainStationRequest Request) => ExecuteRequest(Request);
     }
 }
