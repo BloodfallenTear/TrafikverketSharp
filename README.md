@@ -1,8 +1,31 @@
-# Trafikverket.NET v0.24.2
+# Trafikverket.NET v0.25.0
 A C# .NET Standard library for Trafikverket. This is **not** an official Trafikverket library.
 
 ## Documentation
 All of the XML documentation found in this API library comes from [Trafikverket](https://api.trafikinfo.trafikverket.se/API/Model).
+
+## Usage
+### How to create a basic, unfiltered TrainStation request:
+```csharp
+Trafikverket Trafikverket = new Trafikverket("Your-Key-Here");
+TrainStationResponse[] Response = Trafikverket.TrainStation.ExecuteRequest();
+Console.WriteLine(String.Join(",\r\n", Response.Select(x => x.AdvertisedLocationName)));
+```
+Example Response: Abborrträsk, Almnäs, Astrid Lindgrens värld, Almedal, *[...]*
+
+### How to create a more advanced, unfiltered TrainAnnouncement request (this way, you can create multiple queries instead of being restricted to only one like above):
+```csharp
+TrafikverketResponse Response = Trafikverket.ExecuteRequest(new TrafikverketRequest(new Query(ObjectType.TrainAnnouncement, "1")));
+Console.WriteLine(String.Join(",\r\n", Response.TrainAnnouncementResponse.Select(x => x.LocationSignature)));
+```
+Example Response: Hel, Sod, Sol, Sci, *[...]*
+
+### How to create a more advanced, filtered TrainMessage request:
+```csharp
+TrafikverketResponse Response = Trafikverket.ExecuteRequest(new TrafikverketRequest(new Query(ObjectType.TrainMessage, "1.4", new Filter().AddOperator(new FilterOperator(FilterOperatorType.EQ, "AffectedLocation", "Cst")))));
+Console.WriteLine(String.Join(",\r\n", Response.TrainMessageResponse.Select(x => x.Header)));
+```
+Example Response: Banarbete, Banarbete, Signalfel, Banarbete, *[...]*
 
 ## Changelog 
 For every release, you can find the changelog to see what has changed from the previous release to that one under the said release. If a release contains nothing but the 'Included APIs' tab, that means nothing that should concern the user has been changed and a few APIs have been added. If you still are curious for all the things which have been changed from version x to version y, you can check out the commit history since I try to document everything I do there.
@@ -16,9 +39,6 @@ For simplicity, you can now download the library via [NuGet](https://www.nuget.o
 
 ## Dependencies
 This project uses one third-party dependency, which is [Newtonsoft.Json (12.0.2)](https://www.newtonsoft.com/) by user [JamesNK](https://github.com/JamesNK). NuGet Link: [Newtonsoft.Json (12.0.2)](https://www.nuget.org/packages/Newtonsoft.Json/12.0.2/). [Insight](https://github.com/BloodfallenTear/Trafikverket.NET/network/dependencies).
-
-## Current Focus
-Currently working on creating custom requests making as well as making it easy for users to use.
 
 ## API Implementation List (For more detailed progress head to [Projects](https://github.com/BloodfallenTear/Trafikverket.NET/projects/1)):
 - [x] TrainAnnouncement - Tidtabellsinformation, d.v.s information om tåg på trafikplatser (stationer, hållplatser) varje post motsvarar ett visst tåg vid respektive trafikplats.
