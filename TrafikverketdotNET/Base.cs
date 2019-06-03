@@ -255,13 +255,10 @@ namespace TrafikverketdotNET
         public RoadGeometry RoadGeometry => new RoadGeometry(APIKey); 
         #endregion
 
-        public List<BaseTrafikverketResponse> ExecuteRequest(TrafikverketRequest Request)
+        public List<BaseTrafikverketResponse[]> ExecuteRequest(TrafikverketRequest Request)
         {
-            var list = new List<BaseTrafikverketResponse>();
+            var list = new List<BaseTrafikverketResponse[]>();
             var resp = base.POSTRequest(Request.CreateXMLString(), true, true);
-
-            Console.WriteLine(resp);
-
             var array = JArray.Parse(resp);
 
             for(int i = 0; i < array.Count; i++)
@@ -269,50 +266,69 @@ namespace TrafikverketdotNET
                 switch(Request.Queries[i].ObjectType)
                 {
                     case ObjectType.TrainAnnouncement:
-                        list.Add(JsonConvert.DeserializeObject<TrainAnnouncementResponse>(array[i].ToString());
+                        list.Add(JsonConvert.DeserializeObject<TrainAnnouncementResponse[]>(array[i][$"{Request.Queries[i].ObjectType}"].ToString()));
                         break;
                     case ObjectType.TrainMessage:
+                        list.Add(JsonConvert.DeserializeObject<TrainMessageResponse[]>(array[i][$"{Request.Queries[i].ObjectType}"].ToString()));
                         break;
                     case ObjectType.TrainStation:
+                        list.Add(JsonConvert.DeserializeObject<TrainStationResponse[]>(array[i][$"{Request.Queries[i].ObjectType}"].ToString()));
                         break;
                     case ObjectType.Camera:
+                        list.Add(JsonConvert.DeserializeObject<CameraResponse[]>(array[i][$"{Request.Queries[i].ObjectType}"].ToString()));
                         break;
                     case ObjectType.FerryAnnouncement:
+                        list.Add(JsonConvert.DeserializeObject<FerryAnnouncementResponse[]>(array[i][$"{Request.Queries[i].ObjectType}"].ToString()));
                         break;
                     case ObjectType.FerryRoute:
+                        list.Add(JsonConvert.DeserializeObject<FerryRouteResponse[]>(array[i][$"{Request.Queries[i].ObjectType}"].ToString()));
                         break;
                     case ObjectType.Icon:
+                        list.Add(JsonConvert.DeserializeObject<IconResponse[]>(array[i][$"{Request.Queries[i].ObjectType}"].ToString()));
                         break;
                     case ObjectType.Parking:
+                        list.Add(JsonConvert.DeserializeObject<ParkingResponse[]>(array[i][$"{Request.Queries[i].ObjectType}"].ToString()));
                         break;
                     case ObjectType.RoadCondition:
+                        list.Add(JsonConvert.DeserializeObject<RoadConditionResponse[]>(array[i][$"{Request.Queries[i].ObjectType}"].ToString()));
                         break;
                     case ObjectType.RoadConditionOverview:
+                        list.Add(JsonConvert.DeserializeObject<RoadConditionOverviewResponse[]>(array[i][$"{Request.Queries[i].ObjectType}"].ToString()));
                         break;
                     case ObjectType.Situation:
+                        list.Add(JsonConvert.DeserializeObject<SituationResponse[]>(array[i][$"{Request.Queries[i].ObjectType}"].ToString()));
                         break;
                     case ObjectType.TrafficFlow:
+                        list.Add(JsonConvert.DeserializeObject<TrafficFlowResponse[]>(array[i][$"{Request.Queries[i].ObjectType}"].ToString()));
                         break;
                     case ObjectType.TrafficSafetyCamera:
+                        list.Add(JsonConvert.DeserializeObject<TrafficSafetyCameraResponse[]>(array[i][$"{Request.Queries[i].ObjectType}"].ToString()));
                         break;
                     case ObjectType.TravelTimeRoute:
+                        list.Add(JsonConvert.DeserializeObject<TravelTimeRouteResponse[]>(array[i][$"{Request.Queries[i].ObjectType}"].ToString()));
                         break;
                     case ObjectType.WeatherStation:
+                        list.Add(JsonConvert.DeserializeObject<WeatherStationResponse[]>(array[i][$"{Request.Queries[i].ObjectType}"].ToString()));
                         break;
                     case ObjectType.MeasurementData100:
+                        list.Add(JsonConvert.DeserializeObject<MeasurementData100Response[]>(array[i][$"{Request.Queries[i].ObjectType}"].ToString()));
                         break;
                     case ObjectType.MeasurementData20:
+                        list.Add(JsonConvert.DeserializeObject<MeasurementData20Response[]>(array[i][$"{Request.Queries[i].ObjectType}"].ToString()));
                         break;
                     case ObjectType.PavementData:
+                        list.Add(JsonConvert.DeserializeObject<PavementDataResponse[]>(array[i][$"{Request.Queries[i].ObjectType}"].ToString()));
                         break;
                     case ObjectType.RoadData:
+                        list.Add(JsonConvert.DeserializeObject<RoadDataResponse[]>(array[i][$"{Request.Queries[i].ObjectType}"].ToString()));
                         break;
                     case ObjectType.RoadGeometry:
+                        list.Add(JsonConvert.DeserializeObject<RoadGeometryResponse[]>(array[i][$"{Request.Queries[i].ObjectType}"].ToString()));
                         break;
                 }
             }
 
-            return null;
+            return list;
         }
 
         public void Dispose() { }
