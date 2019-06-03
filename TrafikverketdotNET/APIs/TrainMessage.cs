@@ -87,6 +87,8 @@ namespace TrafikverketdotNET
         internal TrainMessageResponse() { }
     }
 
+    public class TrainMessageRequest : BaseTrafikverketRequest { public TrainMessageRequest(Query Query) : base(Query) { } }
+
     /// <summary>
     /// Tågtrafikmeddelande, exempelvis information kring banarbete, tågfel, anläggningsfel och dylikt.
     /// </summary>
@@ -103,9 +105,9 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => "1.4";
 
-        public override TrainMessageResponse[] ExecuteRequest() => ExecuteRequest("TrainMessage", CurrentSchemaVersion);
-
+        public override TrainMessageResponse[] ExecuteRequest() => base.ExecuteRequest("TrainMessage", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
-        public override TrainMessageResponse[] ExecuteRequest(String XMLRequest) => ExecuteRequest("TrainMessage", "1.4", XMLRequest);
+        public override TrainMessageResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TrainMessage", "1.4", XMLRequest);
+        public override TrainMessageResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

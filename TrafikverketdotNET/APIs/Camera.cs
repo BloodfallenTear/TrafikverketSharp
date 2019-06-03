@@ -106,6 +106,8 @@ namespace TrafikverketdotNET
         internal CameraResponse() { }
     }
 
+    public class CameraRequest : BaseTrafikverketRequest { public CameraRequest(Query Query) : base(Query) { } }
+
     /// <summary>
     /// Kameror för automatisk väglag och trafikflöde.
     /// </summary>
@@ -122,9 +124,9 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => "1";
 
-        public override CameraResponse[] ExecuteRequest() => ExecuteRequest("Camera", CurrentSchemaVersion);
-
+        public override CameraResponse[] ExecuteRequest() => base.ExecuteRequest("Camera", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
-        public override CameraResponse[] ExecuteRequest(String XMLRequest) => ExecuteRequest("Camera", "1", XMLRequest);
+        public override CameraResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("Camera", "1", XMLRequest);
+        public override CameraResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

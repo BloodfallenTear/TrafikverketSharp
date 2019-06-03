@@ -186,6 +186,8 @@ namespace TrafikverketdotNET
         internal TrainAnnouncementResponse() { }
     }
 
+    public class TrainAnnouncementRequest : BaseTrafikverketRequest { public TrainAnnouncementRequest(Query Query) : base(Query) { } }
+
     /// <summary>
     /// Tidtabellsinformation, d.v.s information om tåg på trafikplatser (stationer, hållplatser) varje post motsvarar ett visst tåg vid respektive trafikplats.
     /// </summary>
@@ -202,9 +204,9 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => "1.4";
 
-        public override TrainAnnouncementResponse[] ExecuteRequest() => ExecuteRequest("TrainAnnouncement", CurrentSchemaVersion);
-
+        public override TrainAnnouncementResponse[] ExecuteRequest() => base.ExecuteRequest("TrainAnnouncement", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
-        public override TrainAnnouncementResponse[] ExecuteRequest(String XMLRequest) => ExecuteRequest("TrainAnnouncement", "1.4", XMLRequest);
+        public override TrainAnnouncementResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TrainAnnouncement", "1.4", XMLRequest);
+        public override TrainAnnouncementResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

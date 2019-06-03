@@ -43,6 +43,8 @@ namespace TrafikverketdotNET
         internal IconResponse() { }
     }
 
+    public class IconRequest : BaseTrafikverketRequest { public IconRequest(Query Query) : base(Query) { } }
+
     public sealed class Icon : BaseTrafikverket<IconResponse[]>
     {
         /// <summary>
@@ -57,8 +59,8 @@ namespace TrafikverketdotNET
         public override String CurrentSchemaVersion => "1";
 
         public override IconResponse[] ExecuteRequest() => ExecuteRequest("Icon", CurrentSchemaVersion);
-
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         public override IconResponse[] ExecuteRequest(String XMLRequest) => ExecuteRequest("Icon", CurrentSchemaVersion, XMLRequest);
+        public override IconResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

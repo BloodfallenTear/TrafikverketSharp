@@ -138,6 +138,8 @@ namespace TrafikverketdotNET
         internal PavementDataResponse() { }
     }
 
+    public class PavementDataRequest : BaseTrafikverketRequest { public PavementDataRequest(Query Query) : base(Query) { } }
+
     public sealed class PavementData : BaseTrafikverket<PavementDataResponse[]>
     {
         /// <summary>
@@ -153,9 +155,9 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => "1";
 
-        public override PavementDataResponse[] ExecuteRequest() => ExecuteRequest("PavementData", CurrentSchemaVersion);
-
+        public override PavementDataResponse[] ExecuteRequest() => base.ExecuteRequest("PavementData", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
-        public override PavementDataResponse[] ExecuteRequest(String XMLRequest) => ExecuteRequest("PavementData", CurrentSchemaVersion, XMLRequest);
+        public override PavementDataResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("PavementData", CurrentSchemaVersion, XMLRequest);
+        public override PavementDataResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

@@ -199,6 +199,8 @@ namespace TrafikverketdotNET
         internal MeasurementData20Response() { }
     }
 
+    public class MeasurementData20Request : BaseTrafikverketRequest { public MeasurementData20Request(Query Query) : base(Query) { } }
+
     public sealed class MeasurementData20 : BaseTrafikverket<MeasurementData20Response[]>
     {
         /// <summary>
@@ -216,9 +218,9 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => "1";
 
-        public override MeasurementData20Response[] ExecuteRequest() => ExecuteRequest("MeasurementData20", CurrentSchemaVersion);
-
+        public override MeasurementData20Response[] ExecuteRequest() => base.ExecuteRequest("MeasurementData20", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
-        public override MeasurementData20Response[] ExecuteRequest(String XMLRequest) => ExecuteRequest("MeasurementData20", CurrentSchemaVersion, XMLRequest);
+        public override MeasurementData20Response[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("MeasurementData20", CurrentSchemaVersion, XMLRequest);
+        public override MeasurementData20Response[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

@@ -77,6 +77,8 @@ namespace TrafikverketdotNET
         internal TrafficFlowResponse() { }
     }
 
+    public class TrafficFlowRequest : BaseTrafikverketRequest { public TrafficFlowRequest(Query Query) : base(Query) { } }
+
     public sealed class TrafficFlow : BaseTrafikverket<TrafficFlowResponse[]>
     {
         /// <summary>
@@ -90,9 +92,9 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => "1";
 
-        public override TrafficFlowResponse[] ExecuteRequest() => ExecuteRequest("TrafficFlow", CurrentSchemaVersion);
-
+        public override TrafficFlowResponse[] ExecuteRequest() => base.ExecuteRequest("TrafficFlow", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
-        public override TrafficFlowResponse[] ExecuteRequest(String XMLRequest) => ExecuteRequest("TrafficFlow", CurrentSchemaVersion, XMLRequest);
+        public override TrafficFlowResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TrafficFlow", CurrentSchemaVersion, XMLRequest);
+        public override TrafficFlowResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

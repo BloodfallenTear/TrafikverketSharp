@@ -108,6 +108,8 @@ namespace TrafikverketdotNET
         internal RoadConditionResponse() { }
     }
 
+    public class RoadConditionRequest : BaseTrafikverketRequest { public RoadConditionRequest(Query Query) : base(Query) { } }
+
     public sealed class RoadCondition : BaseTrafikverket<RoadConditionResponse[]>
     {
         /// <summary>
@@ -121,9 +123,9 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => "1.2";
 
-        public override RoadConditionResponse[] ExecuteRequest() => ExecuteRequest("RoadCondition", CurrentSchemaVersion);
-
+        public override RoadConditionResponse[] ExecuteRequest() => base.ExecuteRequest("RoadCondition", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
-        public override RoadConditionResponse[] ExecuteRequest(String XMLRequest) => ExecuteRequest("RoadCondition", CurrentSchemaVersion, XMLRequest);
+        public override RoadConditionResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("RoadCondition", CurrentSchemaVersion, XMLRequest);
+        public override RoadConditionResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

@@ -106,6 +106,8 @@ namespace TrafikverketdotNET
         internal ParkingResponse() { }
     }
 
+    public class ParkingRequest : BaseTrafikverketRequest { public ParkingRequest(Query Query) : base(Query) { } }
+
     public sealed class Parking : BaseTrafikverket<ParkingResponse[]>
     {
         /// <summary>
@@ -119,9 +121,9 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => "1";
 
-        public override ParkingResponse[] ExecuteRequest() => ExecuteRequest("Parking", CurrentSchemaVersion);
-
+        public override ParkingResponse[] ExecuteRequest() => base.ExecuteRequest("Parking", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
-        public override ParkingResponse[] ExecuteRequest(String XMLRequest) => ExecuteRequest("Parking", CurrentSchemaVersion, XMLRequest);
+        public override ParkingResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("Parking", CurrentSchemaVersion, XMLRequest);
+        public override ParkingResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

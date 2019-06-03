@@ -56,6 +56,8 @@ namespace TrafikverketdotNET
         internal TrafficSafetyCameraResponse() { }
     }
 
+    public class TrafficSafetyCameraRequest : BaseTrafikverketRequest { public TrafficSafetyCameraRequest(Query Query) : base(Query) { } }
+
     public sealed class TrafficSafetyCamera : BaseTrafikverket<TrafficSafetyCameraResponse[]>
     {
         /// <summary>
@@ -69,9 +71,9 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => "1";
 
-        public override TrafficSafetyCameraResponse[] ExecuteRequest() => ExecuteRequest("TrafficSafetyCamera", CurrentSchemaVersion);
-
+        public override TrafficSafetyCameraResponse[] ExecuteRequest() => base.ExecuteRequest("TrafficSafetyCamera", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
-        public override TrafficSafetyCameraResponse[] ExecuteRequest(String XMLRequest) => ExecuteRequest("TrafficSafetyCamera", CurrentSchemaVersion, XMLRequest);
+        public override TrafficSafetyCameraResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TrafficSafetyCamera", CurrentSchemaVersion, XMLRequest);
+        public override TrafficSafetyCameraResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

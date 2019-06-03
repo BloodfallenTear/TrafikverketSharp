@@ -137,6 +137,8 @@ namespace TrafikverketdotNET
         internal RoadDataResponse() { }
     }
 
+    public class RoadDataRequest : BaseTrafikverketRequest { public RoadDataRequest(Query Query) : base(Query) { } }
+
     public sealed class RoadData : BaseTrafikverket<RoadDataResponse[]>
     {
         /// <summary>
@@ -152,9 +154,9 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => "1";
 
-        public override RoadDataResponse[] ExecuteRequest() => ExecuteRequest("RoadData", CurrentSchemaVersion);
-
+        public override RoadDataResponse[] ExecuteRequest() => base.ExecuteRequest("RoadData", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
-        public override RoadDataResponse[] ExecuteRequest(String XMLRequest) => ExecuteRequest("RoadData", CurrentSchemaVersion, XMLRequest);
+        public override RoadDataResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("RoadData", CurrentSchemaVersion, XMLRequest);
+        public override RoadDataResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

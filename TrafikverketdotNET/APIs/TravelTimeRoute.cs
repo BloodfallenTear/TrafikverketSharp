@@ -94,6 +94,8 @@ namespace TrafikverketdotNET
         internal TravelTimeRouteResponse() { }
     }
 
+    public class TravelTimeRouteRequest : BaseTrafikverketRequest { public TravelTimeRouteRequest(Query Query) : base(Query) { } }
+
     public sealed class TravelTimeRoute : BaseTrafikverket<TravelTimeRouteResponse[]>
     {
         /// <summary>
@@ -107,9 +109,9 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => "1.4";
 
-        public override TravelTimeRouteResponse[] ExecuteRequest() => ExecuteRequest("TravelTimeRoute", CurrentSchemaVersion);
-
+        public override TravelTimeRouteResponse[] ExecuteRequest() => base.ExecuteRequest("TravelTimeRoute", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
-        public override TravelTimeRouteResponse[] ExecuteRequest(String XMLRequest) => ExecuteRequest("TravelTimeRoute", CurrentSchemaVersion, XMLRequest);
+        public override TravelTimeRouteResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TravelTimeRoute", CurrentSchemaVersion, XMLRequest);
+        public override TravelTimeRouteResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

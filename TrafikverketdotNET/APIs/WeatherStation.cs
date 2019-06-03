@@ -61,6 +61,8 @@ namespace TrafikverketdotNET
         internal WeatherStationResponse() { }
     }
 
+    public class WeatherStationRequest : BaseTrafikverketRequest { public WeatherStationRequest(Query Query) : base(Query) { } }
+
     public sealed class WeatherStation : BaseTrafikverket<WeatherStationResponse[]>
     {
         /// <summary>
@@ -74,9 +76,9 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => "1";
 
-        public override WeatherStationResponse[] ExecuteRequest() => ExecuteRequest("WeatherStation", CurrentSchemaVersion);
-
+        public override WeatherStationResponse[] ExecuteRequest() => base.ExecuteRequest("WeatherStation", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
-        public override WeatherStationResponse[] ExecuteRequest(String XMLRequest) => ExecuteRequest("WeatherStation", CurrentSchemaVersion, XMLRequest);
+        public override WeatherStationResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("WeatherStation", CurrentSchemaVersion, XMLRequest);
+        public override WeatherStationResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

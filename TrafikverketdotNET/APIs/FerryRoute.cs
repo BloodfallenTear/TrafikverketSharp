@@ -62,6 +62,8 @@ namespace TrafikverketdotNET
         internal FerryRouteResponse() { }
     }
 
+    public class FerryRouteRequest : BaseTrafikverketRequest { public FerryRouteRequest(Query Query) : base(Query) { } }
+
     public sealed class FerryRoute : BaseTrafikverket<FerryRouteResponse[]>
     {
         /// <summary>
@@ -75,9 +77,9 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => "1.2";
 
-        public override FerryRouteResponse[] ExecuteRequest() => ExecuteRequest("FerryRoute", CurrentSchemaVersion);
-
+        public override FerryRouteResponse[] ExecuteRequest() => base.ExecuteRequest("FerryRoute", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>s
-        public override FerryRouteResponse[] ExecuteRequest(String XMLRequest) => ExecuteRequest("FerryRoute", CurrentSchemaVersion, XMLRequest);
+        public override FerryRouteResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("FerryRoute", CurrentSchemaVersion, XMLRequest);
+        public override FerryRouteResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

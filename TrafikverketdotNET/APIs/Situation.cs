@@ -43,6 +43,8 @@ namespace TrafikverketdotNET
         internal SituationResponse() { }
     }
 
+    public class SituationRequest : BaseTrafikverketRequest { public SituationRequest(Query Query) : base(Query) { } }
+
     public sealed class Situation : BaseTrafikverket<SituationResponse[]>
     {
         /// <summary>
@@ -56,9 +58,9 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => "1.2";
 
-        public override SituationResponse[] ExecuteRequest() => ExecuteRequest("Situation", CurrentSchemaVersion);
-
+        public override SituationResponse[] ExecuteRequest() => base.ExecuteRequest("Situation", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
-        public override SituationResponse[] ExecuteRequest(String XMLRequest) => ExecuteRequest("Situation", CurrentSchemaVersion, XMLRequest);
+        public override SituationResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("Situation", CurrentSchemaVersion, XMLRequest);
+        public override SituationResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }
