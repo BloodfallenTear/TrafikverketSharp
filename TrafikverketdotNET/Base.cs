@@ -94,7 +94,7 @@ namespace TrafikverketdotNET
 
         public abstract T ExecuteRequest();
         public abstract T ExecuteRequest(String XMLRequest);
-        //public abstract T ExecuteRequest(TrafikverketRequest Request);
+        public abstract T ExecuteRequest(BaseTrafikverketRequest Request);
 
         protected virtual T ExecuteRequest(String ObjectType, String SchemaVersion)
         {
@@ -111,19 +111,15 @@ namespace TrafikverketdotNET
             return JsonConvert.DeserializeObject<T>(JObject.Parse(resp)[$"{ObjectType}"].ToString());
         }
 
-        //protected virtual T ExecuteRequest(String ObjectType, String SchemaVersion, BaseTrafikverketRequest Request)
-        //{
-
-        //    return null;
-        //}
-
-        protected T ExecuteRequest(BaseTrafikverketRequest Request)
+        protected virtual T ExecuteCustomRequest(BaseTrafikverketRequest Request)
         {
             var resp = POSTRequest(Request.CreateXMLString(), true);
             return JsonConvert.DeserializeObject<T>(JObject.Parse(resp)[$"{Request.Query.ObjectType}"].ToString());
         }
 
         /// <param name="RequestQuery">The HTTP request content sent to the server.</param>
+        /// <param name="CustomRequest">True if this is a custom made request.</param>
+        /// <param name="TrafikverketRequest">True if this is a 'TrafikverketRequest' (a general request with multiple queries).</param>
         protected String POSTRequest(String RequestQuery, Boolean CustomRequest = false, Boolean TrafikverketRequest = false)
         {
             try
