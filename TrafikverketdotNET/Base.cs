@@ -120,12 +120,7 @@ namespace TrafikverketdotNET
         protected T ExecuteRequest(BaseTrafikverketRequest Request)
         {
             var resp = POSTRequest(Request.CreateXMLString(), true);
-            return null;
-        }
-
-        public static void ExecuteRequest(TrafikverketRequest Request)
-        {
-            
+            return JsonConvert.DeserializeObject<T>(JObject.Parse(resp)[$"{Request.Query.ObjectType}"].ToString());
         }
 
         /// <param name="RequestQuery">The HTTP request content sent to the server.</param>
@@ -136,7 +131,7 @@ namespace TrafikverketdotNET
                 if (CustomRequest)
                     RequestQuery = RequestQuery.Replace("<LOGIN authenticationkey=\"AUTHKEY\"/>", $"<LOGIN authenticationkey=\"{APIKey}\"/>"); //Normally, I would've just replaced 'AUTHKEY', but this is a measure in case the user writes AUTHKEY somewhere else in their request, even though it makes no sense for them to do so.
 
-                Console.WriteLine($"\r\nRequestQuery: \"{RequestQuery}\", CustomRequest: {CustomRequest}\r\n".PadLeft(50, '=').PadRight(50, '='));
+                //Console.WriteLine($"\r\nRequestQuery: \"{RequestQuery}\", CustomRequest: {CustomRequest}\r\n");
 
                 var content = new StringContent(RequestQuery, Encoding.UTF8, "application/xml");
                 using (var http = new HttpClient())
@@ -271,8 +266,6 @@ namespace TrafikverketdotNET
             //    TrainStation.ExecuteRequest(),
             //    TrainMessage.ExecuteRequest()
             //};
-
-            BaseTrafikverket<BaseTrafikverketResponse[]>.ExecuteRequest(Request);
 
             return null;
         }
