@@ -11,10 +11,10 @@ namespace TrafikverketdotNET
         [JsonProperty("Advertised")] internal Boolean _Advertised { get; set; }
         [JsonProperty("AdvertisedTimeAtLocation")] internal DateTime _AdvertisedTimeAtLocation { get; set; }
         [JsonProperty("AdvertisedTrainIdent")] internal String _AdvertisedTrainIdent { get; set; }
-        [JsonProperty("Booking")] internal String[] _Booking { get; set; }
+        [JsonProperty("Booking")] internal Booking[] _Booking { get; set; }
         [JsonProperty("Canceled")] internal Boolean _Canceled { get; set; }
         [JsonProperty("Deleted")] internal Boolean _Deleted { get; set; }
-        [JsonProperty("Deviation")] internal String[] _Deviation { get; set; }
+        [JsonProperty("Deviation")] internal Deviation[] _Deviation { get; set; }
         [JsonProperty("EstimatedTimeAtLocation")] internal DateTime _EstimatedTimeAtLocation { get; set; }
         [JsonProperty("EstimatedTimeIsPreliminary")] internal Boolean _EstimatedTimeIsPreliminary { get; set; }
         [JsonProperty("InformationOwner")] internal String _InformationOwner { get; set; }
@@ -23,18 +23,18 @@ namespace TrafikverketdotNET
         [JsonProperty("ModifiedTime")] internal DateTime _ModifiedTime { get; set; }
         [JsonProperty("NewEquipment")] internal Int32 _NewEquipment { get; set; }
         [JsonProperty("Operator")] internal String _Operator { get; set; }
-        [JsonProperty("OtherInformation")] internal String[] _OtherInformation { get; set; }
+        [JsonProperty("OtherInformation")] internal OtherInformation[] _OtherInformation { get; set; }
         [JsonProperty("PlannedEstimatedTimeAtLocation")] internal DateTime _PlannedEstimatedTimeAtLocation { get; set; }
         [JsonProperty("PlannedEstimatedTimeAtLocationIsValid")] internal Boolean _PlannedEstimatedTimeAtLocationIsValid { get; set; }
-        [JsonProperty("ProductInformation")] internal String[] _ProductInformation { get; set; }
+        [JsonProperty("ProductInformation")] internal ProductInformation[] _ProductInformation { get; set; }
         [JsonProperty("ScheduledDepartureDateTime")] internal DateTime _ScheduledDepartureDateTime { get; set; }
-        [JsonProperty("Service")] internal String[] _Service { get; set; }
+        [JsonProperty("Service")] internal Service[] _Service { get; set; }
         [JsonProperty("TechnicalDateTime")] internal DateTime _TechnicalDateTime { get; set; }
         [JsonProperty("TechnicalTrainIdent")] internal String _TechnicalTrainIdent { get; set; }
         [JsonProperty("TimeAtLocation")] internal DateTime _TimeAtLocation { get; set; }
         [JsonProperty("TimeAtLocationWithSeconds")] internal DateTime _TimeAtLocationWithSeconds { get; set; }
         [JsonProperty("TrackAtLocation")] internal String _TrackAtLocation { get; set; }
-        [JsonProperty("TrainComposition")] internal String[] _TrainComposition { get; set; }
+        [JsonProperty("TrainComposition")] internal TrainComposition[] _TrainComposition { get; set; }
         [JsonProperty("TrainOwner")] internal String _TrainOwner { get; set; }
         [JsonProperty("TypeOfTraffic")] internal String _TypeOfTraffic { get; set; }
         [JsonProperty("WebLink")] internal String _WebLink { get; set; }
@@ -67,7 +67,7 @@ namespace TrafikverketdotNET
         /// <summary>
         /// Bokningsinformation, ex: "Vagn 4 obokad.".
         /// </summary>
-        [JsonIgnore] public String[] Booking => _Booking;
+        [JsonIgnore] public Booking[] Booking => _Booking;
         /// <summary>
         /// Anger om ankomsten/avgången är inställd.
         /// </summary>
@@ -79,7 +79,7 @@ namespace TrafikverketdotNET
         /// <summary>
         /// Eventuell avvikelse, ex: "Buss ersätter", "Spårändrat", "Kort tåg", "Ej servering" o.s.v.
         /// </summary>
-        [JsonIgnore] public String[] Deviation => _Deviation;
+        [JsonIgnore] public Deviation[] Deviation => _Deviation;
         /// <summary>
         /// Tidpunkt för beräknad ankomst eller avgång.
         /// </summary>
@@ -117,7 +117,7 @@ namespace TrafikverketdotNET
         /// <summary>
         /// Övrig annonseringsinformation, ex. "Trevlig resa!", "Bakre fordon går låst!", "Ingen påstigning".
         /// </summary>
-        [JsonIgnore] public String[] OtherInformation => _OtherInformation;
+        [JsonIgnore] public OtherInformation[] OtherInformation => _OtherInformation;
         /// <summary>
         /// Anger en planerad försening och dess giltighet anges med PlannedEstimatedTimeAtLocationIsValid-flaggan.
         /// </summary>
@@ -129,7 +129,7 @@ namespace TrafikverketdotNET
         /// <summary>
         /// Beskrivning av tåget, ex. "Tågkompaniet", "SJ InterCity", "TiB/Tågkomp".
         /// </summary>
-        [JsonIgnore] public String[] ProductInformation => _ProductInformation;
+        [JsonIgnore] public ProductInformation[] ProductInformation => _ProductInformation;
         /// <summary>
         /// Tågets annonserade avgångsdatum
         /// </summary>
@@ -137,7 +137,7 @@ namespace TrafikverketdotNET
         /// <summary>
         /// Lite extra utöver produktinformation, ex "Bistro", "Sov-och liggv".
         /// </summary>
-        [JsonIgnore] public String[] Service => _Service;
+        [JsonIgnore] public Service[] Service => _Service;
         /// <summary>
         /// Teknisk tid
         /// </summary>
@@ -161,7 +161,7 @@ namespace TrafikverketdotNET
         /// <summary>
         /// Tågsammansättning, ex: "Vagnsordning 7, 6, 5, 4, 2, 1".
         /// </summary>
-        [JsonIgnore] public String[] TrainComposition => _TrainComposition;
+        [JsonIgnore] public TrainComposition[] TrainComposition => _TrainComposition;
         /// <summary>
         /// Ägaren av det aktuella tågläget.
         /// </summary>
@@ -202,7 +202,7 @@ namespace TrafikverketdotNET
         /// <summary>
         /// SchemaVersion versionen som biblioteken använder.
         /// </summary>
-        public override String CurrentSchemaVersion => "1.4";
+        public override String CurrentSchemaVersion => "1.5";
 
         public override TrainAnnouncementResponse[] ExecuteRequest() => base.ExecuteRequest("TrainAnnouncement", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
