@@ -27,6 +27,9 @@ Console.WriteLine(String.Join(",\r\n", Response.TrainMessageResponse.Select(x =>
 ```
 Example Response: Banarbete, Banarbete, Signalfel, Banarbete, *[...]*
 
+### Dev Note
+If you're unsure which Schema Version this library currently supports, be sure to go into the respective API class and see the 'CurrentSchemaVersion' property. 
+
 ## Changelog 
 For every release, you can find the changelog to see what has changed from the previous release to that one under the said release. If a release contains nothing but the 'Included APIs' tab, that means nothing that should concern the user has been changed and a few APIs have been added. If you still are curious for all the things which have been changed from version x to version y, you can check out the commit history since I try to document everything I do there.
 
