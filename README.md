@@ -27,11 +27,9 @@ Console.WriteLine(String.Join(",\r\n", Response.TrainMessageResponse.Select(x =>
 ```
 Example Response: Banarbete, Banarbete, Signalfel, Banarbete, *[...]*
 
-### Dev Note
-If you're unsure which Schema Version this library currently supports, be sure to go into the respective API class and see the 'CurrentSchemaVersion' property. Warning: Whichever 'CurrentSchemaVersion' version it's set to, does not mean that it's backwards compatible with previous versions, e.g if 'CurrentSchemaVersion' is "1.5", it does not support all the previous versions, you have to use version "1.5" specifically.
-
 ### GetSchemaVersion Dictionary
 To get which Schema Version the library supports, you can access a dictionary located in the 'Trafikverket' class.
+Warning: Whichever 'CurrentSchemaVersion' version it's set to, does not mean that it's backwards compatible with previous versions, e.g if 'CurrentSchemaVersion' is "1.5", it does not support all the previous versions, you have to use version "1.5" specifically.
 Example: `String SchemaVersion = Trafikverket.GetSchemaVersion[ObjectType.TrainStation];`
 
 ## Changelog 
