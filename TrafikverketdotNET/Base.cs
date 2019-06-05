@@ -47,17 +47,17 @@ namespace TrafikverketdotNET
 
     public class RequestQueryInvalidException : Exception { public RequestQueryInvalidException(String message) : base(message) { } }
 
+    //public abstract class BaseTrafikverketRequest
+    //{
+    //    protected Query _Query { get; set; }
+    //    public Query Query => _Query;
+
+    //    protected BaseTrafikverketRequest(Query Query) { this._Query = Query; }
+
+    //    public String CreateXMLString() => $"<REQUEST><LOGIN authenticationkey=\"AUTHKEY\"/>{Query.CreateXMLString()}</REQUEST>";
+    //}
+
     public abstract class BaseTrafikverketRequest
-    {
-        protected Query _Query { get; set; }
-        public Query Query => _Query;
-
-        protected BaseTrafikverketRequest(Query Query) { this._Query = Query; }
-
-        public String CreateXMLString() => $"<REQUEST><LOGIN authenticationkey=\"AUTHKEY\"/>{Query.CreateXMLString()}</REQUEST>";
-    }
-
-    public abstract class BaseTrafikverketRequestXXX
     {
         internal Query _Query { get; set; }
         public Query Query => _Query;
@@ -93,8 +93,8 @@ namespace TrafikverketdotNET
         public abstract ObjectType ObjectType { get; }
         public abstract String SchemaVersion { get; }
 
-        protected BaseTrafikverketRequestXXX(Filter Filter) { this._Filter = Filter; this._Query = GetQuery(this.ObjectType, this.SchemaVersion); }
-        protected BaseTrafikverketRequestXXX(String ID = null, Boolean IncludeDeletedObjects = false,
+        protected BaseTrafikverketRequest(Filter Filter) { this._Filter = Filter; this._Query = GetQuery(this.ObjectType, this.SchemaVersion); }
+        protected BaseTrafikverketRequest(String ID = null, Boolean IncludeDeletedObjects = false,
                                           UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
                                           Boolean LastModified = false, Int32 ChangeID = 0,
                                           String Include = null, String Exclude = null, String Distinct = null)
@@ -112,7 +112,7 @@ namespace TrafikverketdotNET
 
             this._Query = GetQuery(this.ObjectType, this.SchemaVersion);
         }
-        protected BaseTrafikverketRequestXXX(String ID = null, Boolean IncludeDeletedObjects = false,
+        protected BaseTrafikverketRequest(String ID = null, Boolean IncludeDeletedObjects = false,
                                           UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
                                           Boolean LastModified = false, Int32 ChangeID = 0,
                                           String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null)
@@ -131,7 +131,7 @@ namespace TrafikverketdotNET
 
             this._Query = GetQuery(this.ObjectType, this.SchemaVersion);
         }
-        protected BaseTrafikverketRequestXXX(String ID = null, Boolean IncludeDeletedObjects = false,
+        protected BaseTrafikverketRequest(String ID = null, Boolean IncludeDeletedObjects = false,
                                           UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
                                           Boolean LastModified = false, Int32 ChangeID = 0,
                                           List<String> Include = null, List<String> Exclude = null, String Distinct = null)
@@ -150,7 +150,7 @@ namespace TrafikverketdotNET
             this._Query = GetQuery(this.ObjectType, this.SchemaVersion);
         }
 
-        protected BaseTrafikverketRequestXXX(String ID = null, Boolean IncludeDeletedObjects = false,
+        protected BaseTrafikverketRequest(String ID = null, Boolean IncludeDeletedObjects = false,
                                           UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
                                           Boolean LastModified = false, Int32 ChangeID = 0,
                                           List<String> Include = null, List<String> Exclude = null, String Distinct = null, Filter Filter = null)

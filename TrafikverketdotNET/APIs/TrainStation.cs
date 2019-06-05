@@ -72,30 +72,40 @@ namespace TrafikverketdotNET
         internal TrainStationResponse() { }
     }
 
-    public class TrainStationRequest : BaseTrafikverketRequestXXX
+    public class TrainStationRequest : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.TrainStation;
         public override String SchemaVersion => "1";
 
         public TrainStationRequest(Filter Filter) : base(Filter) { }
 
-        public TrainStationRequest(string ID = null, bool IncludeDeletedObjects = false, uint Limit = 0, string OrderBy = null, uint Skip = 0, bool LastModified = false, int ChangeID = 0, string Include = null, string Exclude = null, string Distinct = null) : base(ID, IncludeDeletedObjects, Limit, OrderBy, Skip, LastModified, ChangeID, Include, Exclude, Distinct)
-        {
-        }
+        public TrainStationRequest(String ID = null, Boolean IncludeDeletedObjects = false, 
+                                   UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0, 
+                                   Boolean LastModified = false, Int32 ChangeID = 0, 
+                                   String Include = null, String Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects, 
+                                                                                                                Limit, OrderBy, Skip, LastModified, 
+                                                                                                                ChangeID, Include, Exclude, Distinct) { }
 
-        public TrainStationRequest(string ID = null, bool IncludeDeletedObjects = false, uint Limit = 0, string OrderBy = null, uint Skip = 0, bool LastModified = false, int ChangeID = 0, List<string> Include = null, List<string> Exclude = null, string Distinct = null) : base(ID, IncludeDeletedObjects, Limit, OrderBy, Skip, LastModified, ChangeID, Include, Exclude, Distinct)
-        {
-        }
+        public TrainStationRequest(String ID = null, Boolean IncludeDeletedObjects = false, 
+                                   UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                   Boolean LastModified = false, Int32 ChangeID = 0, 
+                                   List<String> Include = null, List<String> Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects, 
+                                                                                                                            Limit, OrderBy, Skip, LastModified, 
+                                                                                                                            ChangeID, Include, Exclude, Distinct) { }
 
-        public TrainStationRequest(string ID = null, bool IncludeDeletedObjects = false, uint Limit = 0, string OrderBy = null, uint Skip = 0, bool LastModified = false, int ChangeID = 0, string Include = null, string Exclude = null, string Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects, Limit, OrderBy, Skip, LastModified, ChangeID, Include, Exclude, Distinct, Filter)
-        {
-        }
+        public TrainStationRequest(String ID = null, Boolean IncludeDeletedObjects = false, 
+                                   UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0, 
+                                   Boolean LastModified = false, Int32 ChangeID = 0, 
+                                   String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects, 
+                                                                                                                                      Limit, OrderBy, Skip, LastModified, 
+                                                                                                                                      ChangeID, Include, Exclude, Distinct, Filter) { }
 
-        public TrainStationRequest(string ID = null, bool IncludeDeletedObjects = false, uint Limit = 0, string OrderBy = null, uint Skip = 0, bool LastModified = false, int ChangeID = 0, List<string> Include = null, List<string> Exclude = null, string Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects, Limit, OrderBy, Skip, LastModified, ChangeID, Include, Exclude, Distinct, Filter)
-        {
-        }
-
-        
+        public TrainStationRequest(String ID = null, Boolean IncludeDeletedObjects = false, 
+                                   UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0, 
+                                   Boolean LastModified = false, Int32 ChangeID = 0, 
+                                   List<String> Include = null, List<String> Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects, 
+                                                                                                                                                  Limit, OrderBy, Skip, LastModified, 
+                                                                                                                                                  ChangeID, Include, Exclude, Distinct, Filter) { }
     }
 
     /// <summary>
