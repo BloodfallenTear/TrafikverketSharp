@@ -80,6 +80,20 @@ namespace TrafikverketdotNET
                 return $"{xmlString}></QUERY>";
         }
 
+        public void SetID(String ID) { this._ID = ID; }
+        public void SetIncludeDeletedObjects(Boolean IncludeDeletedObjects) { this._IncludeDeletedObjects = IncludeDeletedObjects; }
+        public void SetLimit(UInt32 Limit) { this._Limit = Limit; }
+        public void SetOrderBy(String OrderBy) { this._OrderBy = OrderBy; }
+        public void SetSkip(UInt32 Skip) { this._Skip = Skip; }
+        public void SetLastModified(Boolean LastModified) { this._LastModified = LastModified; }
+        public void SetChangeID(Int32 ChangeID) { this._ChangeID = ChangeID; }
+
+        public void SetInclude(String Include) { this._Include = new List<String>() { Include }; }
+        public void SetInclude(List<String> Include) { this._Include = Include; }
+        public void SetExclude(String Exclude) { this._Exclude = new List<String>() { Exclude }; }
+        public void SetExclude(List<String> Exclude) { this._Exclude = Exclude; }
+        public void SetDistinct(String Distinct) { this._Distinct = Distinct; }
+
         public void SetFilter(Filter Filter) { this._Filter = Filter; }
     }
 }

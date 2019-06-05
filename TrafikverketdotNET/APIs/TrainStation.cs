@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TrafikverketdotNET.Subs;
 using Newtonsoft.Json;
 
@@ -71,7 +72,31 @@ namespace TrafikverketdotNET
         internal TrainStationResponse() { }
     }
 
-    public class TrainStationRequest : BaseTrafikverketRequest { public TrainStationRequest(Query Query) : base(Query) { } }
+    public class TrainStationRequest : BaseTrafikverketRequestXXX
+    {
+        public override ObjectType ObjectType => ObjectType.TrainStation;
+        public override String SchemaVersion => "1";
+
+        public TrainStationRequest(Filter Filter) : base(Filter) { }
+
+        public TrainStationRequest(string ID = null, bool IncludeDeletedObjects = false, uint Limit = 0, string OrderBy = null, uint Skip = 0, bool LastModified = false, int ChangeID = 0, string Include = null, string Exclude = null, string Distinct = null) : base(ID, IncludeDeletedObjects, Limit, OrderBy, Skip, LastModified, ChangeID, Include, Exclude, Distinct)
+        {
+        }
+
+        public TrainStationRequest(string ID = null, bool IncludeDeletedObjects = false, uint Limit = 0, string OrderBy = null, uint Skip = 0, bool LastModified = false, int ChangeID = 0, List<string> Include = null, List<string> Exclude = null, string Distinct = null) : base(ID, IncludeDeletedObjects, Limit, OrderBy, Skip, LastModified, ChangeID, Include, Exclude, Distinct)
+        {
+        }
+
+        public TrainStationRequest(string ID = null, bool IncludeDeletedObjects = false, uint Limit = 0, string OrderBy = null, uint Skip = 0, bool LastModified = false, int ChangeID = 0, string Include = null, string Exclude = null, string Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects, Limit, OrderBy, Skip, LastModified, ChangeID, Include, Exclude, Distinct, Filter)
+        {
+        }
+
+        public TrainStationRequest(string ID = null, bool IncludeDeletedObjects = false, uint Limit = 0, string OrderBy = null, uint Skip = 0, bool LastModified = false, int ChangeID = 0, List<string> Include = null, List<string> Exclude = null, string Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects, Limit, OrderBy, Skip, LastModified, ChangeID, Include, Exclude, Distinct, Filter)
+        {
+        }
+
+        
+    }
 
     /// <summary>
     /// Trafikplatser, både med och utan resandeutbyte.
@@ -92,6 +117,9 @@ namespace TrafikverketdotNET
         public override TrainStationResponse[] ExecuteRequest() => base.ExecuteRequest("TrainStation", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         public override TrainStationResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TrainStation", CurrentSchemaVersion, XMLRequest);
-        public override TrainStationResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
+        public override TrainStationResponse[] ExecuteRequest(BaseTrafikverketRequest Request)
+        {
+            return base.ExecuteCustomRequest(Request);
+        }
     }
 }
