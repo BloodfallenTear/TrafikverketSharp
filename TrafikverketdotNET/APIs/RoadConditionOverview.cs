@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TrafikverketdotNET.Subs;
 using Newtonsoft.Json;
 
@@ -61,7 +62,37 @@ namespace TrafikverketdotNET
         internal RoadConditionOverviewResponse() { }
     }
 
-    public class RoadConditionOverviewRequest : BaseTrafikverketRequest { public RoadConditionOverviewRequest(Query Query) : base(Query) { } }
+    public class RoadConditionOverviewRequest : BaseTrafikverketRequest
+    {
+        public override ObjectType ObjectType => ObjectType.RoadConditionOverview;
+        public override string SchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
+
+        public RoadConditionOverviewRequest(Filter Filter) : base(Filter) { }
+        public RoadConditionOverviewRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                            UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                            Boolean LastModified = false, Int32 ChangeID = 0,
+                                            String Include = null, String Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                         Limit, OrderBy, Skip, LastModified,
+                                                                                                                         ChangeID, Include, Exclude, Distinct) { }
+        public RoadConditionOverviewRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                            UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                            Boolean LastModified = false, Int32 ChangeID = 0,
+                                            List<String> Include = null, List<String> Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                     Limit, OrderBy, Skip, LastModified,
+                                                                                                                                     ChangeID, Include, Exclude, Distinct) { }
+        public RoadConditionOverviewRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                            UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                            Boolean LastModified = false, Int32 ChangeID = 0,
+                                            String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                               Limit, OrderBy, Skip, LastModified,
+                                                                                                                                               ChangeID, Include, Exclude, Distinct, Filter) { }
+        public RoadConditionOverviewRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                            UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                            Boolean LastModified = false, Int32 ChangeID = 0,
+                                            List<String> Include = null, List<String> Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                                           Limit, OrderBy, Skip, LastModified,
+                                                                                                                                                           ChangeID, Include, Exclude, Distinct, Filter){ }
+    }
 
     public sealed class RoadConditionOverview : BaseTrafikverket<RoadConditionOverviewResponse[]>
     {
@@ -71,10 +102,11 @@ namespace TrafikverketdotNET
         /// <param name="APIKey">Användarens unika nyckel.</param>
         public RoadConditionOverview(String APIKey) : base(APIKey) { }
 
+        internal override ObjectType ObjectType => ObjectType.RoadConditionOverview;
         /// <summary>
         /// SchemaVersion versionen som biblioteken använder.
         /// </summary>
-        public override String CurrentSchemaVersion => "1";
+        public override String CurrentSchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
 
         public override RoadConditionOverviewResponse[] ExecuteRequest() => base.ExecuteRequest("RoadConditionOverview", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>

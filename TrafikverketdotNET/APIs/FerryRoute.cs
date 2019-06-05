@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TrafikverketdotNET.Subs;
 using TrafikverketdotNET.Subs.FerryRouteResponse;
 using Newtonsoft.Json;
@@ -62,7 +63,38 @@ namespace TrafikverketdotNET
         internal FerryRouteResponse() { }
     }
 
-    public class FerryRouteRequest : BaseTrafikverketRequest { public FerryRouteRequest(Query Query) : base(Query) { } }
+    public class FerryRouteRequest : BaseTrafikverketRequest
+    {
+        public override ObjectType ObjectType => ObjectType.FerryRoute;
+        public override string SchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
+
+        public FerryRouteRequest(Filter Filter) : base(Filter) { }
+        public FerryRouteRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                 UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                 Boolean LastModified = false, Int32 ChangeID = 0,
+                                 String Include = null, String Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
+                                                                                                              Limit, OrderBy, Skip, LastModified,
+                                                                                                              ChangeID, Include, Exclude, Distinct) { }
+        public FerryRouteRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                 UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                 Boolean LastModified = false, Int32 ChangeID = 0,
+                                 List<String> Include = null, List<String> Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                          Limit, OrderBy, Skip, LastModified,
+                                                                                                                          ChangeID, Include, Exclude, Distinct) { }
+        public FerryRouteRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                 UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                 Boolean LastModified = false, Int32 ChangeID = 0,
+                                 String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                    Limit, OrderBy, Skip, LastModified,
+                                                                                                                                    ChangeID, Include, Exclude, Distinct, Filter) { }
+        public FerryRouteRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                 UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                 Boolean LastModified = false, Int32 ChangeID = 0,
+                                 List<String> Include = null, List<String> Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                                Limit, OrderBy, Skip, LastModified,
+                                                                                                                                                ChangeID, Include, Exclude, Distinct, Filter) { }
+
+    }
 
     public sealed class FerryRoute : BaseTrafikverket<FerryRouteResponse[]>
     {
@@ -72,10 +104,11 @@ namespace TrafikverketdotNET
         /// <param name="APIKey">Användarens unika nyckel.</param>
         public FerryRoute(String APIKey) : base(APIKey) { }
 
+        internal override ObjectType ObjectType => ObjectType.FerryRoute;
         /// <summary>
         /// SchemaVersion versionen som biblioteken använder.
         /// </summary>
-        public override String CurrentSchemaVersion => "1.2";
+        public override String CurrentSchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
 
         public override FerryRouteResponse[] ExecuteRequest() => base.ExecuteRequest("FerryRoute", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>s

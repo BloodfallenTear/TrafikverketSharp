@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -108,6 +109,29 @@ namespace TrafikverketdotNET
         /// </summary>
         public RoadGeometry RoadGeometry => new RoadGeometry(APIKey);
         #endregion
+
+        public static Dictionary<ObjectType, String> GetSchemaVersion => new Dictionary<ObjectType, String>()
+        {
+            { ObjectType.TrainAnnouncement, "1.5" },
+            { ObjectType.TrainMessage, "1.4" },
+            { ObjectType.TrainStation, "1" },
+            { ObjectType.Camera, "1" },
+            { ObjectType.FerryAnnouncement, "1.2" },
+            { ObjectType.FerryRoute, "1.2" },
+            { ObjectType.Icon, "1" },
+            { ObjectType.Parking, "1" },
+            { ObjectType.RoadCondition, "1.2" },
+            { ObjectType.RoadConditionOverview, "1" },
+            { ObjectType.Situation, "1.2" },
+            { ObjectType.TrafficSafetyCamera, "1" },
+            { ObjectType.TravelTimeRoute, "1´.4" },
+            { ObjectType.WeatherStation, "1" },
+            { ObjectType.MeasurementData100, "1" },
+            { ObjectType.MeasurementData20, "1" },
+            { ObjectType.PavementData, "1" },
+            { ObjectType.RoadData, "1" },
+            { ObjectType.RoadGeometry, "1" }
+        };
 
         public TrafikverketResponse ExecuteRequest(TrafikverketRequest Request)
         {

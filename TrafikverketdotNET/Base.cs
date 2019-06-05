@@ -218,6 +218,7 @@ namespace TrafikverketdotNET
     {
         protected BaseTrafikverket(String APIKey) : base(APIKey) { }
 
+        internal abstract ObjectType ObjectType { get; }
         public abstract String CurrentSchemaVersion { get; }
 
         public abstract T ExecuteRequest();

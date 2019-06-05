@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TrafikverketdotNET.Subs;
 using TrafikverketdotNET.Subs.MeasurementDataResponse;
 using Newtonsoft.Json;
@@ -199,7 +200,38 @@ namespace TrafikverketdotNET
         internal MeasurementData20Response() { }
     }
 
-    public class MeasurementData20Request : BaseTrafikverketRequest { public MeasurementData20Request(Query Query) : base(Query) { } }
+    public class MeasurementData20Request : BaseTrafikverketRequest
+    {
+        public override ObjectType ObjectType => ObjectType.MeasurementData100;
+        public override string SchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
+
+        public MeasurementData20Request(Filter Filter) : base(Filter) { }
+        public MeasurementData20Request(String ID = null, Boolean IncludeDeletedObjects = false,
+                                        UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                        Boolean LastModified = false, Int32 ChangeID = 0,
+                                        String Include = null, String Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                     Limit, OrderBy, Skip, LastModified,
+                                                                                                                     ChangeID, Include, Exclude, Distinct) { }
+        public MeasurementData20Request(String ID = null, Boolean IncludeDeletedObjects = false,
+                                        UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                        Boolean LastModified = false, Int32 ChangeID = 0,
+                                        List<String> Include = null, List<String> Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                 Limit, OrderBy, Skip, LastModified,
+                                                                                                                                 ChangeID, Include, Exclude, Distinct) { }
+        public MeasurementData20Request(String ID = null, Boolean IncludeDeletedObjects = false,
+                                        UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                        Boolean LastModified = false, Int32 ChangeID = 0,
+                                        String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                           Limit, OrderBy, Skip, LastModified,
+                                                                                                                                           ChangeID, Include, Exclude, Distinct, Filter) { }
+        public MeasurementData20Request(String ID = null, Boolean IncludeDeletedObjects = false,
+                                        UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                        Boolean LastModified = false, Int32 ChangeID = 0,
+                                        List<String> Include = null, List<String> Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                                       Limit, OrderBy, Skip, LastModified,
+                                                                                                                                                       ChangeID, Include, Exclude, Distinct, Filter) { }
+
+    }
 
     public sealed class MeasurementData20 : BaseTrafikverket<MeasurementData20Response[]>
     {
@@ -213,10 +245,11 @@ namespace TrafikverketdotNET
         /// <param name="APIKey">Användarens unika nyckel.</param>
         public MeasurementData20(String APIKey) : base(APIKey) { }
 
+        internal override ObjectType ObjectType => ObjectType.MeasurementData20;
         /// <summary>
         /// SchemaVersion versionen som biblioteken använder.
         /// </summary>
-        public override String CurrentSchemaVersion => "1";
+        public override String CurrentSchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
 
         public override MeasurementData20Response[] ExecuteRequest() => base.ExecuteRequest("MeasurementData20", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>

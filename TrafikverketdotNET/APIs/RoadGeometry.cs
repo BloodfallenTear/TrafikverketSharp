@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using TrafikverketdotNET.Subs;
-using TrafikverketdotNET.Subs.RoadGeometryResponse;
 using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
@@ -57,7 +57,37 @@ namespace TrafikverketdotNET
         internal RoadGeometryResponse() { }
     }
 
-    public class RoadGeometryRequest : BaseTrafikverketRequest { public RoadGeometryRequest(Query Query) : base(Query) { } }
+    public class RoadGeometryRequest : BaseTrafikverketRequest
+    {
+        public override ObjectType ObjectType => ObjectType.RoadGeometry;
+        public override string SchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
+
+        public RoadGeometryRequest(Filter Filter) : base(Filter) { }
+        public RoadGeometryRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                   UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                   Boolean LastModified = false, Int32 ChangeID = 0,
+                                   String Include = null, String Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                Limit, OrderBy, Skip, LastModified,
+                                                                                                                ChangeID, Include, Exclude, Distinct) { }
+        public RoadGeometryRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                   UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                   Boolean LastModified = false, Int32 ChangeID = 0,
+                                   List<String> Include = null, List<String> Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                            Limit, OrderBy, Skip, LastModified,
+                                                                                                                            ChangeID, Include, Exclude, Distinct) { }
+        public RoadGeometryRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                   UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                   Boolean LastModified = false, Int32 ChangeID = 0,
+                                   String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                      Limit, OrderBy, Skip, LastModified,
+                                                                                                                                      ChangeID, Include, Exclude, Distinct, Filter) { }
+        public RoadGeometryRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                   UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                   Boolean LastModified = false, Int32 ChangeID = 0,
+                                   List<String> Include = null, List<String> Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                                  Limit, OrderBy, Skip, LastModified,
+                                                                                                                                                  ChangeID, Include, Exclude, Distinct, Filter) { }
+    }
 
     public sealed class RoadGeometry : BaseTrafikverket<RoadGeometryResponse[]>
     {
@@ -68,10 +98,11 @@ namespace TrafikverketdotNET
         /// <param name="APIKey">Användarens unika nyckel.</param>
         public RoadGeometry(String APIKey) : base(APIKey) { }
 
+        internal override ObjectType ObjectType => ObjectType.RoadGeometry;
         /// <summary>
         /// SchemaVersion versionen som biblioteken använder.
         /// </summary>
-        public override String CurrentSchemaVersion => "1";
+        public override String CurrentSchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
 
         public override RoadGeometryResponse[] ExecuteRequest() => base.ExecuteRequest("RoadGeometry", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>

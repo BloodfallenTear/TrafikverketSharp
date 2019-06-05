@@ -75,31 +75,27 @@ namespace TrafikverketdotNET
     public class TrainStationRequest : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.TrainStation;
-        public override String SchemaVersion => "1";
+        public override String SchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
 
         public TrainStationRequest(Filter Filter) : base(Filter) { }
-
         public TrainStationRequest(String ID = null, Boolean IncludeDeletedObjects = false, 
                                    UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0, 
                                    Boolean LastModified = false, Int32 ChangeID = 0, 
                                    String Include = null, String Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects, 
                                                                                                                 Limit, OrderBy, Skip, LastModified, 
                                                                                                                 ChangeID, Include, Exclude, Distinct) { }
-
         public TrainStationRequest(String ID = null, Boolean IncludeDeletedObjects = false, 
                                    UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
                                    Boolean LastModified = false, Int32 ChangeID = 0, 
                                    List<String> Include = null, List<String> Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects, 
                                                                                                                             Limit, OrderBy, Skip, LastModified, 
                                                                                                                             ChangeID, Include, Exclude, Distinct) { }
-
         public TrainStationRequest(String ID = null, Boolean IncludeDeletedObjects = false, 
                                    UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0, 
                                    Boolean LastModified = false, Int32 ChangeID = 0, 
                                    String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects, 
                                                                                                                                       Limit, OrderBy, Skip, LastModified, 
                                                                                                                                       ChangeID, Include, Exclude, Distinct, Filter) { }
-
         public TrainStationRequest(String ID = null, Boolean IncludeDeletedObjects = false, 
                                    UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0, 
                                    Boolean LastModified = false, Int32 ChangeID = 0, 
@@ -119,10 +115,11 @@ namespace TrafikverketdotNET
         /// <param name="APIKey">Användarens unika nyckel.</param>
         public TrainStation(String APIKey) : base(APIKey) { }
 
+        internal override ObjectType ObjectType => ObjectType.TrainStation;
         /// <summary>
         /// SchemaVersion versionen som biblioteken använder.
         /// </summary>
-        public override String CurrentSchemaVersion => "1";
+        public override String CurrentSchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
 
         public override TrainStationResponse[] ExecuteRequest() => base.ExecuteRequest("TrainStation", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TrafikverketdotNET.Subs;
 using Newtonsoft.Json;
 
@@ -138,9 +139,39 @@ namespace TrafikverketdotNET
         internal PavementDataResponse() { }
     }
 
-    public class PavementDataRequest : BaseTrafikverketRequest { public PavementDataRequest(Query Query) : base(Query) { } }
+    public class PavementDataRequest : BaseTrafikverketRequest
+    {
+        public override ObjectType ObjectType => ObjectType.PavementData;
+        public override string SchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
 
-    public sealed class PavementData : BaseTrafikverket<PavementDataResponse[]>
+        public PavementDataRequest(Filter Filter) : base(Filter) { }
+        public PavementDataRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                   UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                   Boolean LastModified = false, Int32 ChangeID = 0,
+                                   String Include = null, String Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                Limit, OrderBy, Skip, LastModified,
+                                                                                                                ChangeID, Include, Exclude, Distinct){ }
+        public PavementDataRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                   UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                   Boolean LastModified = false, Int32 ChangeID = 0,
+                                   List<String> Include = null, List<String> Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                            Limit, OrderBy, Skip, LastModified,
+                                                                                                                            ChangeID, Include, Exclude, Distinct) { }
+        public PavementDataRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                   UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                   Boolean LastModified = false, Int32 ChangeID = 0,
+                                   String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                      Limit, OrderBy, Skip, LastModified,
+                                                                                                                                      ChangeID, Include, Exclude, Distinct, Filter) { }
+        public PavementDataRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                   UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                   Boolean LastModified = false, Int32 ChangeID = 0,
+                                   List<String> Include = null, List<String> Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                                  Limit, OrderBy, Skip, LastModified,
+                                                                                                                                                  ChangeID, Include, Exclude, Distinct, Filter) { }
+    }
+
+    public class PavementData : BaseTrafikverket<PavementDataResponse[]>
     {
         /// <summary>
         /// Beläggningsdata från PMS-systemen kombinerat med relevant vägdata från NVDB. 
@@ -150,10 +181,11 @@ namespace TrafikverketdotNET
         /// <param name="APIKey">Användarens unika nyckel.</param>
         public PavementData(String APIKey) : base(APIKey) { }
 
+        internal override ObjectType ObjectType => ObjectType.PavementData;
         /// <summary>
         /// SchemaVersion versionen som biblioteken använder.
         /// </summary>
-        public override String CurrentSchemaVersion => "1";
+        public override String CurrentSchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
 
         public override PavementDataResponse[] ExecuteRequest() => base.ExecuteRequest("PavementData", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>

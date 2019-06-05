@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TrafikverketdotNET.Subs;
 using Newtonsoft.Json;
 
@@ -77,7 +78,37 @@ namespace TrafikverketdotNET
         internal TrafficFlowResponse() { }
     }
 
-    public class TrafficFlowRequest : BaseTrafikverketRequest { public TrafficFlowRequest(Query Query) : base(Query) { } }
+    public class TrafficFlowRequest : BaseTrafikverketRequest
+    {
+        public override ObjectType ObjectType => ObjectType.TrafficFlow;
+        public override string SchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
+
+        public TrafficFlowRequest(Filter Filter) : base(Filter) { }
+        public TrafficFlowRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                  UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                  Boolean LastModified = false, Int32 ChangeID = 0,
+                                  String Include = null, String Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
+                                                                                                               Limit, OrderBy, Skip, LastModified,
+                                                                                                               ChangeID, Include, Exclude, Distinct) { }
+        public TrafficFlowRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                  UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                  Boolean LastModified = false, Int32 ChangeID = 0,
+                                  List<String> Include = null, List<String> Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                           Limit, OrderBy, Skip, LastModified,
+                                                                                                                           ChangeID, Include, Exclude, Distinct) { }
+        public TrafficFlowRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                  UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                  Boolean LastModified = false, Int32 ChangeID = 0,
+                                  String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                     Limit, OrderBy, Skip, LastModified,
+                                                                                                                                     ChangeID, Include, Exclude, Distinct, Filter) { }
+        public TrafficFlowRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                  UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                  Boolean LastModified = false, Int32 ChangeID = 0,
+                                  List<String> Include = null, List<String> Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                                 Limit, OrderBy, Skip, LastModified,
+                                                                                                                                                 ChangeID, Include, Exclude, Distinct, Filter) { }
+    }
 
     public sealed class TrafficFlow : BaseTrafikverket<TrafficFlowResponse[]>
     {
@@ -87,10 +118,11 @@ namespace TrafikverketdotNET
         /// <param name="APIKey">Användarens unika nyckel.</param>
         public TrafficFlow(String APIKey) : base(APIKey) { }
 
+        internal override ObjectType ObjectType => ObjectType.TrafficFlow;
         /// <summary>
         /// SchemaVersion versionen som biblioteken använder.
         /// </summary>
-        public override String CurrentSchemaVersion => "1";
+        public override String CurrentSchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
 
         public override TrafficFlowResponse[] ExecuteRequest() => base.ExecuteRequest("TrafficFlow", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>

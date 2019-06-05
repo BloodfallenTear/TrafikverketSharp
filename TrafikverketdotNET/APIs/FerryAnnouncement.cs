@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TrafikverketdotNET.Subs.FerryAnnouncementResponse;
 using Newtonsoft.Json;
 
@@ -47,7 +48,37 @@ namespace TrafikverketdotNET
         internal FerryAnnouncementResponse() { }
     }
 
-    public class FerryAnnouncementRequest : BaseTrafikverketRequest { public FerryAnnouncementRequest(Query Query) : base(Query) { } }
+    public class FerryAnnouncementRequest : BaseTrafikverketRequest
+    {
+        public override ObjectType ObjectType => ObjectType.FerryAnnouncement;
+        public override string SchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
+
+        public FerryAnnouncementRequest(Filter Filter) : base(Filter) { }
+        public FerryAnnouncementRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                        UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                        Boolean LastModified = false, Int32 ChangeID = 0,
+                                        String Include = null, String Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                     Limit, OrderBy, Skip, LastModified,
+                                                                                                                     ChangeID, Include, Exclude, Distinct) { }
+        public FerryAnnouncementRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                        UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                        Boolean LastModified = false, Int32 ChangeID = 0,
+                                        List<String> Include = null, List<String> Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                 Limit, OrderBy, Skip, LastModified,
+                                                                                                                                 ChangeID, Include, Exclude, Distinct) { }
+        public FerryAnnouncementRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                        UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                        Boolean LastModified = false, Int32 ChangeID = 0,
+                                        String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                           Limit, OrderBy, Skip, LastModified,
+                                                                                                                                           ChangeID, Include, Exclude, Distinct, Filter) { }
+        public FerryAnnouncementRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                        UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                        Boolean LastModified = false, Int32 ChangeID = 0,
+                                        List<String> Include = null, List<String> Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                                       Limit, OrderBy, Skip, LastModified,
+                                                                                                                                                       ChangeID, Include, Exclude, Distinct, Filter) { }
+    }
 
     public sealed class FerryAnnouncement : BaseTrafikverket<FerryAnnouncementResponse[]>
     {
@@ -57,10 +88,11 @@ namespace TrafikverketdotNET
         /// <param name="APIKey">Användarens unika nyckel.</param>
         public FerryAnnouncement(String APIKey) : base(APIKey) { }
 
+        internal override ObjectType ObjectType => ObjectType.FerryAnnouncement;
         /// <summary>
         /// SchemaVersion versionen som biblioteken använder.
         /// </summary>
-        public override String CurrentSchemaVersion => "1.2";
+        public override String CurrentSchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
 
         public override FerryAnnouncementResponse[] ExecuteRequest() => base.ExecuteRequest("FerryAnnouncement", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>

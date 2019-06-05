@@ -1,6 +1,7 @@
 ﻿using System;
 using TrafikverketdotNET.Subs.TrainAnnouncementResponse;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace TrafikverketdotNET
 {
@@ -186,7 +187,37 @@ namespace TrafikverketdotNET
         internal TrainAnnouncementResponse() { }
     }
 
-    public class TrainAnnouncementRequest : BaseTrafikverketRequest { public TrainAnnouncementRequest(Query Query) : base(Query) { } }
+    public class TrainAnnouncementRequest : BaseTrafikverketRequest
+    {
+        public override ObjectType ObjectType => ObjectType.TrainStation;
+        public override string SchemaVersion => "1.5";
+
+        public TrainAnnouncementRequest(Filter Filter) : base(Filter) { }
+        public TrainAnnouncementRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                        UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                        Boolean LastModified = false, Int32 ChangeID = 0,
+                                        String Include = null, String Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                     Limit, OrderBy, Skip, LastModified,
+                                                                                                                     ChangeID, Include, Exclude, Distinct) { }
+        public TrainAnnouncementRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                        UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                        Boolean LastModified = false, Int32 ChangeID = 0,
+                                        List<String> Include = null, List<String> Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                 Limit, OrderBy, Skip, LastModified,
+                                                                                                                                 ChangeID, Include, Exclude, Distinct) { }
+        public TrainAnnouncementRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                        UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                        Boolean LastModified = false, Int32 ChangeID = 0,
+                                        String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                           Limit, OrderBy, Skip, LastModified,
+                                                                                                                                           ChangeID, Include, Exclude, Distinct, Filter) { }
+        public TrainAnnouncementRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                        UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                        Boolean LastModified = false, Int32 ChangeID = 0,
+                                        List<String> Include = null, List<String> Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                                       Limit, OrderBy, Skip, LastModified,
+                                                                                                                                                       ChangeID, Include, Exclude, Distinct, Filter) { }
+    }
 
     /// <summary>
     /// Tidtabellsinformation, d.v.s information om tåg på trafikplatser (stationer, hållplatser) varje post motsvarar ett visst tåg vid respektive trafikplats.
@@ -199,10 +230,11 @@ namespace TrafikverketdotNET
         /// <param name="APIKey">Användarens unika nyckel.</param>
         public TrainAnnouncement(String APIKey) : base(APIKey) { }
 
+        internal override ObjectType ObjectType => ObjectType.TrainAnnouncement;
         /// <summary>
         /// SchemaVersion versionen som biblioteken använder.
         /// </summary>
-        public override String CurrentSchemaVersion => "1.5";
+        public override String CurrentSchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
 
         public override TrainAnnouncementResponse[] ExecuteRequest() => base.ExecuteRequest("TrainAnnouncement", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
