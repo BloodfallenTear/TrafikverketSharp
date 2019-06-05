@@ -189,7 +189,7 @@ namespace TrafikverketdotNET
 
     public class TrainAnnouncementRequest : BaseTrafikverketRequest
     {
-        public override ObjectType ObjectType => ObjectType.TrainStation;
+        public override ObjectType ObjectType => ObjectType.TrainAnnouncement;
         public override string SchemaVersion => "1.5";
 
         public TrainAnnouncementRequest(Filter Filter) : base(Filter) { }
@@ -238,7 +238,7 @@ namespace TrafikverketdotNET
 
         public override TrainAnnouncementResponse[] ExecuteRequest() => base.ExecuteRequest("TrainAnnouncement", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
-        public override TrainAnnouncementResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TrainAnnouncement", "1.4", XMLRequest);
+        public override TrainAnnouncementResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TrainAnnouncement", "1.5", XMLRequest);
         public override TrainAnnouncementResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

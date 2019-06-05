@@ -47,16 +47,6 @@ namespace TrafikverketdotNET
 
     public class RequestQueryInvalidException : Exception { public RequestQueryInvalidException(String message) : base(message) { } }
 
-    //public abstract class BaseTrafikverketRequest
-    //{
-    //    protected Query _Query { get; set; }
-    //    public Query Query => _Query;
-
-    //    protected BaseTrafikverketRequest(Query Query) { this._Query = Query; }
-
-    //    public String CreateXMLString() => $"<REQUEST><LOGIN authenticationkey=\"AUTHKEY\"/>{Query.CreateXMLString()}</REQUEST>";
-    //}
-
     public abstract class BaseTrafikverketRequest
     {
         internal Query _Query { get; set; }
@@ -172,7 +162,7 @@ namespace TrafikverketdotNET
 
         protected Query GetQuery(ObjectType ObjectType, String SchemaVersion)
         {
-            var query = new Query(ObjectType, "1", Filter ?? null);
+            var query = new Query(ObjectType, SchemaVersion, Filter ?? null);
             if (ID != null)
                 query.SetID(ID);
             if (IncludeDeletedObjects)
