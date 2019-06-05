@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TrafikverketdotNET.Subs.TravelTimeRouteResponse;
 using Newtonsoft.Json;
 
@@ -94,7 +95,37 @@ namespace TrafikverketdotNET
         internal TravelTimeRouteResponse() { }
     }
 
-    public class TravelTimeRouteRequest : BaseTrafikverketRequest { public TravelTimeRouteRequest(Query Query) : base(Query) { } }
+    public class TravelTimeRouteRequest : BaseTrafikverketRequest
+    {
+        public override ObjectType ObjectType => ObjectType.TravelTimeRoute;
+        public override string SchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
+
+        public TravelTimeRouteRequest(Filter Filter) : base(Filter) { }
+        public TravelTimeRouteRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                      UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                      Boolean LastModified = false, Int32 ChangeID = 0,
+                                      String Include = null, String Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                   Limit, OrderBy, Skip, LastModified,
+                                                                                                                   ChangeID, Include, Exclude, Distinct) { }
+        public TravelTimeRouteRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                      UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                      Boolean LastModified = false, Int32 ChangeID = 0,
+                                      List<String> Include = null, List<String> Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                               Limit, OrderBy, Skip, LastModified,
+                                                                                                                               ChangeID, Include, Exclude, Distinct) { }
+        public TravelTimeRouteRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                      UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                      Boolean LastModified = false, Int32 ChangeID = 0,
+                                      String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                         Limit, OrderBy, Skip, LastModified,
+                                                                                                                                         ChangeID, Include, Exclude, Distinct, Filter) { }
+        public TravelTimeRouteRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                      UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                      Boolean LastModified = false, Int32 ChangeID = 0,
+                                      List<String> Include = null, List<String> Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                                     Limit, OrderBy, Skip, LastModified,
+                                                                                                                                                     ChangeID, Include, Exclude, Distinct, Filter) { }
+    }
 
     public sealed class TravelTimeRoute : BaseTrafikverket<TravelTimeRouteResponse[]>
     {
@@ -104,10 +135,11 @@ namespace TrafikverketdotNET
         /// <param name="APIKey">Användarens unika nyckel.</param>
         public TravelTimeRoute(String APIKey) : base(APIKey) { }
 
+        internal override ObjectType ObjectType => ObjectType.TravelTimeRoute;
         /// <summary>
         /// SchemaVersion versionen som biblioteken använder.
         /// </summary>
-        public override String CurrentSchemaVersion => "1.4";
+        public override String CurrentSchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
 
         public override TravelTimeRouteResponse[] ExecuteRequest() => base.ExecuteRequest("TravelTimeRoute", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>

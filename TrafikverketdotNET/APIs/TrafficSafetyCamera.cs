@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TrafikverketdotNET.Subs;
 using Newtonsoft.Json;
 
@@ -56,7 +57,38 @@ namespace TrafikverketdotNET
         internal TrafficSafetyCameraResponse() { }
     }
 
-    public class TrafficSafetyCameraRequest : BaseTrafikverketRequest { public TrafficSafetyCameraRequest(Query Query) : base(Query) { } }
+    public class TrafficSafetyCameraRequest : BaseTrafikverketRequest
+    {
+        public override ObjectType ObjectType => ObjectType.TrafficSafetyCamera;
+        public override string SchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
+
+        public TrafficSafetyCameraRequest(Filter Filter) : base(Filter) { }
+        public TrafficSafetyCameraRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                          UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                          Boolean LastModified = false, Int32 ChangeID = 0,
+                                          String Include = null, String Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                       Limit, OrderBy, Skip, LastModified,
+                                                                                                                       ChangeID, Include, Exclude, Distinct) { }
+        public TrafficSafetyCameraRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                          UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                          Boolean LastModified = false, Int32 ChangeID = 0,
+                                          List<String> Include = null, List<String> Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                   Limit, OrderBy, Skip, LastModified,
+                                                                                                                                   ChangeID, Include, Exclude, Distinct) { }
+        public TrafficSafetyCameraRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                          UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                          Boolean LastModified = false, Int32 ChangeID = 0,
+                                          String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                             Limit, OrderBy, Skip, LastModified,
+                                                                                                                                             ChangeID, Include, Exclude, Distinct, Filter) { }
+        public TrafficSafetyCameraRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                          UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                          Boolean LastModified = false, Int32 ChangeID = 0,
+                                          List<String> Include = null, List<String> Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                                                         Limit, OrderBy, Skip, LastModified,
+                                                                                                                                                         ChangeID, Include, Exclude, Distinct, Filter) { }
+
+    }
 
     public sealed class TrafficSafetyCamera : BaseTrafikverket<TrafficSafetyCameraResponse[]>
     {
@@ -66,10 +98,11 @@ namespace TrafikverketdotNET
         /// <param name="APIKey">Användarens unika nyckel.</param>
         public TrafficSafetyCamera(String APIKey) : base(APIKey) { }
 
+        internal override ObjectType ObjectType => ObjectType.TrafficSafetyCamera;
         /// <summary>
         /// SchemaVersion versionen som biblioteken använder.
         /// </summary>
-        public override String CurrentSchemaVersion => "1";
+        public override String CurrentSchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
 
         public override TrafficSafetyCameraResponse[] ExecuteRequest() => base.ExecuteRequest("TrafficSafetyCamera", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
