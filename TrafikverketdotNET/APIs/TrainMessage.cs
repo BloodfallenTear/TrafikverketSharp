@@ -91,7 +91,7 @@ namespace TrafikverketdotNET
     public class TrainMessageRequest : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.TrainMessage;
-        public override string SchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
+        public override string SchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         public TrainMessageRequest(Filter Filter) : base(Filter) { }
         public TrainMessageRequest(String ID = null, Boolean IncludeDeletedObjects = false,
@@ -135,7 +135,7 @@ namespace TrafikverketdotNET
         /// <summary>
         /// SchemaVersion versionen som biblioteken använder.
         /// </summary>
-        public override String CurrentSchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
+        public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
 
         public override TrainMessageResponse[] ExecuteRequest() => base.ExecuteRequest("TrainMessage", CurrentSchemaVersion);

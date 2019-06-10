@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Text;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace TrafikverketdotNET
@@ -27,7 +28,14 @@ namespace TrafikverketdotNET
                 {
                     var resp = http.PostAsync(URL, content).Result;
                     if (!resp.IsSuccessStatusCode)
-                        throw new Exception($"Status Code: {resp.StatusCode}");
+                    {
+                        var statusCode = resp.StatusCode;
+
+                        var err = JsonConvert.DeserializeObject<RequestError>(JObject.Parse(resp.Content.ReadAsStringAsync().Result)["RESPONSE"]["RESULT"][0]["ERROR"].ToString());
+                        Console.WriteLine($"Source: {err.Source}, Message: {err.Message}");
+
+                        throw new Exception($"Error Source: \"{err.Source}\", Error Message: \"{err.Message}\". Status Code: {statusCode} ({(Int32)statusCode})");
+                    }
 
                     var respString = resp.Content.ReadAsStringAsync().Result;
                     var data = JObject.Parse(respString);
@@ -39,6 +47,15 @@ namespace TrafikverketdotNET
                 }
             }
             catch (HttpRequestException err) { throw new Exception(err.Message, err.InnerException); }
+        }
+
+        internal class RequestError
+        {
+            [JsonProperty("SOURCE")] internal String _Source { get; set; }
+            [JsonProperty("MESSAGE")] internal String _Message { get; set; }
+
+            [JsonIgnore] public String Source => _Source;
+            [JsonIgnore] public String Message => _Message;
         }
     }
 }

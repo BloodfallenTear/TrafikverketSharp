@@ -81,7 +81,7 @@ namespace TrafikverketdotNET
     public class TrafficFlowRequest : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.TrafficFlow;
-        public override string SchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
+        public override string SchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         public TrafficFlowRequest(Filter Filter) : base(Filter) { }
         public TrafficFlowRequest(String ID = null, Boolean IncludeDeletedObjects = false,
@@ -122,7 +122,7 @@ namespace TrafikverketdotNET
         /// <summary>
         /// SchemaVersion versionen som biblioteken använder.
         /// </summary>
-        public override String CurrentSchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
+        public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         public override TrafficFlowResponse[] ExecuteRequest() => base.ExecuteRequest("TrafficFlow", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>

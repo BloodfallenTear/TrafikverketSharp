@@ -110,7 +110,7 @@ namespace TrafikverketdotNET
     public class CameraRequest : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.Camera;
-        public override String SchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
+        public override String SchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         public CameraRequest(Filter Filter) : base(Filter) { }
         public CameraRequest(String ID = null, Boolean IncludeDeletedObjects = false,
@@ -154,7 +154,7 @@ namespace TrafikverketdotNET
         /// <summary>
         /// SchemaVersion versionen som biblioteken använder.
         /// </summary>
-        public override String CurrentSchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
+        public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         public override CameraResponse[] ExecuteRequest() => base.ExecuteRequest("Camera", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>

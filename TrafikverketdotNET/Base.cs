@@ -45,8 +45,6 @@ namespace TrafikverketdotNET
 {
     public abstract class BaseTrafikverketResponse { }
 
-    public class RequestQueryInvalidException : Exception { public RequestQueryInvalidException(String message) : base(message) { } }
-
     public abstract class BaseTrafikverketRequest
     {
         internal Query _Query { get; set; }

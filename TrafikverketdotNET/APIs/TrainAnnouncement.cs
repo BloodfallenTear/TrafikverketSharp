@@ -234,7 +234,7 @@ namespace TrafikverketdotNET
         /// <summary>
         /// SchemaVersion versionen som biblioteken använder.
         /// </summary>
-        public override String CurrentSchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
+        public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         public override TrainAnnouncementResponse[] ExecuteRequest() => base.ExecuteRequest("TrainAnnouncement", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>

@@ -110,7 +110,7 @@ namespace TrafikverketdotNET
         public RoadGeometry RoadGeometry => new RoadGeometry(APIKey);
         #endregion
 
-        public static Dictionary<ObjectType, String> GetSchemaVersion => new Dictionary<ObjectType, String>()
+        public static Dictionary<ObjectType, String> SchemaVersions => new Dictionary<ObjectType, String>()
         {
             { ObjectType.TrainAnnouncement, "1.5" },
             { ObjectType.TrainMessage, "1.4" },

@@ -1,4 +1,4 @@
-# Trafikverket.NET v0.27.0
+# Trafikverket.NET v0.28.0
 A C# .NET Standard library for Trafikverket. This is **not** an official Trafikverket library.
 
 ## Documentation
@@ -27,10 +27,10 @@ Console.WriteLine(String.Join(",\r\n", Response.TrainMessageResponse.Select(x =>
 ```
 Example Response: Banarbete, Banarbete, Signalfel, Banarbete, *[...]*
 
-### GetSchemaVersion Dictionary
+### SchemaVersions Dictionary
 To get which Schema Version the library supports, you can access a dictionary located in the 'Trafikverket' class.
 Warning: Whichever 'CurrentSchemaVersion' version it's set to, does not mean that it's backwards compatible with previous versions, e.g if 'CurrentSchemaVersion' is "1.5", it does not support all the previous versions, you have to use version "1.5" specifically.
-Example: `String SchemaVersion = Trafikverket.GetSchemaVersion[ObjectType.TrainStation];`
+Example: `String SchemaVersion = Trafikverket.SchemaVersions[ObjectType.TrainStation];`
 
 ## Changelog 
 For every release, you can find the changelog to see what has changed from the previous release to that one under the said release. If a release contains nothing but the 'Included APIs' tab, that means nothing that should concern the user has been changed and a few APIs have been added. If you still are curious for all the things which have been changed from version x to version y, you can check out the commit history since I try to document everything I do there.

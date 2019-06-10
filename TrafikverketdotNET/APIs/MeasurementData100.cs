@@ -117,7 +117,7 @@ namespace TrafikverketdotNET
     public class MeasurementData100Request : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.MeasurementData100;
-        public override string SchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
+        public override string SchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         public MeasurementData100Request(Filter Filter) : base(Filter) { }
         public MeasurementData100Request(String ID = null, Boolean IncludeDeletedObjects = false,
@@ -161,7 +161,7 @@ namespace TrafikverketdotNET
         /// <summary>
         /// SchemaVersion versionen som biblioteken använder.
         /// </summary>
-        public override String CurrentSchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
+        public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         public override MeasurementData100Response[] ExecuteRequest() => base.ExecuteRequest("MeasurementData100", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>

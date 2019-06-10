@@ -75,7 +75,7 @@ namespace TrafikverketdotNET
     public class TrainStationRequest : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.TrainStation;
-        public override String SchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
+        public override String SchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         public TrainStationRequest(Filter Filter) : base(Filter) { }
         public TrainStationRequest(String ID = null, Boolean IncludeDeletedObjects = false, 
@@ -119,14 +119,11 @@ namespace TrafikverketdotNET
         /// <summary>
         /// SchemaVersion versionen som biblioteken använder.
         /// </summary>
-        public override String CurrentSchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
+        public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         public override TrainStationResponse[] ExecuteRequest() => base.ExecuteRequest("TrainStation", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         public override TrainStationResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TrainStation", CurrentSchemaVersion, XMLRequest);
-        public override TrainStationResponse[] ExecuteRequest(BaseTrafikverketRequest Request)
-        {
-            return base.ExecuteCustomRequest(Request);
-        }
+        public override TrainStationResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

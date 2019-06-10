@@ -110,7 +110,7 @@ namespace TrafikverketdotNET
     public class ParkingRequest : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.Parking;
-        public override string SchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
+        public override string SchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         public ParkingRequest(Filter Filter) : base(Filter) { }
         public ParkingRequest(String ID = null, Boolean IncludeDeletedObjects = false,
@@ -151,7 +151,7 @@ namespace TrafikverketdotNET
         /// <summary>
         /// SchemaVersion versionen som biblioteken använder.
         /// </summary>
-        public override String CurrentSchemaVersion => Trafikverket.GetSchemaVersion[this.ObjectType];
+        public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         public override ParkingResponse[] ExecuteRequest() => base.ExecuteRequest("Parking", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
