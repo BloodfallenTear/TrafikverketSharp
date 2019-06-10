@@ -96,12 +96,17 @@ namespace TrafikverketdotNET
 
     }
 
+    /// <summary>
+    /// Information om färjeleder.
+    /// </summary>
+    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
     public sealed class FerryRoute : BaseTrafikverket<FerryRouteResponse[]>
     {
         /// <summary>
         /// Information om färjeleder.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
+        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
         public FerryRoute(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.FerryRoute;

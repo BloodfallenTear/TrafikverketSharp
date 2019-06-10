@@ -222,12 +222,14 @@ namespace TrafikverketdotNET
     /// <summary>
     /// Tidtabellsinformation, d.v.s information om tåg på trafikplatser (stationer, hållplatser) varje post motsvarar ett visst tåg vid respektive trafikplats.
     /// </summary>
+    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
     public sealed class TrainAnnouncement : BaseTrafikverket<TrainAnnouncementResponse[]>
     {
         /// <summary>
         /// Tidtabellsinformation, d.v.s information om tåg på trafikplatser (stationer, hållplatser) varje post motsvarar ett visst tåg vid respektive trafikplats.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
+        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
         public TrainAnnouncement(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.TrainAnnouncement;

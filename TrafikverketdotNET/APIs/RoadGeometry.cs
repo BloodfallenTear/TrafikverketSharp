@@ -89,6 +89,11 @@ namespace TrafikverketdotNET
                                                                                                                                                   ChangeID, Include, Exclude, Distinct, Filter) { }
     }
 
+    /// <summary>
+    /// Vägens geometri relaterat till det data vi tillhandahåller från PMS-systemen med data om beläggningar och mätdata.
+    /// Vi kan ej garantera att geometrin är dagsaktuell från NVDB. Datum för när data hämtades framgår av posten TimeStamp. 
+    /// </summary>
+    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
     public sealed class RoadGeometry : BaseTrafikverket<RoadGeometryResponse[]>
     {
         /// <summary>
@@ -96,6 +101,7 @@ namespace TrafikverketdotNET
         /// Vi kan ej garantera att geometrin är dagsaktuell från NVDB. Datum för när data hämtades framgår av posten TimeStamp. 
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
+        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
         public RoadGeometry(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.RoadGeometry;

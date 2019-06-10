@@ -80,12 +80,17 @@ namespace TrafikverketdotNET
                                                                                                                                                        ChangeID, Include, Exclude, Distinct, Filter) { }
     }
 
+    /// <summary>
+    /// Ankomster och avgångar.
+    /// </summary>
+    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
     public sealed class FerryAnnouncement : BaseTrafikverket<FerryAnnouncementResponse[]>
     {
         /// <summary>
         /// Ankomster och avgångar.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
+        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
         public FerryAnnouncement(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.FerryAnnouncement;

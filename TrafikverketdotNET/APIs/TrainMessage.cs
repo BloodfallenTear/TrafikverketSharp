@@ -123,12 +123,14 @@ namespace TrafikverketdotNET
     /// <summary>
     /// Tågtrafikmeddelande, exempelvis information kring banarbete, tågfel, anläggningsfel och dylikt.
     /// </summary>
+    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
     public sealed class TrainMessage : BaseTrafikverket<TrainMessageResponse[]>
     {
         /// <summary>
         /// Tågtrafikmeddelande, exempelvis information kring banarbete, tågfel, anläggningsfel och dylikt.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
+        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
         public TrainMessage(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.TrainMessage;

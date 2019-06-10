@@ -233,6 +233,14 @@ namespace TrafikverketdotNET
 
     }
 
+    /// <summary>
+    /// Mätdata per 20 meter. 
+    /// Data från vägytemätningar med laserscanning alternativt som beräknats fram baserat på dem. 
+    /// Mätningarna utförs årligen eller vartannat år beroende på trafikmängd. 
+    /// Senast gällande mätdata finns att hämta dvs ej historik. 
+    /// Källsystem är PMS-systemen.
+    /// </summary>
+    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
     public sealed class MeasurementData20 : BaseTrafikverket<MeasurementData20Response[]>
     {
         /// <summary>
@@ -243,6 +251,7 @@ namespace TrafikverketdotNET
         /// Källsystem är PMS-systemen.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
+        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
         public MeasurementData20(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.MeasurementData20;

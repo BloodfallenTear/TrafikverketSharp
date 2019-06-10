@@ -94,12 +94,17 @@ namespace TrafikverketdotNET
                                                                                                                                                     ChangeID, Include, Exclude, Distinct, Filter) { }
     }
 
+    /// <summary>
+    /// Väderstationer med mätdata.
+    /// </summary>
+    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
     public sealed class WeatherStation : BaseTrafikverket<WeatherStationResponse[]>
     {
         /// <summary>
         /// Väderstationer med mätdata.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
+        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
         public WeatherStation(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.WeatherStation;

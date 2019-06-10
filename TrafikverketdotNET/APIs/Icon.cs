@@ -77,12 +77,17 @@ namespace TrafikverketdotNET
 
     }
 
+    /// <summary>
+    /// Ikoner, exempelvis för använding i grafiska användargränssnitt och kartor.
+    /// </summary>
+    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
     public sealed class Icon : BaseTrafikverket<IconResponse[]>
     {
         /// <summary>
         /// Ikoner, exempelvis för använding i grafiska användargränssnitt och kartor.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
+        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
         public Icon(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.Icon;

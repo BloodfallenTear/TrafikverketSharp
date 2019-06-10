@@ -139,12 +139,17 @@ namespace TrafikverketdotNET
                                                                                                                                              ChangeID, Include, Exclude, Distinct, Filter) { }
     }
 
+    /// <summary>
+    /// Information om rastplatser och parkeringar.
+    /// </summary>
+    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
     public sealed class Parking : BaseTrafikverket<ParkingResponse[]>
     {
         /// <summary>
         /// Information om rastplatser och parkeringar.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
+        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
         public Parking(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.Parking;

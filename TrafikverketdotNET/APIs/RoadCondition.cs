@@ -141,12 +141,17 @@ namespace TrafikverketdotNET
                                                                                                                                                    ChangeID, Include, Exclude, Distinct, Filter) { }
     }
 
+    /// <summary>
+    /// Information om väglag.
+    /// </summary>
+    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
     public sealed class RoadCondition : BaseTrafikverket<RoadConditionResponse[]>
     {
         /// <summary>
         /// Information om väglag.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
+        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
         public RoadCondition(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.RoadCondition;

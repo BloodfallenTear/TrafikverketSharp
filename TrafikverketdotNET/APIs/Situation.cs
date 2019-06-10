@@ -76,12 +76,17 @@ namespace TrafikverketdotNET
                                                                                                                                                ChangeID, Include, Exclude, Distinct, Filter) { }
     }
 
+    /// <summary>
+    /// Situationer innehållandes händelser och störningar som trafikmeddelanden, vägarbeten, olyckor, restiktioner m.m.
+    /// </summary>
+    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
     public sealed class Situation : BaseTrafikverket<SituationResponse[]>
     {
         /// <summary>
         /// Situationer innehållandes händelser och störningar som trafikmeddelanden, vägarbeten, olyckor, restiktioner m.m.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
+        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
         public Situation(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.Situation;

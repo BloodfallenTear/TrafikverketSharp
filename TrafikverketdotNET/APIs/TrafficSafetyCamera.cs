@@ -90,12 +90,17 @@ namespace TrafikverketdotNET
 
     }
 
+    /// <summary>
+    /// Trafiksäkerhetskameror.
+    /// </summary>
+    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
     public sealed class TrafficSafetyCamera : BaseTrafikverket<TrafficSafetyCameraResponse[]>
     {
         /// <summary>
         /// Trafiksäkerhetskameror.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
+        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
         public TrafficSafetyCamera(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.TrafficSafetyCamera;

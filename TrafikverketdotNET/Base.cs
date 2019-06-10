@@ -213,6 +213,7 @@ namespace TrafikverketdotNET
         public abstract T ExecuteRequest(String XMLRequest);
         public abstract T ExecuteRequest(BaseTrafikverketRequest Request);
 
+        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
         protected virtual T ExecuteRequest(String ObjectType, String SchemaVersion)
         {
             var resp = POSTRequest($"<REQUEST>" +
@@ -222,12 +223,14 @@ namespace TrafikverketdotNET
             return JsonConvert.DeserializeObject<T>(JObject.Parse(resp)[$"{ObjectType}"].ToString());
         }
 
+        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
         protected virtual T ExecuteRequest(String ObjectType, String SchemaVersion, String RequestQuery)
         {
             var resp = POSTRequest(RequestQuery);
             return JsonConvert.DeserializeObject<T>(JObject.Parse(resp)[$"{ObjectType}"].ToString());
         }
 
+        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
         protected virtual T ExecuteCustomRequest(BaseTrafikverketRequest Request)
         {
             var resp = POSTRequest(Request.CreateXMLString(), true);

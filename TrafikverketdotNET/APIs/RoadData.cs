@@ -170,6 +170,12 @@ namespace TrafikverketdotNET
                                                                                                                                               ChangeID, Include, Exclude, Distinct, Filter) { }
     }
 
+    /// <summary>
+    /// Vägdata från NVDB som är relevant tillsammans med PMS-systemens beläggnings och mätdata. 
+    /// Vi kan ej garantera att det är dagsaktuell data från NVDB. Datum för när data hämtades framgår av posten TimeStamp. 
+    /// För att se källa för respektive data, gå till fliken Om variabler i systemet PMSV3.
+    /// </summary>
+    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
     public sealed class RoadData : BaseTrafikverket<RoadDataResponse[]>
     {
         /// <summary>
@@ -178,6 +184,7 @@ namespace TrafikverketdotNET
         /// För att se källa för respektive data, gå till fliken Om variabler i systemet PMSV3.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
+        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
         public RoadData(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.RoadData;

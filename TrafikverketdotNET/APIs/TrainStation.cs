@@ -107,12 +107,14 @@ namespace TrafikverketdotNET
     /// <summary>
     /// Trafikplatser, både med och utan resandeutbyte.
     /// </summary>
+    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
     public sealed class TrainStation : BaseTrafikverket<TrainStationResponse[]>
     {
         /// <summary>
         /// Trafikplatser, både med och utan resandeutbyte.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
+        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
         public TrainStation(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.TrainStation;

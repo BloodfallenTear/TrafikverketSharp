@@ -110,12 +110,17 @@ namespace TrafikverketdotNET
                                                                                                                                                  ChangeID, Include, Exclude, Distinct, Filter) { }
     }
 
+    /// <summary>
+    /// Uppmätta eller härledda värden relaterat till trafik eller enskilda fordonets rörelser på en viss sektion eller vid en specifik punkt på vägnätet.
+    /// </summary>
+    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
     public sealed class TrafficFlow : BaseTrafikverket<TrafficFlowResponse[]>
     {
         /// <summary>
         /// Uppmätta eller härledda värden relaterat till trafik eller enskilda fordonets rörelser på en viss sektion eller vid en specifik punkt på vägnätet.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
+        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
         public TrafficFlow(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.TrafficFlow;

@@ -146,6 +146,13 @@ namespace TrafikverketdotNET
                                                                                                                                                         ChangeID, Include, Exclude, Distinct, Filter){ }
     }
 
+    /// <summary>
+    /// Mätdata per 100 meter. 
+    /// Ett medelvärde har räknats fram för 100 meter baserat på de ingående 20-metersvärdena (se mer info i MeasurementData20). 
+    /// Observera att det inte finns 100-metersdata för alla våra 20-metersvariabler. 
+    /// Källsystem är PMS-systemen.
+    /// </summary>
+    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
     public sealed class MeasurementData100 : BaseTrafikverket<MeasurementData100Response[]>
     {
         /// <summary>
@@ -155,6 +162,7 @@ namespace TrafikverketdotNET
         /// Källsystem är PMS-systemen.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
+        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
         public MeasurementData100(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.MeasurementData100;

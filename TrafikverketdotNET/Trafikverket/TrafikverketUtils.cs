@@ -16,6 +16,7 @@ namespace TrafikverketdotNET
         /// <param name="RequestQuery">The HTTP request content sent to the server.</param>
         /// <param name="CustomRequest">True if this is a custom made request.</param>
         /// <param name="TrafikverketRequest">True if this is a 'TrafikverketRequest' (a general request with multiple queries).</param>
+        /// <exception cref="Exception">Thrown when Trafikverket returns an error.</exception>
         protected String POSTRequest(String RequestQuery, Boolean CustomRequest = false, Boolean TrafikverketRequest = false)
         {
             try
@@ -30,9 +31,7 @@ namespace TrafikverketdotNET
                     if (!resp.IsSuccessStatusCode)
                     {
                         var statusCode = resp.StatusCode;
-
                         var err = JsonConvert.DeserializeObject<RequestError>(JObject.Parse(resp.Content.ReadAsStringAsync().Result)["RESPONSE"]["RESULT"][0]["ERROR"].ToString());
-                        Console.WriteLine($"Source: {err.Source}, Message: {err.Message}");
 
                         throw new Exception($"Error Source: \"{err.Source}\", Error Message: \"{err.Message}\". Status Code: {statusCode} ({(Int32)statusCode})");
                     }

@@ -171,6 +171,12 @@ namespace TrafikverketdotNET
                                                                                                                                                   ChangeID, Include, Exclude, Distinct, Filter) { }
     }
 
+    /// <summary>
+    /// Beläggningsdata från PMS-systemen kombinerat med relevant vägdata från NVDB. 
+    /// Vi kan ej garantera att det är helt aktuellt data från NVDB. Datum för när data hämtades framgår av posten TimeStamp. 
+    /// För att se källa för respektive data, gå till fliken Om variabler i systemet PMSV3.
+    /// </summary>
+    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
     public class PavementData : BaseTrafikverket<PavementDataResponse[]>
     {
         /// <summary>
@@ -179,6 +185,7 @@ namespace TrafikverketdotNET
         /// För att se källa för respektive data, gå till fliken Om variabler i systemet PMSV3.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
+        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
         public PavementData(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.PavementData;
