@@ -4,6 +4,13 @@ A C# .NET Standard library for Trafikverket. This is **not** an official Trafikv
 ## Documentation
 All of the XML documentation found in this API library comes from [Trafikverket](https://api.trafikinfo.trafikverket.se/API/Model).
 
+## Support
+This project currently only officially supports .NET Standard 2.0.
+
+## NuGet
+For simplicity, you can now download the library via [NuGet](https://www.nuget.org/packages/Trafikverket.NET/)!
+>`Install-Package Trafikverket.NET`
+
 ## Usage
 ### How to create a basic, unfiltered TrainStation request:
 ```csharp
@@ -34,13 +41,6 @@ Example: `String SchemaVersion = Trafikverket.SchemaVersions[ObjectType.TrainSta
 
 ## Changelog 
 For every release, you can find the changelog to see what has changed from the previous release to that one under the said release. If a release contains nothing but the 'Included APIs' tab, that means nothing that should concern the user has been changed and a few APIs have been added. If you still are curious for all the things which have been changed from version x to version y, you can check out the commit history since I try to document everything I do there.
-
-## Support
-This project currently only officially supports .NET Standard 2.0.
-
-## NuGet
-For simplicity, you can now download the library via [NuGet](https://www.nuget.org/packages/Trafikverket.NET/)!
->`Install-Package Trafikverket.NET`
 
 ## Dependencies
 This project uses one third-party dependency, which is [Newtonsoft.Json (12.0.2)](https://www.newtonsoft.com/) by user [JamesNK](https://github.com/JamesNK). NuGet Link: [Newtonsoft.Json (12.0.2)](https://www.nuget.org/packages/Newtonsoft.Json/12.0.2/). [Insight](https://github.com/BloodfallenTear/Trafikverket.NET/network/dependencies).
