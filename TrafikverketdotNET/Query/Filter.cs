@@ -1,46 +1,66 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace TrafikverketdotNET
 {
     public class Filter
     {
-            private List<FilterOperator> _FilterOperators { get; set; }
-            private List<FilterGroup> _FilterGroups { get; set; }
+        internal FilterOperator[] _FilterOperators { get; set; }
+        internal FilterGroup[] _FilterGroups { get; set; }
 
-            public List<FilterOperator> FilterOperators => _FilterOperators;
-            public List<FilterGroup> FilterGroups => _FilterGroups;
+        public FilterOperator[] FilterOperators => _FilterOperators;
+        public FilterGroup[] FilterGroups => _FilterGroups;
 
-            public Filter() { _FilterOperators = new List<FilterOperator>(); _FilterGroups = new List<FilterGroup>(); }
+        public Filter() { _FilterOperators = default(FilterOperator[]); _FilterGroups = default(FilterGroup[]); }
 
-            public Filter AddOperator(FilterOperator FilterOperator)
+        public Filter AddOperator(FilterOperator FilterOperator)
+        {
+            if (_FilterOperators == null)
             {
-                _FilterOperators.Add(FilterOperator);
+                Console.WriteLine("X");
+                this._FilterOperators = new FilterOperator[] { FilterOperator };
                 return this;
             }
+            var data = new FilterOperator[_FilterOperators.Length + 1];
+            for (UInt32 i = 0; i < _FilterOperators.Length; i++)
+                data[i] = _FilterOperators[i];
+            data[_FilterOperators.Length] = FilterOperator;
+            _FilterOperators = data;
+            return this;
+        }
 
-            public Filter AddGroup(FilterGroup FilterGroup)
+        public Filter AddGroup(FilterGroup FilterGroup)
+        {
+            if(_FilterGroups?.Length == 0)
             {
-                _FilterGroups.Add(FilterGroup);
+                _FilterGroups = new FilterGroup[] { FilterGroup };
                 return this;
             }
+            var data = new FilterGroup[_FilterGroups.Length + 1];
+            for (UInt32 i = 0; i < _FilterGroups.Length; i++)
+                data[i] = _FilterGroups[i];
+            data[_FilterGroups.Length] = FilterGroup;
+            _FilterGroups = data;
+            return this;
+        }
 
-            public String CreateXMLString()
-            {
-                String xmlString = null;
+        public String CreateXMLString()
+        {
+            String xmlString = null;
 
+            if (_FilterGroups != null)
                 foreach (var group in FilterGroups)
                     xmlString += $"{group.CreateXMLString()}";
 
+            if (_FilterOperators != null)
                 foreach (var oper in FilterOperators)
-                    xmlString += $"{oper.CreateXMLString()}";
+                xmlString += $"{oper.CreateXMLString()}";
 
-                if (xmlString.Length > 0)
-                    return $"<FILTER>{xmlString}</FILTER>";
-                return null;
-            }
+            if (xmlString.Length > 0)
+                return $"<FILTER>{xmlString}</FILTER>";
+            return null;
+        }
 
-            public void SetFilterOperators(List<FilterOperator> FilterOperators) { this._FilterOperators = FilterOperators; }
-            public void SetFilterGroups(List<FilterGroup> FilterGroups) { this._FilterGroups = FilterGroups; }
+        public void SetFilterOperators(FilterOperator[] FilterOperators) { this._FilterOperators = FilterOperators; }
+        public void SetFilterGroups(FilterGroup[] FilterGroups) { this._FilterGroups = FilterGroups; }
     }
 }

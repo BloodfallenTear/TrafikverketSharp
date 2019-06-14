@@ -1,7 +1,6 @@
 ﻿using System;
 using TrafikverketdotNET.Subs.TrainAnnouncementResponse;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 
 namespace TrafikverketdotNET
 {

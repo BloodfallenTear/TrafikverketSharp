@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using TrafikverketdotNET.Subs;
 using TrafikverketdotNET.Subs.RoadDataResponse;
 using Newtonsoft.Json;

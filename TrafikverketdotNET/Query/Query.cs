@@ -73,7 +73,7 @@ namespace TrafikverketdotNET
             if (ChangeID != 0)
                 xmlString += $" changeid=\"{ChangeID}\"";
 
-            if(Filter?.FilterOperators?.Count > 0 || Filter?.FilterGroups?.Count > 0)
+            if(Filter?.FilterOperators?.Length > 0 || Filter?.FilterGroups?.Length > 0)
                 return $"{xmlString}>{Filter.CreateXMLString()}</QUERY>";
             else
                 return $"{xmlString}></QUERY>";
