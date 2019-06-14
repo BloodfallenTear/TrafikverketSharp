@@ -70,36 +70,18 @@ namespace TrafikverketdotNET
 
         public Filter Filter => _Filter;
 
-        internal List<String> _Include { get; set; }
-        internal List<String> _Exclude { get; set; }
+        internal String[] _Include { get; set; }
+        internal String[] _Exclude { get; set; }
         internal String _Distinct { get; set; }
 
-        public List<String> Include => _Include;
-        public List<String> Exclude => _Exclude;
+        public String[] Include => _Include;
+        public String[] Exclude => _Exclude;
         public String Distinct => _Distinct;
 
         public abstract ObjectType ObjectType { get; }
         public abstract String SchemaVersion { get; }
 
         protected BaseTrafikverketRequest(Filter Filter) { this._Filter = Filter; this._Query = GetQuery(this.ObjectType, this.SchemaVersion); }
-        protected BaseTrafikverketRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                          UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                          Boolean LastModified = false, Int32 ChangeID = 0,
-                                          String Include = null, String Exclude = null, String Distinct = null)
-        {
-            this._ID = ID;
-            this._IncludeDeletedObjects = IncludeDeletedObjects;
-            this._Limit = Limit;
-            this._OrderBy = OrderBy;
-            this._Skip = Skip;
-            this._LastModified = LastModified;
-            this._ChangeID = ChangeID;
-            this._Include = new List<String>() { Include };
-            this._Exclude = new List<String>() { Exclude };
-            this._Distinct = Distinct;
-
-            this._Query = GetQuery(this.ObjectType, this.SchemaVersion);
-        }
         protected BaseTrafikverketRequest(String ID = null, Boolean IncludeDeletedObjects = false,
                                           UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
                                           Boolean LastModified = false, Int32 ChangeID = 0,
@@ -112,8 +94,8 @@ namespace TrafikverketdotNET
             this._Skip = Skip;
             this._LastModified = LastModified;
             this._ChangeID = ChangeID;
-            this._Include = new List<String>() { Include };
-            this._Exclude = new List<String>() { Exclude };
+            this._Include = new String[] { Include };
+            this._Exclude = new String[] { Exclude };
             this._Distinct = Distinct;
             this._Filter = Filter;
 
@@ -122,7 +104,7 @@ namespace TrafikverketdotNET
         protected BaseTrafikverketRequest(String ID = null, Boolean IncludeDeletedObjects = false,
                                           UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
                                           Boolean LastModified = false, Int32 ChangeID = 0,
-                                          List<String> Include = null, List<String> Exclude = null, String Distinct = null)
+                                          String[] Include = null, String[] Exclude = null, String Distinct = null)
         {
             this._ID = ID;
             this._IncludeDeletedObjects = IncludeDeletedObjects;
@@ -137,11 +119,10 @@ namespace TrafikverketdotNET
 
             this._Query = GetQuery(this.ObjectType, this.SchemaVersion);
         }
-
         protected BaseTrafikverketRequest(String ID = null, Boolean IncludeDeletedObjects = false,
                                           UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
                                           Boolean LastModified = false, Int32 ChangeID = 0,
-                                          List<String> Include = null, List<String> Exclude = null, String Distinct = null, Filter Filter = null)
+                                          String[] Include = null, String[] Exclude = null, String Distinct = null, Filter Filter = null)
         {
             this._ID = ID;
             this._IncludeDeletedObjects = IncludeDeletedObjects;
@@ -193,10 +174,8 @@ namespace TrafikverketdotNET
         protected void SetLastModified(Boolean LastModified) { this._LastModified = LastModified; }
         protected void SetChangeID(Int32 ChangeID) { this._ChangeID = ChangeID; }
 
-        protected void SetInclude(String Include) { this._Include = new List<String>() { Include }; }
-        protected void SetInclude(List<String> Include) { this._Include = Include; }
-        protected void SetExclude(String Exclude) { this._Exclude = new List<String>() { Exclude }; }
-        protected void SetExclude(List<String> Exclude) { this._Exclude = Exclude; }
+        protected void SetInclude(params String[] Include) { this._Include = Include; }
+        protected void SetExclude(params String[] Exclude) { this._Exclude = Exclude; }
         protected void SetDistinct(String Distinct) { this._Distinct = Distinct; }
 
         public String CreateXMLString() => $"<REQUEST><LOGIN authenticationkey=\"AUTHKEY\"/>{Query.CreateXMLString()}</REQUEST>";

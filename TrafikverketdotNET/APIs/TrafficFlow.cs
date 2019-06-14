@@ -93,19 +93,19 @@ namespace TrafikverketdotNET
         public TrafficFlowRequest(String ID = null, Boolean IncludeDeletedObjects = false,
                                   UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
                                   Boolean LastModified = false, Int32 ChangeID = 0,
-                                  List<String> Include = null, List<String> Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                           Limit, OrderBy, Skip, LastModified,
-                                                                                                                           ChangeID, Include, Exclude, Distinct) { }
-        public TrafficFlowRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                  UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                  Boolean LastModified = false, Int32 ChangeID = 0,
                                   String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
                                                                                                                                      Limit, OrderBy, Skip, LastModified,
                                                                                                                                      ChangeID, Include, Exclude, Distinct, Filter) { }
         public TrafficFlowRequest(String ID = null, Boolean IncludeDeletedObjects = false,
                                   UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
                                   Boolean LastModified = false, Int32 ChangeID = 0,
-                                  List<String> Include = null, List<String> Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
+                                  String[] Include = null, String[] Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
+                                                                                                                           Limit, OrderBy, Skip, LastModified,
+                                                                                                                           ChangeID, Include, Exclude, Distinct) { }
+        public TrafficFlowRequest(String ID = null, Boolean IncludeDeletedObjects = false,
+                                  UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
+                                  Boolean LastModified = false, Int32 ChangeID = 0,
+                                  String[] Include = null, String[] Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
                                                                                                                                                  Limit, OrderBy, Skip, LastModified,
                                                                                                                                                  ChangeID, Include, Exclude, Distinct, Filter) { }
     }

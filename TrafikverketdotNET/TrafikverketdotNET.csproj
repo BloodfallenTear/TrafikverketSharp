@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.28.1</Version>
+    <Version>0.28.2</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company>BloodfallenTear</Company>
     <Authors>BloodfallenTear</Authors>
@@ -18,7 +18,7 @@
     <DocumentationFile />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <NoWarn>1701;1702;IDE0002;IDE0049;IDE0060;IDE1006;CS1591</NoWarn>
+    <NoWarn>1701;1702;IDE0002;IDE0003;IDE0034;IDE0049;IDE0060;IDE1006;CS1591</NoWarn>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>

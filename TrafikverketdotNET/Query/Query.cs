@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace TrafikverketdotNET
 {
@@ -29,12 +28,12 @@ namespace TrafikverketdotNET
 
         public Filter Filter => _Filter;
 
-        private List<String> _Include { get; set; }
-        private List<String> _Exclude { get; set; }
+        private String[] _Include { get; set; }
+        private String[] _Exclude { get; set; }
         private String _Distinct { get; set; }
 
-        public List<String> Include => _Include;
-        public List<String> Exclude => _Exclude;
+        public String[] Include => _Include;
+        public String[] Exclude => _Exclude;
         public String Distinct => _Distinct;
 
         public Query(ObjectType ObjectType, String SchemaVersion)
@@ -42,8 +41,8 @@ namespace TrafikverketdotNET
             this._ObjectType = ObjectType;
             this._SchemaVersion = SchemaVersion;
             this._Filter = new Filter();
-            this._Include = new List<String>();
-            this._Exclude = new List<String>();
+            this._Include = default(String[]);
+            this._Exclude = default(String[]);
 
         }
         public Query(ObjectType ObjectType, String SchemaVersion, Filter Filter)
@@ -51,8 +50,8 @@ namespace TrafikverketdotNET
             this._ObjectType = ObjectType;
             this._SchemaVersion = SchemaVersion;
             this._Filter = Filter;
-            this._Include = new List<String>();
-            this._Exclude = new List<String>();
+            this._Include = default(String[]);
+            this._Exclude = default(String[]);
         }
 
         public String CreateXMLString()
@@ -88,10 +87,8 @@ namespace TrafikverketdotNET
         public void SetLastModified(Boolean LastModified) { this._LastModified = LastModified; }
         public void SetChangeID(Int32 ChangeID) { this._ChangeID = ChangeID; }
 
-        public void SetInclude(String Include) { this._Include = new List<String>() { Include }; }
-        public void SetInclude(List<String> Include) { this._Include = Include; }
-        public void SetExclude(String Exclude) { this._Exclude = new List<String>() { Exclude }; }
-        public void SetExclude(List<String> Exclude) { this._Exclude = Exclude; }
+        public void SetInclude(params String[] Include) { this._Include = Include; }
+        public void SetExclude(params String[] Exclude) { this._Exclude = Exclude; }
         public void SetDistinct(String Distinct) { this._Distinct = Distinct; }
 
         public void SetFilter(Filter Filter) { this._Filter = Filter; }

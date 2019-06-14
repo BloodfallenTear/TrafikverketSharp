@@ -1,15 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace TrafikverketdotNET
 {
     public class TrafikverketRequest 
     {
-        private List<Query> _Queries { get; set; }
-        public List<Query> Queries => _Queries;
+        internal Query[] _Queries { get; set; }
+        public Query[] Queries => _Queries;
 
-        public TrafikverketRequest(Query Query) { this._Queries = new List<Query>() { Query }; }
-        public TrafikverketRequest(List<Query> Queries) { this._Queries = Queries; }
+        public TrafikverketRequest(Query Query) { this._Queries = new Query[] { Query }; }
+        public TrafikverketRequest(params Query[] Queries)
+        {
+            this._Queries = new Query[Queries.Length];
+            for (UInt16 i = 0; i < Queries.Length; i++)
+                this._Queries[i] = Queries[i];
+        }
 
         public String CreateXMLString()
         {
@@ -19,10 +23,14 @@ namespace TrafikverketdotNET
             return $"{xmlString}</REQUEST>";
         }
 
-        public Query AddQuery(Query Query)
+        public TrafikverketRequest AddQuery(Query Query)
         {
-            _Queries.Add(Query);
-            return Query;
+            var data = new Query[_Queries.Length + 1];
+            for (UInt16 i = 0; i < _Queries.Length; i++)
+                data[i] = _Queries[i];
+            data[_Queries.Length] = Query;
+            _Queries = data;
+            return this;
         }
     }
 }

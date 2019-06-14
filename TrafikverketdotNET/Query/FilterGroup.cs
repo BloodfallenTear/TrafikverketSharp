@@ -7,29 +7,37 @@ namespace TrafikverketdotNET
     public class FilterGroup
     {
         private FilterOperatorGroup _FilterGroupOperator { get; set; }
-        private List<FilterOperator> _FilterOperators { get; set; }
-        private List<FilterGroup> _FilterGroups { get; set; }
+        private FilterOperator[] _FilterOperators { get; set; }
+        private FilterGroup[] _FilterGroups { get; set; }
 
         public FilterOperatorGroup FilterGroupOperator => _FilterGroupOperator;
-        public List<FilterOperator> FilterOperators => _FilterOperators;
-        public List<FilterGroup> FilterGroups => _FilterGroups;
+        public FilterOperator[] FilterOperators => _FilterOperators;
+        public FilterGroup[] FilterGroups => _FilterGroups;
 
         public FilterGroup(FilterOperatorGroup FilterGroupOperator)
         {
             this._FilterGroupOperator = FilterGroupOperator;
-            _FilterOperators = new List<FilterOperator>();
-            _FilterGroups = new List<FilterGroup>();
+            _FilterOperators = default(FilterOperator[]);
+            _FilterGroups = default(FilterGroup[]);
         }
 
         public FilterGroup AddOperator(FilterOperator FilterOperator)
         {
-            _FilterOperators.Add(FilterOperator);
+            var data = new FilterOperator[_FilterOperators.Length + 1];
+            for (UInt16 i = 0; i < _FilterOperators.Length; i++)
+                data[i] = _FilterOperators[i];
+            data[_FilterOperators.Length] = FilterOperator;
+            _FilterOperators = data;
             return this;
         }
 
         public FilterGroup AddGroup(FilterGroup FilterGroup)
         {
-            _FilterGroups.Add(FilterGroup);
+            var data = new FilterGroup[_FilterGroups.Length + 1];
+            for (UInt16 i = 0; i < _FilterGroups.Length; i++)
+                data[i] = _FilterGroups[i];
+            data[_FilterGroups.Length] = FilterGroup;
+            _FilterGroups = data;
             return this;
         }
 
