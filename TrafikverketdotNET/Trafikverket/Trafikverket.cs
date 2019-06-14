@@ -124,7 +124,7 @@ namespace TrafikverketdotNET
             { ObjectType.RoadConditionOverview, "1" },
             { ObjectType.Situation, "1.2" },
             { ObjectType.TrafficSafetyCamera, "1" },
-            { ObjectType.TravelTimeRoute, "1´.4" },
+            { ObjectType.TravelTimeRoute, "1.4" },
             { ObjectType.WeatherStation, "1" },
             { ObjectType.MeasurementData100, "1" },
             { ObjectType.MeasurementData20, "1" },
