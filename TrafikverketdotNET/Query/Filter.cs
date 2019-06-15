@@ -16,7 +16,6 @@ namespace TrafikverketdotNET
         {
             if (_FilterOperators == null)
             {
-                Console.WriteLine("X");
                 this._FilterOperators = new FilterOperator[] { FilterOperator };
                 return this;
             }

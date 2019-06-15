@@ -73,10 +73,20 @@ namespace TrafikverketdotNET
             if (ChangeID != 0)
                 xmlString += $" changeid=\"{ChangeID}\"";
 
-            if(Filter?.FilterOperators?.Length > 0 || Filter?.FilterGroups?.Length > 0)
-                return $"{xmlString}>{Filter.CreateXMLString()}</QUERY>";
+            if (Filter?.FilterOperators?.Length > 0 || Filter?.FilterGroups?.Length > 0)
+                xmlString += $">{Filter.CreateXMLString()}";
             else
-                return $"{xmlString}></QUERY>";
+                xmlString += $">";
+
+            if (Include?.Length > 0)
+                foreach(var include in Include)
+                    xmlString += $"<INCLUDE>{include}</INCLUDE>";
+            if (Exclude?.Length > 0)
+                foreach (var exclude in Exclude)
+                    xmlString += $"<EXCLUDE>{exclude}</EXCLUDE>";
+            if (Distinct?.Length > 0)
+                xmlString += $"<DISTINCT>{Distinct}</DISTINCT>";
+            return $"{xmlString}</QUERY>";
         }
 
         public void SetID(String ID) { this._ID = ID; }
