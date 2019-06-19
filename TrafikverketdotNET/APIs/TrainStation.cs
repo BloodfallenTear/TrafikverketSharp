@@ -1,10 +1,11 @@
 ﻿using System;
 using TrafikverketdotNET.Subs;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace TrafikverketdotNET
 {
-    public sealed class TrainStationResponse : BaseTrafikverketResponse
+    public sealed class TrainStationResponse : IBaseTrafikverketResponse
     {
         [JsonProperty("Advertised")] internal Boolean _Advertised { get; set; }
         [JsonProperty("AdvertisedLocationName")] internal String _AdvertisedLocationName { get; set; }
@@ -18,6 +19,7 @@ namespace TrafikverketdotNET
         [JsonProperty("PlatformLine")] internal String[] _PlatformLine { get; set; }
         [JsonProperty("Prognosticated")] internal Boolean _Prognosticated { get; set; }
         [JsonProperty("Geometry")] internal Geometry _Geometry { get; set; }
+        [JsonProperty("INFO")] internal Info _Info { get; set; }
 
         /// <summary>
         /// Anger om stationen annonseras i tidtabell.
@@ -67,6 +69,7 @@ namespace TrafikverketdotNET
         /// Geometrisk punkt i koordinatsystem. Fältet kan användas för geo-frågor.
         /// </summary>
         [JsonIgnore] public Geometry Geometry => _Geometry;
+        [JsonIgnore] public Info Info => _Info;
 
         internal TrainStationResponse() { }
     }
@@ -80,40 +83,22 @@ namespace TrafikverketdotNET
         public TrainStationRequest(String ID = null, Boolean IncludeDeletedObjects = false, 
                                    UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0, 
                                    Boolean LastModified = false, Int32 ChangeID = 0, 
-                                   String Include = null, String Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects, 
-                                                                                                                Limit, OrderBy, Skip, LastModified, 
-                                                                                                                ChangeID, Include, Exclude, Distinct) { }
-        public TrainStationRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                   UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                   Boolean LastModified = false, Int32 ChangeID = 0,
-                                   String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                                      Limit, OrderBy, Skip, LastModified,
-                                                                                                                                      ChangeID, Include, Exclude, Distinct, Filter) { }
-        public TrainStationRequest(String ID = null, Boolean IncludeDeletedObjects = false, 
-                                   UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                   Boolean LastModified = false, Int32 ChangeID = 0, 
-                                   String[] Include = null, String[] Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects, 
-                                                                                                                            Limit, OrderBy, Skip, LastModified, 
-                                                                                                                            ChangeID, Include, Exclude, Distinct) { }
-        public TrainStationRequest(String ID = null, Boolean IncludeDeletedObjects = false, 
-                                   UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0, 
-                                   Boolean LastModified = false, Int32 ChangeID = 0, 
                                    String[] Include = null, String[] Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects, 
-                                                                                                                                                  Limit, OrderBy, Skip, LastModified, 
-                                                                                                                                                  ChangeID, Include, Exclude, Distinct, Filter) { }
+                                                                                                                                          Limit, OrderBy, Skip, LastModified, 
+                                                                                                                                          ChangeID, Include, Exclude, Distinct, Filter) { }
     }
 
     /// <summary>
     /// Trafikplatser, både med och utan resandeutbyte.
     /// </summary>
-    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
-    public sealed class TrainStation : BaseTrafikverket<TrainStationResponse[]>
+    /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
+    public sealed class TrainStation : BaseTrafikverket<TrainStationResponse[], TrainStationRequest>
     {
         /// <summary>
         /// Trafikplatser, både med och utan resandeutbyte.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
-        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public TrainStation(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.TrainStation;
@@ -125,6 +110,6 @@ namespace TrafikverketdotNET
         public override TrainStationResponse[] ExecuteRequest() => base.ExecuteRequest("TrainStation", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         public override TrainStationResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TrainStation", CurrentSchemaVersion, XMLRequest);
-        public override TrainStationResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
+        public override TrainStationResponse[] ExecuteRequest(TrainStationRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

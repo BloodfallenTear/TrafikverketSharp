@@ -208,24 +208,6 @@ namespace TrafikverketdotNET
         public MeasurementData20Request(String ID = null, Boolean IncludeDeletedObjects = false,
                                         UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
                                         Boolean LastModified = false, Int32 ChangeID = 0,
-                                        String Include = null, String Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                     Limit, OrderBy, Skip, LastModified,
-                                                                                                                     ChangeID, Include, Exclude, Distinct) { }
-        public MeasurementData20Request(String ID = null, Boolean IncludeDeletedObjects = false,
-                                        UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                        Boolean LastModified = false, Int32 ChangeID = 0,
-                                        String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                                           Limit, OrderBy, Skip, LastModified,
-                                                                                                                                           ChangeID, Include, Exclude, Distinct, Filter) { }
-        public MeasurementData20Request(String ID = null, Boolean IncludeDeletedObjects = false,
-                                        UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                        Boolean LastModified = false, Int32 ChangeID = 0,
-                                        String[] Include = null, String[] Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                                 Limit, OrderBy, Skip, LastModified,
-                                                                                                                                 ChangeID, Include, Exclude, Distinct) { }
-        public MeasurementData20Request(String ID = null, Boolean IncludeDeletedObjects = false,
-                                        UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                        Boolean LastModified = false, Int32 ChangeID = 0,
                                         String[] Include = null, String[] Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
                                                                                                                                                        Limit, OrderBy, Skip, LastModified,
                                                                                                                                                        ChangeID, Include, Exclude, Distinct, Filter) { }
@@ -239,8 +221,8 @@ namespace TrafikverketdotNET
     /// Senast gällande mätdata finns att hämta dvs ej historik. 
     /// Källsystem är PMS-systemen.
     /// </summary>
-    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
-    public sealed class MeasurementData20 : BaseTrafikverket<MeasurementData20Response[]>
+    /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
+    public sealed class MeasurementData20 : BaseTrafikverket<MeasurementData20Response[], MeasurementData20Request>
     {
         /// <summary>
         /// Mätdata per 20 meter. 
@@ -250,7 +232,7 @@ namespace TrafikverketdotNET
         /// Källsystem är PMS-systemen.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
-        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public MeasurementData20(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.MeasurementData20;
@@ -262,6 +244,6 @@ namespace TrafikverketdotNET
         public override MeasurementData20Response[] ExecuteRequest() => base.ExecuteRequest("MeasurementData20", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         public override MeasurementData20Response[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("MeasurementData20", CurrentSchemaVersion, XMLRequest);
-        public override MeasurementData20Response[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
+        public override MeasurementData20Response[] ExecuteRequest(MeasurementData20Request Request) => base.ExecuteCustomRequest(Request);
     }
 }

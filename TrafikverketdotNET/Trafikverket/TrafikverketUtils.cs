@@ -16,7 +16,7 @@ namespace TrafikverketdotNET
         /// <param name="RequestQuery">The HTTP request content sent to the server.</param>
         /// <param name="CustomRequest">True if this is a custom made request.</param>
         /// <param name="TrafikverketRequest">True if this is a 'TrafikverketRequest' (a general request with multiple queries).</param>
-        /// <exception cref="Exception">Thrown when Trafikverket returns an error.</exception>
+        /// <exception cref="TrafikverketException">Thrown when Trafikverket returns an error.</exception>
         protected String POSTRequest(String RequestQuery, Boolean CustomRequest = false, Boolean TrafikverketRequest = false)
         {
             try
@@ -33,7 +33,7 @@ namespace TrafikverketdotNET
                         var statusCode = resp.StatusCode;
                         var err = JsonConvert.DeserializeObject<RequestError>(JObject.Parse(resp.Content.ReadAsStringAsync().Result)["RESPONSE"]["RESULT"][0]["ERROR"].ToString());
 
-                        throw new Exception($"Error Source: \"{err.Source}\", Error Message: \"{err.Message}\". Status Code: {statusCode} ({(Int32)statusCode})");
+                        throw new TrafikverketException($"Error Source: \"{err.Source}\", Error Message: \"{err.Message}\". Status Code: {statusCode} ({(Int32)statusCode})");
                     }
 
                     var respString = resp.Content.ReadAsStringAsync().Result;
@@ -45,7 +45,7 @@ namespace TrafikverketdotNET
                         return data["RESPONSE"]["RESULT"][0].ToString();
                 }
             }
-            catch (HttpRequestException err) { throw new Exception(err.Message, err.InnerException); }
+            catch (HttpRequestException err) { throw new TrafikverketException(err.Message, err.InnerException); }
         }
 
         internal class RequestError

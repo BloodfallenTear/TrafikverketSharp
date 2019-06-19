@@ -117,24 +117,6 @@ namespace TrafikverketdotNET
         public RoadConditionRequest(String ID = null, Boolean IncludeDeletedObjects = false,
                                     UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
                                     Boolean LastModified = false, Int32 ChangeID = 0,
-                                    String Include = null, String Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                 Limit, OrderBy, Skip, LastModified,
-                                                                                                                 ChangeID, Include, Exclude, Distinct) { }
-        public RoadConditionRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                    UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                    Boolean LastModified = false, Int32 ChangeID = 0,
-                                    String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                                       Limit, OrderBy, Skip, LastModified,
-                                                                                                                                       ChangeID, Include, Exclude, Distinct, Filter) { }
-        public RoadConditionRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                    UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                    Boolean LastModified = false, Int32 ChangeID = 0,
-                                    String[] Include = null, String[] Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                             Limit, OrderBy, Skip, LastModified,
-                                                                                                                             ChangeID, Include, Exclude, Distinct) { }
-        public RoadConditionRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                    UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                    Boolean LastModified = false, Int32 ChangeID = 0,
                                     String[] Include = null, String[] Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
                                                                                                                                                    Limit, OrderBy, Skip, LastModified,
                                                                                                                                                    ChangeID, Include, Exclude, Distinct, Filter) { }
@@ -143,14 +125,14 @@ namespace TrafikverketdotNET
     /// <summary>
     /// Information om väglag.
     /// </summary>
-    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
-    public sealed class RoadCondition : BaseTrafikverket<RoadConditionResponse[]>
+    /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
+    public sealed class RoadCondition : BaseTrafikverket<RoadConditionResponse[], RoadConditionRequest>
     {
         /// <summary>
         /// Information om väglag.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
-        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public RoadCondition(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.RoadCondition;
@@ -162,6 +144,6 @@ namespace TrafikverketdotNET
         public override RoadConditionResponse[] ExecuteRequest() => base.ExecuteRequest("RoadCondition", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         public override RoadConditionResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("RoadCondition", CurrentSchemaVersion, XMLRequest);
-        public override RoadConditionResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
+        public override RoadConditionResponse[] ExecuteRequest(RoadConditionRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

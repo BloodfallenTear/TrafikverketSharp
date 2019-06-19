@@ -96,24 +96,6 @@ namespace TrafikverketdotNET
         public TrainMessageRequest(String ID = null, Boolean IncludeDeletedObjects = false,
                                    UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
                                    Boolean LastModified = false, Int32 ChangeID = 0,
-                                   String Include = null, String Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                Limit, OrderBy, Skip, LastModified,
-                                                                                                                ChangeID, Include, Exclude, Distinct) { }
-        public TrainMessageRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                   UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                   Boolean LastModified = false, Int32 ChangeID = 0,
-                                   String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                                      Limit, OrderBy, Skip, LastModified,
-                                                                                                                                      ChangeID, Include, Exclude, Distinct, Filter) { }
-        public TrainMessageRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                   UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                   Boolean LastModified = false, Int32 ChangeID = 0,
-                                   String[] Include = null, String[] Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                            Limit, OrderBy, Skip, LastModified,
-                                                                                                                            ChangeID, Include, Exclude, Distinct) { }
-        public TrainMessageRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                   UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                   Boolean LastModified = false, Int32 ChangeID = 0,
                                    String[] Include = null, String[] Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
                                                                                                                                                   Limit, OrderBy, Skip, LastModified,
                                                                                                                                                   ChangeID, Include, Exclude, Distinct, Filter) { }
@@ -122,14 +104,14 @@ namespace TrafikverketdotNET
     /// <summary>
     /// Tågtrafikmeddelande, exempelvis information kring banarbete, tågfel, anläggningsfel och dylikt.
     /// </summary>
-    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
-    public sealed class TrainMessage : BaseTrafikverket<TrainMessageResponse[]>
+    /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
+    public sealed class TrainMessage : BaseTrafikverket<TrainMessageResponse[], TrainMessageRequest>
     {
         /// <summary>
         /// Tågtrafikmeddelande, exempelvis information kring banarbete, tågfel, anläggningsfel och dylikt.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
-        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public TrainMessage(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.TrainMessage;
@@ -142,6 +124,6 @@ namespace TrafikverketdotNET
         public override TrainMessageResponse[] ExecuteRequest() => base.ExecuteRequest("TrainMessage", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         public override TrainMessageResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TrainMessage", "1.4", XMLRequest);
-        public override TrainMessageResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
+        public override TrainMessageResponse[] ExecuteRequest(TrainMessageRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

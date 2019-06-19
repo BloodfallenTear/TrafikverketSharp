@@ -70,24 +70,6 @@ namespace TrafikverketdotNET
         public WeatherStationRequest(String ID = null, Boolean IncludeDeletedObjects = false,
                                      UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
                                      Boolean LastModified = false, Int32 ChangeID = 0,
-                                     String Include = null, String Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                  Limit, OrderBy, Skip, LastModified,
-                                                                                                                  ChangeID, Include, Exclude, Distinct) { }
-        public WeatherStationRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                     UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                     Boolean LastModified = false, Int32 ChangeID = 0,
-                                     String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                                        Limit, OrderBy, Skip, LastModified,
-                                                                                                                                        ChangeID, Include, Exclude, Distinct, Filter) { }
-        public WeatherStationRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                     UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                     Boolean LastModified = false, Int32 ChangeID = 0,
-                                     String[] Include = null, String[] Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                              Limit, OrderBy, Skip, LastModified,
-                                                                                                                              ChangeID, Include, Exclude, Distinct) { }
-        public WeatherStationRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                     UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                     Boolean LastModified = false, Int32 ChangeID = 0,
                                      String[] Include = null, String[] Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
                                                                                                                                                     Limit, OrderBy, Skip, LastModified,
                                                                                                                                                     ChangeID, Include, Exclude, Distinct, Filter) { }
@@ -96,14 +78,14 @@ namespace TrafikverketdotNET
     /// <summary>
     /// Väderstationer med mätdata.
     /// </summary>
-    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
-    public sealed class WeatherStation : BaseTrafikverket<WeatherStationResponse[]>
+    /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
+    public sealed class WeatherStation : BaseTrafikverket<WeatherStationResponse[], WeatherStationRequest>
     {
         /// <summary>
         /// Väderstationer med mätdata.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
-        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public WeatherStation(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.WeatherStation;
@@ -115,6 +97,6 @@ namespace TrafikverketdotNET
         public override WeatherStationResponse[] ExecuteRequest() => base.ExecuteRequest("WeatherStation", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         public override WeatherStationResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("WeatherStation", CurrentSchemaVersion, XMLRequest);
-        public override WeatherStationResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
+        public override WeatherStationResponse[] ExecuteRequest(WeatherStationRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

@@ -146,24 +146,6 @@ namespace TrafikverketdotNET
         public RoadDataRequest(String ID = null, Boolean IncludeDeletedObjects = false,
                                UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
                                Boolean LastModified = false, Int32 ChangeID = 0,
-                               String Include = null, String Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
-                                                                                                            Limit, OrderBy, Skip, LastModified,
-                                                                                                            ChangeID, Include, Exclude, Distinct) { }
-        public RoadDataRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                               UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                               Boolean LastModified = false, Int32 ChangeID = 0,
-                               String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                                  Limit, OrderBy, Skip, LastModified,
-                                                                                                                                  ChangeID, Include, Exclude, Distinct, Filter) { }
-        public RoadDataRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                               UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                               Boolean LastModified = false, Int32 ChangeID = 0,
-                               String[] Include = null, String[] Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                Limit, OrderBy, Skip, LastModified,
-                                                                                                                ChangeID, Include, Exclude, Distinct) { }
-        public RoadDataRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                               UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                               Boolean LastModified = false, Int32 ChangeID = 0,
                                String[] Include = null, String[] Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
                                                                                                                                               Limit, OrderBy, Skip, LastModified,
                                                                                                                                               ChangeID, Include, Exclude, Distinct, Filter) { }
@@ -174,8 +156,8 @@ namespace TrafikverketdotNET
     /// Vi kan ej garantera att det är dagsaktuell data från NVDB. Datum för när data hämtades framgår av posten TimeStamp. 
     /// För att se källa för respektive data, gå till fliken Om variabler i systemet PMSV3.
     /// </summary>
-    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
-    public sealed class RoadData : BaseTrafikverket<RoadDataResponse[]>
+    /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
+    public sealed class RoadData : BaseTrafikverket<RoadDataResponse[], RoadDataRequest>
     {
         /// <summary>
         /// Vägdata från NVDB som är relevant tillsammans med PMS-systemens beläggnings och mätdata. 
@@ -183,7 +165,7 @@ namespace TrafikverketdotNET
         /// För att se källa för respektive data, gå till fliken Om variabler i systemet PMSV3.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
-        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public RoadData(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.RoadData;
@@ -195,6 +177,6 @@ namespace TrafikverketdotNET
         public override RoadDataResponse[] ExecuteRequest() => base.ExecuteRequest("RoadData", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         public override RoadDataResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("RoadData", CurrentSchemaVersion, XMLRequest);
-        public override RoadDataResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
+        public override RoadDataResponse[] ExecuteRequest(RoadDataRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

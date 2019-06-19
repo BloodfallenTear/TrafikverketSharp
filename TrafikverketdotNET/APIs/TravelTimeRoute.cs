@@ -103,24 +103,6 @@ namespace TrafikverketdotNET
         public TravelTimeRouteRequest(String ID = null, Boolean IncludeDeletedObjects = false,
                                       UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
                                       Boolean LastModified = false, Int32 ChangeID = 0,
-                                      String Include = null, String Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                   Limit, OrderBy, Skip, LastModified,
-                                                                                                                   ChangeID, Include, Exclude, Distinct) { }
-        public TravelTimeRouteRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                      UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                      Boolean LastModified = false, Int32 ChangeID = 0,
-                                      String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                                         Limit, OrderBy, Skip, LastModified,
-                                                                                                                                         ChangeID, Include, Exclude, Distinct, Filter) { }
-        public TravelTimeRouteRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                      UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                      Boolean LastModified = false, Int32 ChangeID = 0,
-                                      String[] Include = null, String[] Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                               Limit, OrderBy, Skip, LastModified,
-                                                                                                                               ChangeID, Include, Exclude, Distinct) { }
-        public TravelTimeRouteRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                      UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                      Boolean LastModified = false, Int32 ChangeID = 0,
                                       String[] Include = null, String[] Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
                                                                                                                                                      Limit, OrderBy, Skip, LastModified,
                                                                                                                                                      ChangeID, Include, Exclude, Distinct, Filter) { }
@@ -129,14 +111,14 @@ namespace TrafikverketdotNET
     /// <summary>
     /// Restider i större städer eller i högbelastade trafiksystem. Beräkning av restid baseras på data från detektorer som är utplacerade längs bestämda rutter.
     /// </summary>
-    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
-    public sealed class TravelTimeRoute : BaseTrafikverket<TravelTimeRouteResponse[]>
+    /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
+    public sealed class TravelTimeRoute : BaseTrafikverket<TravelTimeRouteResponse[], TravelTimeRouteRequest>
     {
         /// <summary>
         /// Restider i större städer eller i högbelastade trafiksystem. Beräkning av restid baseras på data från detektorer som är utplacerade längs bestämda rutter.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
-        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public TravelTimeRoute(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.TravelTimeRoute;
@@ -148,6 +130,6 @@ namespace TrafikverketdotNET
         public override TravelTimeRouteResponse[] ExecuteRequest() => base.ExecuteRequest("TravelTimeRoute", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         public override TravelTimeRouteResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TravelTimeRoute", CurrentSchemaVersion, XMLRequest);
-        public override TravelTimeRouteResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
+        public override TravelTimeRouteResponse[] ExecuteRequest(TravelTimeRouteRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

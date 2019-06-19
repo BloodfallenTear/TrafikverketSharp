@@ -65,24 +65,6 @@ namespace TrafikverketdotNET
         public RoadGeometryRequest(String ID = null, Boolean IncludeDeletedObjects = false,
                                    UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
                                    Boolean LastModified = false, Int32 ChangeID = 0,
-                                   String Include = null, String Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                Limit, OrderBy, Skip, LastModified,
-                                                                                                                ChangeID, Include, Exclude, Distinct) { }
-        public RoadGeometryRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                   UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                   Boolean LastModified = false, Int32 ChangeID = 0,
-                                   String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                                      Limit, OrderBy, Skip, LastModified,
-                                                                                                                                      ChangeID, Include, Exclude, Distinct, Filter) { }
-        public RoadGeometryRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                   UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                   Boolean LastModified = false, Int32 ChangeID = 0,
-                                   String[] Include = null, String[] Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                            Limit, OrderBy, Skip, LastModified,
-                                                                                                                            ChangeID, Include, Exclude, Distinct) { }
-        public RoadGeometryRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                   UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                   Boolean LastModified = false, Int32 ChangeID = 0,
                                    String[] Include = null, String[] Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
                                                                                                                                                   Limit, OrderBy, Skip, LastModified,
                                                                                                                                                   ChangeID, Include, Exclude, Distinct, Filter) { }
@@ -92,15 +74,15 @@ namespace TrafikverketdotNET
     /// Vägens geometri relaterat till det data vi tillhandahåller från PMS-systemen med data om beläggningar och mätdata.
     /// Vi kan ej garantera att geometrin är dagsaktuell från NVDB. Datum för när data hämtades framgår av posten TimeStamp. 
     /// </summary>
-    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
-    public sealed class RoadGeometry : BaseTrafikverket<RoadGeometryResponse[]>
+    /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
+    public sealed class RoadGeometry : BaseTrafikverket<RoadGeometryResponse[], RoadGeometryRequest>
     {
         /// <summary>
         /// Vägens geometri relaterat till det data vi tillhandahåller från PMS-systemen med data om beläggningar och mätdata.
         /// Vi kan ej garantera att geometrin är dagsaktuell från NVDB. Datum för när data hämtades framgår av posten TimeStamp. 
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
-        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public RoadGeometry(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.RoadGeometry;
@@ -112,6 +94,6 @@ namespace TrafikverketdotNET
         public override RoadGeometryResponse[] ExecuteRequest() => base.ExecuteRequest("RoadGeometry", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         public override RoadGeometryResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("RoadGeometry", CurrentSchemaVersion, XMLRequest);
-        public override RoadGeometryResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
+        public override RoadGeometryResponse[] ExecuteRequest(RoadGeometryRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

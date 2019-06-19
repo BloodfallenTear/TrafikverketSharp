@@ -195,24 +195,6 @@ namespace TrafikverketdotNET
         public TrainAnnouncementRequest(String ID = null, Boolean IncludeDeletedObjects = false,
                                         UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
                                         Boolean LastModified = false, Int32 ChangeID = 0,
-                                        String Include = null, String Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                     Limit, OrderBy, Skip, LastModified,
-                                                                                                                     ChangeID, Include, Exclude, Distinct) { }
-        public TrainAnnouncementRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                        UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                        Boolean LastModified = false, Int32 ChangeID = 0,
-                                        String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                                           Limit, OrderBy, Skip, LastModified,
-                                                                                                                                           ChangeID, Include, Exclude, Distinct, Filter) { }
-        public TrainAnnouncementRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                        UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                        Boolean LastModified = false, Int32 ChangeID = 0,
-                                        String[] Include = null, String[] Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                                 Limit, OrderBy, Skip, LastModified,
-                                                                                                                                 ChangeID, Include, Exclude, Distinct) { }
-        public TrainAnnouncementRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                        UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                        Boolean LastModified = false, Int32 ChangeID = 0,
                                         String[] Include = null, String[] Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
                                                                                                                                                        Limit, OrderBy, Skip, LastModified,
                                                                                                                                                        ChangeID, Include, Exclude, Distinct, Filter) { }
@@ -221,14 +203,14 @@ namespace TrafikverketdotNET
     /// <summary>
     /// Tidtabellsinformation, d.v.s information om tåg på trafikplatser (stationer, hållplatser) varje post motsvarar ett visst tåg vid respektive trafikplats.
     /// </summary>
-    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
-    public sealed class TrainAnnouncement : BaseTrafikverket<TrainAnnouncementResponse[]>
+    /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
+    public sealed class TrainAnnouncement : BaseTrafikverket<TrainAnnouncementResponse[], TrainAnnouncementRequest>
     {
         /// <summary>
         /// Tidtabellsinformation, d.v.s information om tåg på trafikplatser (stationer, hållplatser) varje post motsvarar ett visst tåg vid respektive trafikplats.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
-        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public TrainAnnouncement(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.TrainAnnouncement;
@@ -240,6 +222,6 @@ namespace TrafikverketdotNET
         public override TrainAnnouncementResponse[] ExecuteRequest() => base.ExecuteRequest("TrainAnnouncement", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         public override TrainAnnouncementResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TrainAnnouncement", "1.5", XMLRequest);
-        public override TrainAnnouncementResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
+        public override TrainAnnouncementResponse[] ExecuteRequest(TrainAnnouncementRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

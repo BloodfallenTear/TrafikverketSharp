@@ -53,4 +53,19 @@ namespace TrafikverketdotNET.Subs
 
         internal Direction() { }
     }
+
+    public sealed class Info
+    {
+        [JsonProperty("LASTMODIFIED")] internal LastModified _LastModified { get; set; }
+        [JsonProperty("LASTCHANGEID")] internal String _LastChangeID { get; set; }
+
+        [JsonIgnore] public LastModified LastModified => _LastModified;
+        [JsonIgnore] public String LastChangeID => _LastChangeID;
+    }
+
+    public sealed class LastModified
+    {
+        [JsonProperty("_attr_datetime")] internal String _DateTime { get; set; }
+        [JsonIgnore] public String DateTime => _DateTime;
+    }
 }

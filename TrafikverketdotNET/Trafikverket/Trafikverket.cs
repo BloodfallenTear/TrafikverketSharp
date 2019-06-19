@@ -133,7 +133,7 @@ namespace TrafikverketdotNET
             { ObjectType.RoadGeometry, "1" }
         };
 
-        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public TrafikverketResponse ExecuteRequest(TrafikverketRequest Request)
         {
             var trafikverketResp = new TrafikverketResponse();

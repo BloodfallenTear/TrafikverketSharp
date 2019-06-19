@@ -86,24 +86,6 @@ namespace TrafikverketdotNET
         public TrafficFlowRequest(String ID = null, Boolean IncludeDeletedObjects = false,
                                   UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
                                   Boolean LastModified = false, Int32 ChangeID = 0,
-                                  String Include = null, String Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
-                                                                                                               Limit, OrderBy, Skip, LastModified,
-                                                                                                               ChangeID, Include, Exclude, Distinct) { }
-        public TrafficFlowRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                  UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                  Boolean LastModified = false, Int32 ChangeID = 0,
-                                  String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                                     Limit, OrderBy, Skip, LastModified,
-                                                                                                                                     ChangeID, Include, Exclude, Distinct, Filter) { }
-        public TrafficFlowRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                  UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                  Boolean LastModified = false, Int32 ChangeID = 0,
-                                  String[] Include = null, String[] Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                           Limit, OrderBy, Skip, LastModified,
-                                                                                                                           ChangeID, Include, Exclude, Distinct) { }
-        public TrafficFlowRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                  UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                  Boolean LastModified = false, Int32 ChangeID = 0,
                                   String[] Include = null, String[] Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
                                                                                                                                                  Limit, OrderBy, Skip, LastModified,
                                                                                                                                                  ChangeID, Include, Exclude, Distinct, Filter) { }
@@ -112,14 +94,14 @@ namespace TrafikverketdotNET
     /// <summary>
     /// Uppmätta eller härledda värden relaterat till trafik eller enskilda fordonets rörelser på en viss sektion eller vid en specifik punkt på vägnätet.
     /// </summary>
-    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
-    public sealed class TrafficFlow : BaseTrafikverket<TrafficFlowResponse[]>
+    /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
+    public sealed class TrafficFlow : BaseTrafikverket<TrafficFlowResponse[], TrafficFlowRequest>
     {
         /// <summary>
         /// Uppmätta eller härledda värden relaterat till trafik eller enskilda fordonets rörelser på en viss sektion eller vid en specifik punkt på vägnätet.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
-        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public TrafficFlow(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.TrafficFlow;
@@ -131,6 +113,6 @@ namespace TrafikverketdotNET
         public override TrafficFlowResponse[] ExecuteRequest() => base.ExecuteRequest("TrafficFlow", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         public override TrafficFlowResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TrafficFlow", CurrentSchemaVersion, XMLRequest);
-        public override TrafficFlowResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
+        public override TrafficFlowResponse[] ExecuteRequest(TrafficFlowRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

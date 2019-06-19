@@ -41,6 +41,12 @@ using Newtonsoft.Json.Linq;
 
 namespace TrafikverketdotNET
 {
+    public class TrafikverketException : Exception
+    {
+        public TrafikverketException(String message) : base(message) { }
+        public TrafikverketException(String message, Exception innerException) : base(message, innerException) { }
+    }
+
     public abstract class BaseTrafikverketResponse { }
 
     public abstract class BaseTrafikverketRequest
@@ -80,43 +86,6 @@ namespace TrafikverketdotNET
         public abstract String SchemaVersion { get; }
 
         protected BaseTrafikverketRequest(Filter Filter) { this._Filter = Filter; this._Query = GetQuery(this.ObjectType, this.SchemaVersion); }
-        protected BaseTrafikverketRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                          UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                          Boolean LastModified = false, Int32 ChangeID = 0,
-                                          String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null)
-        {
-            this._ID = ID;
-            this._IncludeDeletedObjects = IncludeDeletedObjects;
-            this._Limit = Limit;
-            this._OrderBy = OrderBy;
-            this._Skip = Skip;
-            this._LastModified = LastModified;
-            this._ChangeID = ChangeID;
-            this._Include = new String[] { Include };
-            this._Exclude = new String[] { Exclude };
-            this._Distinct = Distinct;
-            this._Filter = Filter;
-
-            this._Query = GetQuery(this.ObjectType, this.SchemaVersion);
-        }
-        protected BaseTrafikverketRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                                          UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                          Boolean LastModified = false, Int32 ChangeID = 0,
-                                          String[] Include = null, String[] Exclude = null, String Distinct = null)
-        {
-            this._ID = ID;
-            this._IncludeDeletedObjects = IncludeDeletedObjects;
-            this._Limit = Limit;
-            this._OrderBy = OrderBy;
-            this._Skip = Skip;
-            this._LastModified = LastModified;
-            this._ChangeID = ChangeID;
-            this._Include = Include;
-            this._Exclude = Exclude;
-            this._Distinct = Distinct;
-
-            this._Query = GetQuery(this.ObjectType, this.SchemaVersion);
-        }
         protected BaseTrafikverketRequest(String ID = null, Boolean IncludeDeletedObjects = false,
                                           UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
                                           Boolean LastModified = false, Int32 ChangeID = 0,
@@ -179,7 +148,7 @@ namespace TrafikverketdotNET
         public String CreateXMLString() => $"<REQUEST><LOGIN authenticationkey=\"AUTHKEY\"/>{Query.CreateXMLString()}</REQUEST>";
     }
 
-    public abstract class BaseTrafikverket<T> : TrafikverketUtils where T : class
+    public abstract class BaseTrafikverket<T, U> : TrafikverketUtils where T : class where U : class
     {
         protected BaseTrafikverket(String APIKey) : base(APIKey) { }
 
@@ -188,9 +157,9 @@ namespace TrafikverketdotNET
 
         public abstract T ExecuteRequest();
         public abstract T ExecuteRequest(String XMLRequest);
-        public abstract T ExecuteRequest(BaseTrafikverketRequest Request);
+        public abstract T ExecuteRequest(U Request);
 
-        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         protected virtual T ExecuteRequest(String ObjectType, String SchemaVersion)
         {
             var resp = POSTRequest($"<REQUEST>" +
@@ -200,17 +169,23 @@ namespace TrafikverketdotNET
             return JsonConvert.DeserializeObject<T>(JObject.Parse(resp)[$"{ObjectType}"].ToString());
         }
 
-        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         protected virtual T ExecuteRequest(String ObjectType, String SchemaVersion, String RequestQuery)
         {
             var resp = POSTRequest(RequestQuery);
             return JsonConvert.DeserializeObject<T>(JObject.Parse(resp)[$"{ObjectType}"].ToString());
         }
 
-        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         protected virtual T ExecuteCustomRequest(BaseTrafikverketRequest Request)
         {
             var resp = POSTRequest(Request.CreateXMLString(), true);
+
+            Subs.Info x = null;
+            if (resp.Contains("\"INFO\":"))
+                x = JsonConvert.DeserializeObject<Subs.Info>(JObject.Parse(resp)["INFO"].ToString());
+            Console.WriteLine($"x.LastModified.DateTime: {x.LastModified.DateTime}");
+
             return JsonConvert.DeserializeObject<T>(JObject.Parse(resp)[$"{Request.Query.ObjectType}"].ToString());
         }
     }

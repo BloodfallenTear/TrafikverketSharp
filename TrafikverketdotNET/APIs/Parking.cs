@@ -115,24 +115,6 @@ namespace TrafikverketdotNET
         public ParkingRequest(String ID = null, Boolean IncludeDeletedObjects = false,
                               UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
                               Boolean LastModified = false, Int32 ChangeID = 0,
-                              String Include = null, String Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
-                                                                                                           Limit, OrderBy, Skip, LastModified,
-                                                                                                           ChangeID, Include, Exclude, Distinct) { }
-        public ParkingRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                              UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                              Boolean LastModified = false, Int32 ChangeID = 0,
-                              String Include = null, String Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                                 Limit, OrderBy, Skip, LastModified,
-                                                                                                                                 ChangeID, Include, Exclude, Distinct, Filter) { }
-        public ParkingRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                              UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                              Boolean LastModified = false, Int32 ChangeID = 0,
-                              String[] Include = null, String[] Exclude = null, String Distinct = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                       Limit, OrderBy, Skip, LastModified,
-                                                                                                                       ChangeID, Include, Exclude, Distinct) { }
-        public ParkingRequest(String ID = null, Boolean IncludeDeletedObjects = false,
-                              UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                              Boolean LastModified = false, Int32 ChangeID = 0,
                               String[] Include = null, String[] Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
                                                                                                                                              Limit, OrderBy, Skip, LastModified,
                                                                                                                                              ChangeID, Include, Exclude, Distinct, Filter) { }
@@ -141,14 +123,14 @@ namespace TrafikverketdotNET
     /// <summary>
     /// Information om rastplatser och parkeringar.
     /// </summary>
-    /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
-    public sealed class Parking : BaseTrafikverket<ParkingResponse[]>
+    /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
+    public sealed class Parking : BaseTrafikverket<ParkingResponse[], ParkingRequest>
     {
         /// <summary>
         /// Information om rastplatser och parkeringar.
         /// </summary>
         /// <param name="APIKey">Användarens unika nyckel.</param>
-        /// <exception cref="Exception">Thrown when there's an error returned from Trafikverket.</exception>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public Parking(String APIKey) : base(APIKey) { }
 
         internal override ObjectType ObjectType => ObjectType.Parking;
@@ -160,6 +142,6 @@ namespace TrafikverketdotNET
         public override ParkingResponse[] ExecuteRequest() => base.ExecuteRequest("Parking", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         public override ParkingResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("Parking", CurrentSchemaVersion, XMLRequest);
-        public override ParkingResponse[] ExecuteRequest(BaseTrafikverketRequest Request) => base.ExecuteCustomRequest(Request);
+        public override ParkingResponse[] ExecuteRequest(ParkingRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }
