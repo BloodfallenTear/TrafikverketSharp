@@ -1,4 +1,4 @@
-# Trafikverket.NET v0.29.0
+# Trafikverket.NET v0.29.1
 A C# .NET Standard library for Trafikverket. This is **not** an official Trafikverket library.
 
 ## Documentation
