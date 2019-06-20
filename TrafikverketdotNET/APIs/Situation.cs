@@ -60,8 +60,7 @@ namespace TrafikverketdotNET
     /// <summary>
     /// Situationer innehållandes händelser och störningar som trafikmeddelanden, vägarbeten, olyckor, restiktioner m.m.
     /// </summary>
-    /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-    public sealed class Situation : BaseTrafikverket<SituationResponse[], SituationRequest>
+    public sealed class Situation : BaseTrafikverket<SituationResponse, SituationRequest>
     {
         /// <summary>
         /// Situationer innehållandes händelser och störningar som trafikmeddelanden, vägarbeten, olyckor, restiktioner m.m.
@@ -76,9 +75,12 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override SituationResponse[] ExecuteRequest() => base.ExecuteRequest("Situation", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override SituationResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("Situation", CurrentSchemaVersion, XMLRequest);
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override SituationResponse[] ExecuteRequest(SituationRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

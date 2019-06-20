@@ -74,8 +74,7 @@ namespace TrafikverketdotNET
     /// Vägens geometri relaterat till det data vi tillhandahåller från PMS-systemen med data om beläggningar och mätdata.
     /// Vi kan ej garantera att geometrin är dagsaktuell från NVDB. Datum för när data hämtades framgår av posten TimeStamp. 
     /// </summary>
-    /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-    public sealed class RoadGeometry : BaseTrafikverket<RoadGeometryResponse[], RoadGeometryRequest>
+    public sealed class RoadGeometry : BaseTrafikverket<RoadGeometryResponse, RoadGeometryRequest>
     {
         /// <summary>
         /// Vägens geometri relaterat till det data vi tillhandahåller från PMS-systemen med data om beläggningar och mätdata.
@@ -91,9 +90,12 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override RoadGeometryResponse[] ExecuteRequest() => base.ExecuteRequest("RoadGeometry", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override RoadGeometryResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("RoadGeometry", CurrentSchemaVersion, XMLRequest);
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override RoadGeometryResponse[] ExecuteRequest(RoadGeometryRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

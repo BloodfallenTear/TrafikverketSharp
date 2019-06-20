@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace TrafikverketdotNET
 {
-    public sealed class TrainStationResponse : IBaseTrafikverketResponse
+    public sealed class TrainStationResponse : BaseTrafikverketResponse
     {
         [JsonProperty("Advertised")] internal Boolean _Advertised { get; set; }
         [JsonProperty("AdvertisedLocationName")] internal String _AdvertisedLocationName { get; set; }
@@ -91,8 +91,7 @@ namespace TrafikverketdotNET
     /// <summary>
     /// Trafikplatser, både med och utan resandeutbyte.
     /// </summary>
-    /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-    public sealed class TrainStation : BaseTrafikverket<TrainStationResponse[], TrainStationRequest>
+    public sealed class TrainStation : BaseTrafikverket<TrainStationResponse, TrainStationRequest>
     {
         /// <summary>
         /// Trafikplatser, både med och utan resandeutbyte.
@@ -107,9 +106,12 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override TrainStationResponse[] ExecuteRequest() => base.ExecuteRequest("TrainStation", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override TrainStationResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TrainStation", CurrentSchemaVersion, XMLRequest);
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override TrainStationResponse[] ExecuteRequest(TrainStationRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

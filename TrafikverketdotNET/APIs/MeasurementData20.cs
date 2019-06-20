@@ -221,8 +221,7 @@ namespace TrafikverketdotNET
     /// Senast gällande mätdata finns att hämta dvs ej historik. 
     /// Källsystem är PMS-systemen.
     /// </summary>
-    /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-    public sealed class MeasurementData20 : BaseTrafikverket<MeasurementData20Response[], MeasurementData20Request>
+    public sealed class MeasurementData20 : BaseTrafikverket<MeasurementData20Response, MeasurementData20Request>
     {
         /// <summary>
         /// Mätdata per 20 meter. 
@@ -241,9 +240,12 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override MeasurementData20Response[] ExecuteRequest() => base.ExecuteRequest("MeasurementData20", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override MeasurementData20Response[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("MeasurementData20", CurrentSchemaVersion, XMLRequest);
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override MeasurementData20Response[] ExecuteRequest(MeasurementData20Request Request) => base.ExecuteCustomRequest(Request);
     }
 }

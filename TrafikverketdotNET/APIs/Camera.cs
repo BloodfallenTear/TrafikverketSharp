@@ -123,8 +123,7 @@ namespace TrafikverketdotNET
     /// <summary>
     /// Kameror för automatisk väglag och trafikflöde.
     /// </summary>
-    /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-    public sealed class Camera : BaseTrafikverket<CameraResponse[], CameraRequest>
+    public sealed class Camera : BaseTrafikverket<CameraResponse, CameraRequest>
     {
         /// <summary>
         /// Kameror för automatisk väglag och trafikflöde.
@@ -139,9 +138,12 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override CameraResponse[] ExecuteRequest() => base.ExecuteRequest("Camera", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override CameraResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("Camera", "1", XMLRequest);
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override CameraResponse[] ExecuteRequest(CameraRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

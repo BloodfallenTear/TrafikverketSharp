@@ -78,8 +78,7 @@ namespace TrafikverketdotNET
     /// <summary>
     /// Väderstationer med mätdata.
     /// </summary>
-    /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-    public sealed class WeatherStation : BaseTrafikverket<WeatherStationResponse[], WeatherStationRequest>
+    public sealed class WeatherStation : BaseTrafikverket<WeatherStationResponse, WeatherStationRequest>
     {
         /// <summary>
         /// Väderstationer med mätdata.
@@ -94,9 +93,12 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override WeatherStationResponse[] ExecuteRequest() => base.ExecuteRequest("WeatherStation", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override WeatherStationResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("WeatherStation", CurrentSchemaVersion, XMLRequest);
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override WeatherStationResponse[] ExecuteRequest(WeatherStationRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

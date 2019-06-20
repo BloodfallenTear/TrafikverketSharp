@@ -125,8 +125,7 @@ namespace TrafikverketdotNET
     /// <summary>
     /// Information om väglag.
     /// </summary>
-    /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-    public sealed class RoadCondition : BaseTrafikverket<RoadConditionResponse[], RoadConditionRequest>
+    public sealed class RoadCondition : BaseTrafikverket<RoadConditionResponse, RoadConditionRequest>
     {
         /// <summary>
         /// Information om väglag.
@@ -141,9 +140,12 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override RoadConditionResponse[] ExecuteRequest() => base.ExecuteRequest("RoadCondition", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override RoadConditionResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("RoadCondition", CurrentSchemaVersion, XMLRequest);
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override RoadConditionResponse[] ExecuteRequest(RoadConditionRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

@@ -74,8 +74,7 @@ namespace TrafikverketdotNET
     /// <summary>
     /// Trafiksäkerhetskameror.
     /// </summary>
-    /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-    public sealed class TrafficSafetyCamera : BaseTrafikverket<TrafficSafetyCameraResponse[], TrafficSafetyCameraRequest>
+    public sealed class TrafficSafetyCamera : BaseTrafikverket<TrafficSafetyCameraResponse, TrafficSafetyCameraRequest>
     {
         /// <summary>
         /// Trafiksäkerhetskameror.
@@ -90,9 +89,12 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override TrafficSafetyCameraResponse[] ExecuteRequest() => base.ExecuteRequest("TrafficSafetyCamera", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override TrafficSafetyCameraResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TrafficSafetyCamera", CurrentSchemaVersion, XMLRequest);
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override TrafficSafetyCameraResponse[] ExecuteRequest(TrafficSafetyCameraRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

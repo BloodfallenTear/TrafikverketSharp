@@ -157,8 +157,7 @@ namespace TrafikverketdotNET
     /// Vi kan ej garantera att det är helt aktuellt data från NVDB. Datum för när data hämtades framgår av posten TimeStamp. 
     /// För att se källa för respektive data, gå till fliken Om variabler i systemet PMSV3.
     /// </summary>
-    /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-    public class PavementData : BaseTrafikverket<PavementDataResponse[], PavementDataRequest>
+    public class PavementData : BaseTrafikverket<PavementDataResponse, PavementDataRequest>
     {
         /// <summary>
         /// Beläggningsdata från PMS-systemen kombinerat med relevant vägdata från NVDB. 
@@ -175,9 +174,12 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override PavementDataResponse[] ExecuteRequest() => base.ExecuteRequest("PavementData", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override PavementDataResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("PavementData", CurrentSchemaVersion, XMLRequest);
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override PavementDataResponse[] ExecuteRequest(PavementDataRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

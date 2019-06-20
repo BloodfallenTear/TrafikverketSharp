@@ -133,8 +133,7 @@ namespace TrafikverketdotNET
     /// Observera att det inte finns 100-metersdata för alla våra 20-metersvariabler. 
     /// Källsystem är PMS-systemen.
     /// </summary>
-    /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-    public sealed class MeasurementData100 : BaseTrafikverket<MeasurementData100Response[], MeasurementData100Request>
+    public sealed class MeasurementData100 : BaseTrafikverket<MeasurementData100Response, MeasurementData100Request>
     {
         /// <summary>
         /// Mätdata per 100 meter. 
@@ -152,9 +151,12 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override MeasurementData100Response[] ExecuteRequest() => base.ExecuteRequest("MeasurementData100", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override MeasurementData100Response[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("MeasurementData100", CurrentSchemaVersion, XMLRequest);
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override MeasurementData100Response[] ExecuteRequest(MeasurementData100Request Request) => base.ExecuteCustomRequest(Request);
     }
 }

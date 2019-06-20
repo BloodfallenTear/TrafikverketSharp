@@ -80,8 +80,7 @@ namespace TrafikverketdotNET
     /// <summary>
     /// Information om färjeleder.
     /// </summary>
-    /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-    public sealed class FerryRoute : BaseTrafikverket<FerryRouteResponse[], FerryRouteRequest>
+    public sealed class FerryRoute : BaseTrafikverket<FerryRouteResponse, FerryRouteRequest>
     {
         /// <summary>
         /// Information om färjeleder.
@@ -96,9 +95,12 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override FerryRouteResponse[] ExecuteRequest() => base.ExecuteRequest("FerryRoute", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>s
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override FerryRouteResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("FerryRoute", CurrentSchemaVersion, XMLRequest);
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override FerryRouteResponse[] ExecuteRequest(FerryRouteRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

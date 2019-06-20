@@ -123,8 +123,7 @@ namespace TrafikverketdotNET
     /// <summary>
     /// Information om rastplatser och parkeringar.
     /// </summary>
-    /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-    public sealed class Parking : BaseTrafikverket<ParkingResponse[], ParkingRequest>
+    public sealed class Parking : BaseTrafikverket<ParkingResponse, ParkingRequest>
     {
         /// <summary>
         /// Information om rastplatser och parkeringar.
@@ -139,9 +138,12 @@ namespace TrafikverketdotNET
         /// </summary>
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override ParkingResponse[] ExecuteRequest() => base.ExecuteRequest("Parking", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override ParkingResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("Parking", CurrentSchemaVersion, XMLRequest);
+        /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public override ParkingResponse[] ExecuteRequest(ParkingRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }
