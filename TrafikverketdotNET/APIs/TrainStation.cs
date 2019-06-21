@@ -19,7 +19,6 @@ namespace TrafikverketdotNET
         [JsonProperty("PlatformLine")] internal String[] _PlatformLine { get; set; }
         [JsonProperty("Prognosticated")] internal Boolean _Prognosticated { get; set; }
         [JsonProperty("Geometry")] internal Geometry _Geometry { get; set; }
-        [JsonProperty("INFO")] internal Info _Info { get; set; }
 
         /// <summary>
         /// Anger om stationen annonseras i tidtabell.
@@ -69,7 +68,6 @@ namespace TrafikverketdotNET
         /// Geometrisk punkt i koordinatsystem. Fältet kan användas för geo-frågor.
         /// </summary>
         [JsonIgnore] public Geometry Geometry => _Geometry;
-        [JsonIgnore] public Info Info => _Info;
 
         internal TrainStationResponse() { }
     }

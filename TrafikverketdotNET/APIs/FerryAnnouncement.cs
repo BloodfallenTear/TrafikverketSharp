@@ -11,7 +11,7 @@ namespace TrafikverketdotNET
         [JsonProperty("DeviationId")] internal String _DeviationId { get; set; }
         [JsonProperty("FromHarbor")] internal FromHarbor _FromHarbor { get; set; }
         [JsonProperty("Id")] internal Int64 _Id { get; set; }
-        [JsonProperty("Info")] internal String[] _Info { get; set; }
+        [JsonProperty("Info")] internal new String[] _Info { get; set; }
         [JsonProperty("ModifiedTime")] internal DateTime _ModifiedTime { get; set; }
         [JsonProperty("Route")] internal Route _Route { get; set; }
         [JsonProperty("ToHarbor")] internal ToHarbor _ToHarbor { get; set; }
@@ -36,7 +36,7 @@ namespace TrafikverketdotNET
         /// <summary>
         /// Information om avgången.
         /// </summary>
-        [JsonIgnore] public String[] Info => _Info;
+        [JsonIgnore] public new String[] Info => _Info;
         /// <summary>
         /// Tidpunkt då dataposten ändrades
         /// </summary>

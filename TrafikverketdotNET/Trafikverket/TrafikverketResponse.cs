@@ -2,6 +2,7 @@
 {
     public class TrafikverketResponse
     {
+        #region Internal
         internal TrainAnnouncementResponse[] _TrainAnnouncementResponse { get; set; }
         internal TrainMessageResponse[] _TrainMessageResponse { get; set; }
         internal TrainStationResponse[] _TrainStationResponse { get; set; }
@@ -25,6 +26,10 @@
         internal RoadDataResponse[] _RoadDataResponse { get; set; }
         internal RoadGeometryResponse[] _RoadGeometryResponse { get; set; }
 
+        internal Subs.Info _Info { get; set; }
+        #endregion
+
+        #region Public
         public TrainAnnouncementResponse[] TrainAnnouncementResponse => _TrainAnnouncementResponse;
         public TrainMessageResponse[] TrainMessageResponse => _TrainMessageResponse;
         public TrainStationResponse[] TrainStationResponse => _TrainStationResponse;
@@ -47,6 +52,9 @@
         public PavementDataResponse[] PavementDataResponse => _PavementDataResponse;
         public RoadDataResponse[] RoadDataResponse => _RoadDataResponse;
         public RoadGeometryResponse[] RoadGeometryResponse => _RoadGeometryResponse;
+
+        public Subs.Info Info => _Info;
+        #endregion
 
         internal TrafikverketResponse() { }
     }

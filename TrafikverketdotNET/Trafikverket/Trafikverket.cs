@@ -138,10 +138,17 @@ namespace TrafikverketdotNET
         {
             var trafikverketResp = new TrafikverketResponse();
             var resp = base.POSTRequest(Request.CreateXMLString(), true, true);
-            var array = JArray.Parse(resp);
+            //if(resp.Contains("\"INFO\":"))
+            //{
+            //    var info = JsonConvert.DeserializeObject<Subs.Info>(JObject.Parse(resp)["INFO"].ToString());
+            //    trafikverketResp._Info = info;
+            //}
+            var array = JArray.Parse(JObject.Parse(resp["RESULT"].ToString()).ToString());
 
             for (int i = 0; i < array.Count; i++)
             {
+                //var array[i][$"{Request.Queries[i].ObjectType}"].ToString() = array[i][$"{Request.Queries[i].ObjectType}"].ToString();
+
                 switch (Request.Queries[i].ObjectType)
                 {
                     case ObjectType.TrainAnnouncement:
