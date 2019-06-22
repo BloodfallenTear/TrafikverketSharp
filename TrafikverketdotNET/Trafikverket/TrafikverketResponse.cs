@@ -26,7 +26,7 @@
         internal RoadDataResponse[] _RoadDataResponse { get; set; }
         internal RoadGeometryResponse[] _RoadGeometryResponse { get; set; }
 
-        internal Subs.Info _Info { get; set; }
+        internal System.Collections.Generic.Dictionary<ObjectType, Subs.Info> _Info { get; set; }
         #endregion
 
         #region Public
@@ -53,7 +53,7 @@
         public RoadDataResponse[] RoadDataResponse => _RoadDataResponse;
         public RoadGeometryResponse[] RoadGeometryResponse => _RoadGeometryResponse;
 
-        public Subs.Info Info => _Info;
+        public System.Collections.Generic.Dictionary<ObjectType, Subs.Info> Info => _Info;
         #endregion
 
         internal TrafikverketResponse() { }

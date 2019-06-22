@@ -2,43 +2,6 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-/* 
- * <REQUEST>
-      <LOGIN authenticationkey="xxx" />
-      <QUERY objecttype="xxx" schemaversion="xxx">
-          <FILTER>
-              <EQ name="" value="" />
-              <EXISTS name="" value="" />
-              <GT name="" value="" />
-              <GTE name="" value="" />
-              <LT name="" value="" />
-              <LTE name="" value="" />
-              <NE name="" value="" />
-              <LIKE name="" value="" />
-              <NOTLIKE name="" value="" />
-              <IN name="" value="" />
-              <NOTIN name="" value="" />
-              <WITHIN shape="" name="" value="" />
-              <INTERSECTS shape="" name="" value="" />
-              <NEAR name="" value="" mindistance="" maxdistance="" />
-              
-              <OR>
-                  
-              </OR>
-              <AND>
-                  
-              </AND>
-              <ELEMENTMATCH>
-                  
-              </ELEMENTMATCH>
-              <NOT>
-                  
-              </NOT>
-          </FILTER>
-      </QUERY>
-   </REQUEST>
-*/
-
 namespace TrafikverketdotNET
 {
     public class TrafikverketException : Exception
