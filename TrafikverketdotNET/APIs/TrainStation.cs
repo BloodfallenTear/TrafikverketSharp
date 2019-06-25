@@ -1,11 +1,21 @@
 ﻿using System;
 using TrafikverketdotNET.Subs;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 
 namespace TrafikverketdotNET
 {
     public sealed class TrainStationResponse : BaseTrafikverketResponse
+    {
+        [JsonProperty("TrainStation")] internal TrainStationData[] _Data { get; set; }
+        [JsonProperty("INFO")] internal Info _Info { get; set; }
+
+        [JsonIgnore] public TrainStationData[] Data => _Data;
+        [JsonIgnore] public Info Info => _Info;
+
+        internal TrainStationResponse() { }
+    }
+
+    public sealed class TrainStationData
     {
         [JsonProperty("Advertised")] internal Boolean _Advertised { get; set; }
         [JsonProperty("AdvertisedLocationName")] internal String _AdvertisedLocationName { get; set; }
@@ -69,10 +79,10 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public Geometry Geometry => _Geometry;
 
-        internal TrainStationResponse() { }
+        internal TrainStationData() { }
     }
 
-    public class TrainStationRequest : BaseTrafikverketRequest
+    public sealed class TrainStationRequest : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.TrainStation;
         public override String SchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
@@ -105,11 +115,11 @@ namespace TrafikverketdotNET
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override TrainStationResponse[] ExecuteRequest() => base.ExecuteRequest("TrainStation", CurrentSchemaVersion);
+        public override TrainStationResponse ExecuteRequest() => base.ExecuteRequest("TrainStation", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override TrainStationResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TrainStation", CurrentSchemaVersion, XMLRequest);
+        public override TrainStationResponse ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TrainStation", CurrentSchemaVersion, XMLRequest);
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override TrainStationResponse[] ExecuteRequest(TrainStationRequest Request) => base.ExecuteCustomRequest(Request);
+        public override TrainStationResponse ExecuteRequest(TrainStationRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

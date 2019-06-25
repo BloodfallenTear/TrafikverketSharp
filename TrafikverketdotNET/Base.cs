@@ -10,11 +10,7 @@ namespace TrafikverketdotNET
         public TrafikverketException(String message, Exception innerException) : base(message, innerException) { }
     }
 
-    public abstract class BaseTrafikverketResponse
-    {
-        [JsonProperty("INFO")] internal Subs.Info _Info { get; set; }
-        public Subs.Info Info => _Info;
-    }
+    public abstract class BaseTrafikverketResponse { }
 
     public abstract class BaseTrafikverketRequest
     {
@@ -122,32 +118,32 @@ namespace TrafikverketdotNET
         internal abstract ObjectType ObjectType { get; }
         public abstract String CurrentSchemaVersion { get; }
 
-        public abstract T[] ExecuteRequest();
-        public abstract T[] ExecuteRequest(String XMLRequest);
-        public abstract T[] ExecuteRequest(U Request);
-
+        public abstract T ExecuteRequest();
+        public abstract T ExecuteRequest(String XMLRequest);
+        public abstract T ExecuteRequest(U Request);
+        
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        protected virtual T[] ExecuteRequest(String ObjectType, String SchemaVersion)
+        protected virtual T ExecuteRequest(String ObjectType, String SchemaVersion)
         {
             var resp = POSTRequest($"<REQUEST>" +
                                     $"<LOGIN authenticationkey=\"{APIKey}\"/>" +
                                     $"<QUERY objecttype=\"{ObjectType}\" schemaversion=\"{SchemaVersion}\"/>" +
                                    $"</REQUEST>");
-            return JsonConvert.DeserializeObject<T[]>(JObject.Parse(resp)[$"{ObjectType}"].ToString());
+            return JsonConvert.DeserializeObject<T>(JObject.Parse(resp).ToString());
         }
 
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        protected virtual T[] ExecuteRequest(String ObjectType, String SchemaVersion, String RequestQuery)
+        protected virtual T ExecuteRequest(String ObjectType, String SchemaVersion, String RequestQuery)
         {
             var resp = POSTRequest(RequestQuery);
-            return JsonConvert.DeserializeObject<T[]>(JObject.Parse(resp)[$"{ObjectType}"].ToString());
+            return JsonConvert.DeserializeObject<T>(JObject.Parse(resp).ToString());
         }
 
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        protected virtual T[] ExecuteCustomRequest(BaseTrafikverketRequest Request)
+        protected virtual T ExecuteCustomRequest(BaseTrafikverketRequest Request)
         {
             var resp = POSTRequest(Request.CreateXMLString(), true);
-            return JsonConvert.DeserializeObject<T[]>(JObject.Parse(resp)[$"{Request.Query.ObjectType}"].ToString());
+            return JsonConvert.DeserializeObject<T>(JObject.Parse(resp).ToString());
         }
     }
 }
