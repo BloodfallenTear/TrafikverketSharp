@@ -136,123 +136,32 @@ namespace TrafikverketdotNET
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         public TrafikverketResponse ExecuteRequest(TrafikverketRequest Request)
         {
-            var trafikverketResp = new TrafikverketResponse();
             var resp = base.POSTRequest(Request.CreateXMLString(), true, true);
             var array = JArray.Parse(resp);
-            var infoDictionary = new Dictionary<ObjectType, Subs.Info>();
+            var trafikverketResp = new TrafikverketResponse();
 
-            for (Int32 i = 0; i < array.Count; i++)
+            for(Int32 i = 0; i < array.Count; i++)
             {
-                var obj = array[i][$"{Request.Queries[i].ObjectType}"].ToString();
-
-                switch (Request.Queries[i].ObjectType)
+                switch(Request.Queries[i].ObjectType)
                 {
                     case ObjectType.TrainAnnouncement:
-                        trafikverketResp._TrainAnnouncementResponse = JsonConvert.DeserializeObject<TrainAnnouncementResponse[]>(obj);
-                        if (array[i].ToString().Contains("\"INFO\":"))
-                            infoDictionary.Add(ObjectType.TrainAnnouncement, JsonConvert.DeserializeObject<Subs.Info>(array[i]["INFO"].ToString()));
-                        break;
-                    case ObjectType.TrainMessage:
-                        trafikverketResp._TrainMessageResponse = JsonConvert.DeserializeObject<TrainMessageResponse[]>(obj);
-                        if (array[i].ToString().Contains("\"INFO\":"))
-                            infoDictionary.Add(ObjectType.TrainMessage, JsonConvert.DeserializeObject<Subs.Info>(array[i]["INFO"].ToString()));
+                        var tempArrayCopy = trafikverketResp._TrainAnnouncementResponse;
+                        var tempArray = new TrainAnnouncementResponse[tempArrayCopy.Length + 1];
+                        tempArray[tempArray.Length - 1]._Data = JsonConvert.DeserializeObject<TrainAnnouncementData[]>(array[i].ToString());
+                        trafikverketResp._TrainAnnouncementResponse = tempArray;
                         break;
                     case ObjectType.TrainStation:
-                        trafikverketResp._TrainStationResponse = JsonConvert.DeserializeObject<TrainStationResponse[]>(obj);
-                        if (array[i].ToString().Contains("\"INFO\":"))
-                            infoDictionary.Add(ObjectType.TrainStation, JsonConvert.DeserializeObject<Subs.Info>(array[i]["INFO"].ToString()));
-                        break;
-                    case ObjectType.Camera:
-                        trafikverketResp._CameraResponse = JsonConvert.DeserializeObject<CameraResponse[]>(obj);
-                        if (array[i].ToString().Contains("\"INFO\":"))
-                            infoDictionary.Add(ObjectType.Camera, JsonConvert.DeserializeObject<Subs.Info>(array[i]["INFO"].ToString()));
-                        break;
-                    case ObjectType.FerryAnnouncement:
-                        trafikverketResp._FerryAnnouncementResponse = JsonConvert.DeserializeObject<FerryAnnouncementResponse[]>(obj);
-                        if (array[i].ToString().Contains("\"INFO\":"))
-                            infoDictionary.Add(ObjectType.FerryAnnouncement, JsonConvert.DeserializeObject<Subs.Info>(array[i]["INFO"].ToString()));
-                        break;
-                    case ObjectType.FerryRoute:
-                        trafikverketResp._FerryRouteResponse = JsonConvert.DeserializeObject<FerryRouteResponse[]>(obj);
-                        if (array[i].ToString().Contains("\"INFO\":"))
-                            infoDictionary.Add(ObjectType.FerryRoute, JsonConvert.DeserializeObject<Subs.Info>(array[i]["INFO"].ToString()));
-                        break;
-                    case ObjectType.Icon:
-                        trafikverketResp._IconResponse = JsonConvert.DeserializeObject<IconResponse[]>(obj);
-                        if (array[i].ToString().Contains("\"INFO\":"))
-                            infoDictionary.Add(ObjectType.Icon, JsonConvert.DeserializeObject<Subs.Info>(array[i]["INFO"].ToString()));
-                        break;
-                    case ObjectType.Parking:
-                        trafikverketResp._ParkingResponse = JsonConvert.DeserializeObject<ParkingResponse[]>(obj);
-                        if (array[i].ToString().Contains("\"INFO\":"))
-                            infoDictionary.Add(ObjectType.Parking, JsonConvert.DeserializeObject<Subs.Info>(array[i]["INFO"].ToString()));
-                        break;
-                    case ObjectType.RoadCondition:
-                        trafikverketResp._RoadConditionResponse = JsonConvert.DeserializeObject<RoadConditionResponse[]>(obj);
-                        if (array[i].ToString().Contains("\"INFO\":"))
-                            infoDictionary.Add(ObjectType.RoadCondition, JsonConvert.DeserializeObject<Subs.Info>(array[i]["INFO"].ToString()));
-                        break;
-                    case ObjectType.RoadConditionOverview:
-                        trafikverketResp._RoadConditionOverviewResponse = JsonConvert.DeserializeObject<RoadConditionOverviewResponse[]>(obj);
-                        if (array[i].ToString().Contains("\"INFO\":"))
-                            infoDictionary.Add(ObjectType.RoadConditionOverview, JsonConvert.DeserializeObject<Subs.Info>(array[i]["INFO"].ToString()));
-                        break;
-                    case ObjectType.Situation:
-                        trafikverketResp._SituationResponse = JsonConvert.DeserializeObject<SituationResponse[]>(obj);
-                        if (array[i].ToString().Contains("\"INFO\":"))
-                            infoDictionary.Add(ObjectType.Situation, JsonConvert.DeserializeObject<Subs.Info>(array[i]["INFO"].ToString()));
-                        break;
-                    case ObjectType.TrafficFlow:
-                        trafikverketResp._TrafficFlowResponse = JsonConvert.DeserializeObject<TrafficFlowResponse[]>(obj);
-                        if (array[i].ToString().Contains("\"INFO\":"))
-                            infoDictionary.Add(ObjectType.TrafficFlow, JsonConvert.DeserializeObject<Subs.Info>(array[i]["INFO"].ToString()));
-                        break;
-                    case ObjectType.TrafficSafetyCamera:
-                        trafikverketResp._TrafficSafetyCameraResponse = JsonConvert.DeserializeObject<TrafficSafetyCameraResponse[]>(obj);
-                        if (array[i].ToString().Contains("\"INFO\":"))
-                            infoDictionary.Add(ObjectType.TrafficSafetyCamera, JsonConvert.DeserializeObject<Subs.Info>(array[i]["INFO"].ToString()));
-                        break;
-                    case ObjectType.TravelTimeRoute:
-                        trafikverketResp._TravelTimeRouteResponse = JsonConvert.DeserializeObject<TravelTimeRouteResponse[]>(obj);
-                        if (array[i].ToString().Contains("\"INFO\":"))
-                            infoDictionary.Add(ObjectType.TravelTimeRoute, JsonConvert.DeserializeObject<Subs.Info>(array[i]["INFO"].ToString()));
-                        break;
-                    case ObjectType.WeatherStation:
-                        trafikverketResp._WeatherStationResponse = JsonConvert.DeserializeObject<WeatherStationResponse[]>(obj);
-                        if (array[i].ToString().Contains("\"INFO\":"))
-                            infoDictionary.Add(ObjectType.WeatherStation, JsonConvert.DeserializeObject<Subs.Info>(array[i]["INFO"].ToString()));
-                        break;
-                    case ObjectType.MeasurementData100:
-                        trafikverketResp._MeasurementData100Response = JsonConvert.DeserializeObject<MeasurementData100Response[]>(obj);
-                        if (array[i].ToString().Contains("\"INFO\":"))
-                            infoDictionary.Add(ObjectType.MeasurementData100, JsonConvert.DeserializeObject<Subs.Info>(array[i]["INFO"].ToString()));
-                        break;
-                    case ObjectType.MeasurementData20:
-                        trafikverketResp._MeasurementData20Response = JsonConvert.DeserializeObject<MeasurementData20Response[]>(obj);
-                        if (array[i].ToString().Contains("\"INFO\":"))
-                            infoDictionary.Add(ObjectType.MeasurementData20, JsonConvert.DeserializeObject<Subs.Info>(array[i]["INFO"].ToString()));
-                        break;
-                    case ObjectType.PavementData:
-                        trafikverketResp._PavementDataResponse = JsonConvert.DeserializeObject<PavementDataResponse[]>(obj);
-                        if (array[i].ToString().Contains("\"INFO\":"))
-                            infoDictionary.Add(ObjectType.PavementData, JsonConvert.DeserializeObject<Subs.Info>(array[i]["INFO"].ToString()));
-                        break;
-                    case ObjectType.RoadData:
-                        trafikverketResp._RoadDataResponse = JsonConvert.DeserializeObject<RoadDataResponse[]>(obj);
-                        if (array[i].ToString().Contains("\"INFO\":"))
-                            infoDictionary.Add(ObjectType.RoadData, JsonConvert.DeserializeObject<Subs.Info>(array[i]["INFO"].ToString()));
-                        break;
-                    case ObjectType.RoadGeometry:
-                        trafikverketResp._RoadGeometryResponse = JsonConvert.DeserializeObject<RoadGeometryResponse[]>(obj);
-                        if (array[i].ToString().Contains("\"INFO\":"))
-                            infoDictionary.Add(ObjectType.RoadGeometry, JsonConvert.DeserializeObject<Subs.Info>(array[i]["INFO"].ToString()));
+                        var tempArrayCopy = trafikverketResp._TrainStationResponse;
+                        var tempArray = new TrainAnnouncementResponse[tempArrayCopy.Length + 1];
+                        tempArray[tempArray.Length - 1]._Data = JsonConvert.DeserializeObject<TrainStationData[]>(array[i].ToString());
+                        trafikverketResp._TrainAnnouncementResponse = tempArray;
                         break;
                 }
             }
 
-            trafikverketResp._Info = infoDictionary;
-            return trafikverketResp;
+            return JsonConvert.DeserializeObject<TrafikverketResponse>(resp);
         }
+
 
         public void Dispose() { }
     }

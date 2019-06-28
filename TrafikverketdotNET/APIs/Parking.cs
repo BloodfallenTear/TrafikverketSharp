@@ -7,6 +7,17 @@ namespace TrafikverketdotNET
 {
     public sealed class ParkingResponse : BaseTrafikverketResponse
     {
+        [JsonProperty("Parking")] internal ParkingData[] _Data { get; set; }
+        [JsonProperty("INFO")] internal Info _Info { get; set; }
+
+        [JsonIgnore] public ParkingData[] Data => _Data;
+        [JsonIgnore] public Info Info => _Info;
+
+        internal ParkingResponse() { }
+    }
+
+    public sealed class ParkingData
+    {
         [JsonProperty("CountyNo")] internal Int32[] _CountyNo { get; set; }
         [JsonProperty("Deleted")] internal Boolean _Deleted { get; set; }
         [JsonProperty("Description")] internal String _Description { get; set; }
@@ -102,11 +113,11 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public String[] UsageSenario => _UsageSenario;
         [JsonIgnore] public VehicleCharacteristics[] VehicleCharacteristics => _VehicleCharacteristics;
-        
-        internal ParkingResponse() { }
+
+        internal ParkingData() { }
     }
 
-    public class ParkingRequest : BaseTrafikverketRequest
+    public sealed class ParkingRequest : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.Parking;
         public override string SchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
@@ -139,11 +150,11 @@ namespace TrafikverketdotNET
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override ParkingResponse[] ExecuteRequest() => base.ExecuteRequest("Parking", CurrentSchemaVersion);
+        public override ParkingResponse ExecuteRequest() => base.ExecuteRequest("Parking", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override ParkingResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("Parking", CurrentSchemaVersion, XMLRequest);
+        public override ParkingResponse ExecuteRequest(String XMLRequest) => base.ExecuteRequest("Parking", CurrentSchemaVersion, XMLRequest);
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override ParkingResponse[] ExecuteRequest(ParkingRequest Request) => base.ExecuteCustomRequest(Request);
+        public override ParkingResponse ExecuteRequest(ParkingRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

@@ -1,10 +1,22 @@
 ﻿using System;
+using TrafikverketdotNET.Subs;
 using TrafikverketdotNET.Subs.TrainAnnouncementResponse;
 using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
 {
     public sealed class TrainAnnouncementResponse : BaseTrafikverketResponse
+    {
+        [JsonProperty("TrainAnnouncement")] internal TrainAnnouncementData[] _Data { get; set; }
+        [JsonProperty("INFO")] internal Info _Info { get; set; }
+
+        [JsonIgnore] public TrainAnnouncementData[] Data => _Data;
+        [JsonIgnore] public Info Info => _Info;
+
+        internal TrainAnnouncementResponse() { }
+    }
+
+    public sealed class TrainAnnouncementData
     {
         [JsonProperty("ActivityId")] internal String _ActivityId { get; set; }
         [JsonProperty("ActivityType")] internal String _ActivityType { get; set; }
@@ -183,10 +195,10 @@ namespace TrafikverketdotNET
         [JsonIgnore] public ViaFromLocation[] ViaFromLocation => _ViaFromLocation;
         [JsonIgnore] public ViaToLocation[] ViaToLocation => _ViaToLocation;
 
-        internal TrainAnnouncementResponse() { }
+        internal TrainAnnouncementData() { }
     }
 
-    public class TrainAnnouncementRequest : BaseTrafikverketRequest
+    public sealed class TrainAnnouncementRequest : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.TrainAnnouncement;
         public override string SchemaVersion => "1.5";
@@ -219,11 +231,11 @@ namespace TrafikverketdotNET
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override TrainAnnouncementResponse[] ExecuteRequest() => base.ExecuteRequest("TrainAnnouncement", CurrentSchemaVersion);
+        public override TrainAnnouncementResponse ExecuteRequest() => base.ExecuteRequest("TrainAnnouncement", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override TrainAnnouncementResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TrainAnnouncement", "1.5", XMLRequest);
+        public override TrainAnnouncementResponse ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TrainAnnouncement", "1.5", XMLRequest);
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override TrainAnnouncementResponse[] ExecuteRequest(TrainAnnouncementRequest Request) => base.ExecuteCustomRequest(Request);
+        public override TrainAnnouncementResponse ExecuteRequest(TrainAnnouncementRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

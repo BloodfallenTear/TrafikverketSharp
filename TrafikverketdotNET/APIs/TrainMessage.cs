@@ -7,6 +7,17 @@ namespace TrafikverketdotNET
 {
     public sealed class TrainMessageResponse : BaseTrafikverketResponse
     {
+        [JsonProperty("TrainMessage")] internal TrainMessageData[] _Data { get; set; }
+        [JsonProperty("INFO")] internal Info _Info { get; set; }
+
+        [JsonIgnore] public TrainMessageData[] Data => _Data;
+        [JsonIgnore] public Info Info => _Info;
+
+        internal TrainMessageResponse() { }
+    }
+
+    public sealed class TrainMessageData
+    {
         [JsonProperty("AffectedLocation")] internal String[] _AffectedLocation { get; set; }
         [JsonProperty("CountyNo")] internal Int32[] _CountyNo { get; set; }
         [JsonProperty("Deleted")] internal Boolean _Deleted { get; set; }
@@ -84,10 +95,10 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public TrafficImpact[] TrafficImpact => _TrafficImpact;
 
-        internal TrainMessageResponse() { }
+        internal TrainMessageData() { }
     }
 
-    public class TrainMessageRequest : BaseTrafikverketRequest
+    public sealed class TrainMessageRequest : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.TrainMessage;
         public override string SchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
@@ -120,11 +131,11 @@ namespace TrafikverketdotNET
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override TrainMessageResponse[] ExecuteRequest() => base.ExecuteRequest("TrainMessage", CurrentSchemaVersion);
+        public override TrainMessageResponse ExecuteRequest() => base.ExecuteRequest("TrainMessage", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override TrainMessageResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TrainMessage", "1.4", XMLRequest);
+        public override TrainMessageResponse ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TrainMessage", "1.4", XMLRequest);
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override TrainMessageResponse[] ExecuteRequest(TrainMessageRequest Request) => base.ExecuteCustomRequest(Request);
+        public override TrainMessageResponse ExecuteRequest(TrainMessageRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

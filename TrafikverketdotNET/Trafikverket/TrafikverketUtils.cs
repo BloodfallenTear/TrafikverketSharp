@@ -40,7 +40,7 @@ namespace TrafikverketdotNET
                     var data = JObject.Parse(respString);
 
                     if (TrafikverketRequest)
-                        return data["RESPONSE"]["RESULT"].ToString();
+                        return data["RESPONSE"].ToString();
                     else
                         return data["RESPONSE"]["RESULT"][0].ToString();
                 }

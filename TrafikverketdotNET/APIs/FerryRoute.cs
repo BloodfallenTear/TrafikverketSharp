@@ -7,6 +7,17 @@ namespace TrafikverketdotNET
 {
     public sealed class FerryRouteResponse : BaseTrafikverketResponse
     {
+        [JsonProperty("FerryRoute")] internal FerryRouteData[] _Data { get; set; }
+        [JsonProperty("INFO")] internal Info _Info { get; set; }
+
+        [JsonIgnore] public FerryRouteData[] Data => _Data;
+        [JsonIgnore] public Info Info => _Info;
+
+        internal FerryRouteResponse() { }
+    }
+
+    public sealed class FerryRouteData
+    {
         [JsonProperty("Deleted")] internal Boolean _Deleted { get; set; }
         [JsonProperty("DeviationId")] internal String _DeviationId { get; set; }
         [JsonProperty("Geometry")] internal Geometry _Geometry { get; set; }
@@ -57,12 +68,12 @@ namespace TrafikverketdotNET
         /// <summary>
         /// Ledtyp.
         /// </summary>
-        [JsonIgnore] public TrafikverketdotNET.Subs.Type Type => _Type;
+        [JsonIgnore] public Subs.Type Type => _Type;
 
-        internal FerryRouteResponse() { }
+        internal FerryRouteData() { }
     }
 
-    public class FerryRouteRequest : BaseTrafikverketRequest
+    public sealed class FerryRouteRequest : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.FerryRoute;
         public override string SchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
@@ -96,11 +107,11 @@ namespace TrafikverketdotNET
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override FerryRouteResponse[] ExecuteRequest() => base.ExecuteRequest("FerryRoute", CurrentSchemaVersion);
+        public override FerryRouteResponse ExecuteRequest() => base.ExecuteRequest("FerryRoute", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>s
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override FerryRouteResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("FerryRoute", CurrentSchemaVersion, XMLRequest);
+        public override FerryRouteResponse ExecuteRequest(String XMLRequest) => base.ExecuteRequest("FerryRoute", CurrentSchemaVersion, XMLRequest);
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override FerryRouteResponse[] ExecuteRequest(FerryRouteRequest Request) => base.ExecuteCustomRequest(Request);
+        public override FerryRouteResponse ExecuteRequest(FerryRouteRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

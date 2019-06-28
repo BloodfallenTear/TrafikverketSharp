@@ -6,6 +6,17 @@ namespace TrafikverketdotNET
 {
     public sealed class RoadConditionOverviewResponse : BaseTrafikverketResponse
     {
+        [JsonProperty("RoadConditionOverview")] internal RoadConditionOverviewData[] _Data { get; set; }
+        [JsonProperty("INFO")] internal Info _Info { get; set; }
+
+        [JsonIgnore] public RoadConditionOverviewData[] Data => _Data;
+        [JsonIgnore] public Info Info => _Info;
+
+        internal RoadConditionOverviewResponse() { }
+    }
+
+    public sealed class RoadConditionOverviewData
+    {
         [JsonProperty("CountyNo")] internal Int32[] _CountyNo { get; set; }
         [JsonProperty("Deleted")] internal Boolean _Deleted { get; set; }
         [JsonProperty("EndTime")] internal DateTime _EndTime { get; set; }
@@ -58,10 +69,10 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public Boolean ValidUntilFurtherNotice => _ValidUntilFurtherNotice;
 
-        internal RoadConditionOverviewResponse() { }
+        internal RoadConditionOverviewData() { }
     }
 
-    public class RoadConditionOverviewRequest : BaseTrafikverketRequest
+    public sealed class RoadConditionOverviewRequest : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.RoadConditionOverview;
         public override string SchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
@@ -94,11 +105,11 @@ namespace TrafikverketdotNET
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override RoadConditionOverviewResponse[] ExecuteRequest() => base.ExecuteRequest("RoadConditionOverview", CurrentSchemaVersion);
+        public override RoadConditionOverviewResponse ExecuteRequest() => base.ExecuteRequest("RoadConditionOverview", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override RoadConditionOverviewResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("RoadConditionOverview", CurrentSchemaVersion, XMLRequest);
+        public override RoadConditionOverviewResponse ExecuteRequest(String XMLRequest) => base.ExecuteRequest("RoadConditionOverview", CurrentSchemaVersion, XMLRequest);
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override RoadConditionOverviewResponse[] ExecuteRequest(RoadConditionOverviewRequest Request) => base.ExecuteCustomRequest(Request);
+        public override RoadConditionOverviewResponse ExecuteRequest(RoadConditionOverviewRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

@@ -7,6 +7,17 @@ namespace TrafikverketdotNET
 {
     public sealed class WeatherStationResponse : BaseTrafikverketResponse
     {
+        [JsonProperty("WeatherStation")] internal WeatherStationData[] _Data { get; set; }
+        [JsonProperty("INFO")] internal Info _Info { get; set; }
+
+        [JsonIgnore] public WeatherStationData[] Data => _Data;
+        [JsonIgnore] public Info Info => _Info;
+
+        internal WeatherStationResponse() { }
+    }
+
+    public sealed class WeatherStationData
+    {
         [JsonProperty("Active")] internal Boolean _Active { get; set; }
         [JsonProperty("CountyNo")] internal Int32[] _CountyNo { get; set; }
         [JsonProperty("Deleted")] internal Boolean _Deleted { get; set; }
@@ -58,10 +69,10 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public Int32 RoadNumberNumeric => _RoadNumberNumeric;
 
-        internal WeatherStationResponse() { }
+        internal WeatherStationData() { }
     }
 
-    public class WeatherStationRequest : BaseTrafikverketRequest
+    public sealed class WeatherStationRequest : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.WeatherStation;
         public override string SchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
@@ -94,11 +105,11 @@ namespace TrafikverketdotNET
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override WeatherStationResponse[] ExecuteRequest() => base.ExecuteRequest("WeatherStation", CurrentSchemaVersion);
+        public override WeatherStationResponse ExecuteRequest() => base.ExecuteRequest("WeatherStation", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override WeatherStationResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("WeatherStation", CurrentSchemaVersion, XMLRequest);
+        public override WeatherStationResponse ExecuteRequest(String XMLRequest) => base.ExecuteRequest("WeatherStation", CurrentSchemaVersion, XMLRequest);
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override WeatherStationResponse[] ExecuteRequest(WeatherStationRequest Request) => base.ExecuteCustomRequest(Request);
+        public override WeatherStationResponse ExecuteRequest(WeatherStationRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

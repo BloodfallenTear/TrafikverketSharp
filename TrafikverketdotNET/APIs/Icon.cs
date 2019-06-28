@@ -1,9 +1,21 @@
 ﻿using System;
+using TrafikverketdotNET.Subs;
 using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
 {
     public sealed class IconResponse : BaseTrafikverketResponse
+    {
+        [JsonProperty("Icon")] internal IconData[] _Data { get; set; }
+        [JsonProperty("INFO")] internal Info _Info { get; set; }
+
+        [JsonIgnore] public IconData[] Data => _Data;
+        [JsonIgnore] public Info Info => _Info;
+
+        internal IconResponse() { }
+    }
+
+    public sealed class IconData
     {
         [JsonProperty("Base64")] internal String _Base64 { get; set; }
         [JsonProperty("Deleted")] internal Boolean _Deleted { get; set; }
@@ -40,10 +52,10 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public String Url => _Url;
 
-        internal IconResponse() { }
+        internal IconData() { }
     }
 
-    public class IconRequest : BaseTrafikverketRequest
+    public sealed class IconRequest : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.Icon;
         public override string SchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
@@ -77,11 +89,11 @@ namespace TrafikverketdotNET
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override IconResponse[] ExecuteRequest() => ExecuteRequest("Icon", CurrentSchemaVersion);
+        public override IconResponse ExecuteRequest() => ExecuteRequest("Icon", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override IconResponse[] ExecuteRequest(String XMLRequest) => ExecuteRequest("Icon", CurrentSchemaVersion, XMLRequest);
+        public override IconResponse ExecuteRequest(String XMLRequest) => ExecuteRequest("Icon", CurrentSchemaVersion, XMLRequest);
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override IconResponse[] ExecuteRequest(IconRequest Request) => base.ExecuteCustomRequest(Request);
+        public override IconResponse ExecuteRequest(IconRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

@@ -6,6 +6,17 @@ namespace TrafikverketdotNET
 {
     public sealed class RoadGeometryResponse : BaseTrafikverketResponse
     {
+        [JsonProperty("RoadGeometry")] internal RoadGeometryData[] _Data { get; set; }
+        [JsonProperty("INFO")] internal Info _Info { get; set; }
+
+        [JsonIgnore] public RoadGeometryData[] Data => _Data;
+        [JsonIgnore] public Info Info => _Info;
+
+        internal RoadGeometryResponse() { }
+    }
+
+    public sealed class RoadGeometryData
+    {
         [JsonProperty("County")] internal Int32 _County { get; set; }
         [JsonProperty("Deleted")] internal Boolean _Deleted { get; set; }
         [JsonProperty("Direction")] internal Direction _Direction { get; set; }
@@ -53,10 +64,10 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public DateTime TimeStamp => _TimeStamp;
 
-        internal RoadGeometryResponse() { }
+        internal RoadGeometryData() { }
     }
 
-    public class RoadGeometryRequest : BaseTrafikverketRequest
+    public sealed class RoadGeometryRequest : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.RoadGeometry;
         public override string SchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
@@ -91,11 +102,11 @@ namespace TrafikverketdotNET
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override RoadGeometryResponse[] ExecuteRequest() => base.ExecuteRequest("RoadGeometry", CurrentSchemaVersion);
+        public override RoadGeometryResponse ExecuteRequest() => base.ExecuteRequest("RoadGeometry", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override RoadGeometryResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("RoadGeometry", CurrentSchemaVersion, XMLRequest);
+        public override RoadGeometryResponse ExecuteRequest(String XMLRequest) => base.ExecuteRequest("RoadGeometry", CurrentSchemaVersion, XMLRequest);
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override RoadGeometryResponse[] ExecuteRequest(RoadGeometryRequest Request) => base.ExecuteCustomRequest(Request);
+        public override RoadGeometryResponse ExecuteRequest(RoadGeometryRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

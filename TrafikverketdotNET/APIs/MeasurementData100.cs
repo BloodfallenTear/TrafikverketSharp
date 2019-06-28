@@ -7,6 +7,15 @@ namespace TrafikverketdotNET
 {
     public sealed class MeasurementData100Response : BaseTrafikverketResponse
     {
+        [JsonProperty("MeasurementData100")] internal MeasurementData100Data[] _Data { get; set; }
+        [JsonProperty("INFO")] internal Info _Info { get; set; }
+
+        [JsonIgnore] public MeasurementData100Data[] Data => _Data;
+        [JsonIgnore] public Info Info => _Info;
+    }
+
+    public sealed class MeasurementData100Data
+    {
         [JsonProperty("County")] internal Int32 _County { get; set; }
         [JsonProperty("Deleted")] internal Boolean _Deleted { get; set; }
         [JsonProperty("Direction")] internal Direction _Direction { get; set; }
@@ -111,9 +120,11 @@ namespace TrafikverketdotNET
         /// Datum för när mätdata hämtades ut från källsystemen och 100m-data skapades.
         /// </summary>
         [JsonIgnore] public DateTime TimeStamp => _TimeStamp;
+
+        internal MeasurementData100Data() { }
     }
 
-    public class MeasurementData100Request : BaseTrafikverketRequest
+    public sealed class MeasurementData100Request : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.MeasurementData100;
         public override string SchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
@@ -152,11 +163,11 @@ namespace TrafikverketdotNET
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override MeasurementData100Response[] ExecuteRequest() => base.ExecuteRequest("MeasurementData100", CurrentSchemaVersion);
+        public override MeasurementData100Response ExecuteRequest() => base.ExecuteRequest("MeasurementData100", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override MeasurementData100Response[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("MeasurementData100", CurrentSchemaVersion, XMLRequest);
+        public override MeasurementData100Response ExecuteRequest(String XMLRequest) => base.ExecuteRequest("MeasurementData100", CurrentSchemaVersion, XMLRequest);
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override MeasurementData100Response[] ExecuteRequest(MeasurementData100Request Request) => base.ExecuteCustomRequest(Request);
+        public override MeasurementData100Response ExecuteRequest(MeasurementData100Request Request) => base.ExecuteCustomRequest(Request);
     }
 }

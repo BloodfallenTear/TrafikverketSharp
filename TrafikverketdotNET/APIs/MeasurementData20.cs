@@ -7,6 +7,17 @@ namespace TrafikverketdotNET
 {
     public sealed class MeasurementData20Response : BaseTrafikverketResponse
     {
+        [JsonProperty("MeasurementData20")] internal MeasurementData20Data[] _Data { get; set; }
+        [JsonProperty("INFO")] internal Info _Info { get; set; }
+
+        [JsonIgnore] public MeasurementData20Data[] Data => _Data;
+        [JsonIgnore] public Info Info => _Info;
+
+        internal MeasurementData20Response() { }
+    }
+
+    public sealed class MeasurementData20Data
+    {
         [JsonProperty("County")] internal Int32 _County { get; set; }
         [JsonProperty("CrossfallRutBottom")] internal Double _CrossfallRutBottom { get; set; }
         [JsonProperty("Curvature")] internal Double _Curvature { get; set; }
@@ -196,10 +207,10 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public Double WaterArea => _WaterArea;
 
-        internal MeasurementData20Response() { }
+        internal MeasurementData20Data() { }
     }
 
-    public class MeasurementData20Request : BaseTrafikverketRequest
+    public sealed class MeasurementData20Request : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.MeasurementData100;
         public override string SchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
@@ -241,11 +252,11 @@ namespace TrafikverketdotNET
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override MeasurementData20Response[] ExecuteRequest() => base.ExecuteRequest("MeasurementData20", CurrentSchemaVersion);
+        public override MeasurementData20Response ExecuteRequest() => base.ExecuteRequest("MeasurementData20", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override MeasurementData20Response[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("MeasurementData20", CurrentSchemaVersion, XMLRequest);
+        public override MeasurementData20Response ExecuteRequest(String XMLRequest) => base.ExecuteRequest("MeasurementData20", CurrentSchemaVersion, XMLRequest);
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override MeasurementData20Response[] ExecuteRequest(MeasurementData20Request Request) => base.ExecuteCustomRequest(Request);
+        public override MeasurementData20Response ExecuteRequest(MeasurementData20Request Request) => base.ExecuteCustomRequest(Request);
     }
 }

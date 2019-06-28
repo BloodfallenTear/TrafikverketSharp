@@ -129,21 +129,21 @@ namespace TrafikverketdotNET
                                     $"<LOGIN authenticationkey=\"{APIKey}\"/>" +
                                     $"<QUERY objecttype=\"{ObjectType}\" schemaversion=\"{SchemaVersion}\"/>" +
                                    $"</REQUEST>");
-            return JsonConvert.DeserializeObject<T>(JObject.Parse(resp).ToString());
+            return JsonConvert.DeserializeObject<T>(resp);
         }
 
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         protected virtual T ExecuteRequest(String ObjectType, String SchemaVersion, String RequestQuery)
         {
             var resp = POSTRequest(RequestQuery);
-            return JsonConvert.DeserializeObject<T>(JObject.Parse(resp).ToString());
+            return JsonConvert.DeserializeObject<T>(resp);
         }
 
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
         protected virtual T ExecuteCustomRequest(BaseTrafikverketRequest Request)
         {
             var resp = POSTRequest(Request.CreateXMLString(), true);
-            return JsonConvert.DeserializeObject<T>(JObject.Parse(resp).ToString());
+            return JsonConvert.DeserializeObject<T>(resp);
         }
     }
 }

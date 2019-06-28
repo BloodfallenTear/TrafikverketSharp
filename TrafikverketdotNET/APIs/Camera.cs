@@ -6,6 +6,17 @@ namespace TrafikverketdotNET
 {
     public sealed class CameraResponse : BaseTrafikverketResponse
     {
+        [JsonProperty("Camera")] internal CameraData[] _Data { get; set; }
+        [JsonProperty("INFO")] internal Info _Info { get; set; }
+
+        [JsonIgnore] public CameraData[] Data => _Data;
+        [JsonIgnore] public Info Info => _Info;
+
+        internal CameraResponse() { }
+    }
+
+    public sealed class CameraData
+    {
         [JsonProperty("Active")] internal Boolean _Active { get; set; }
         [JsonProperty("CameraGroup")] internal String _CameraGroup { get; set; }
         [JsonProperty("ContentType")] internal String _ContentType { get; set; }
@@ -103,10 +114,10 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public Geometry Geometry => _Geometry;
 
-        internal CameraResponse() { }
+        internal CameraData() { }
     }
 
-    public class CameraRequest : BaseTrafikverketRequest
+    public sealed class CameraRequest : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.Camera;
         public override String SchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
@@ -139,11 +150,11 @@ namespace TrafikverketdotNET
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override CameraResponse[] ExecuteRequest() => base.ExecuteRequest("Camera", CurrentSchemaVersion);
+        public override CameraResponse ExecuteRequest() => base.ExecuteRequest("Camera", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override CameraResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("Camera", "1", XMLRequest);
+        public override CameraResponse ExecuteRequest(String XMLRequest) => base.ExecuteRequest("Camera", "1", XMLRequest);
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override CameraResponse[] ExecuteRequest(CameraRequest Request) => base.ExecuteCustomRequest(Request);
+        public override CameraResponse ExecuteRequest(CameraRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

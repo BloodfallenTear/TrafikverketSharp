@@ -1,10 +1,20 @@
 ﻿using System;
-using TrafikverketdotNET.Subs.RoadConditionResponse;
 using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
 {
     public sealed class RoadConditionResponse : BaseTrafikverketResponse
+    {
+        [JsonProperty("RoadCondition")] internal RoadConditionData[] _Data { get; set; }
+        [JsonProperty("INFO")] internal Subs.Info _Info { get; set; }
+
+        [JsonIgnore] public RoadConditionData[] Data => _Data;
+        [JsonIgnore] public Subs.Info Info => _Info;
+
+        internal RoadConditionResponse() { }
+    }
+
+    public sealed class RoadConditionData
     {
         [JsonProperty("Cause")] internal String[] _Cause { get; set; }
         [JsonProperty("ConditionCode")] internal Int32 _ConditionCode { get; set; }
@@ -14,7 +24,7 @@ namespace TrafikverketdotNET
         [JsonProperty("Creator")] internal String _Creator { get; set; }
         [JsonProperty("Deleted")] internal Boolean _Deleted { get; set; }
         [JsonProperty("EndTime")] internal DateTime _EndTime { get; set; }
-        [JsonProperty("Geometry")] internal Geometry _Geometry { get; set; }
+        [JsonProperty("Geometry")] internal Subs.RoadConditionResponse.Geometry _Geometry { get; set; }
         [JsonProperty("IconId")] internal String _IconId { get; set; }
         [JsonProperty("Id")] internal String _Id { get; set; }
         [JsonProperty("LocationText")] internal String _LocationText { get; set; }
@@ -61,7 +71,7 @@ namespace TrafikverketdotNET
         /// <summary>
         /// Geometrisk punkt i koordinatsystem. Fältet kan användas för geo-frågor.
         /// </summary>
-        [JsonIgnore] public Geometry Geometry => _Geometry;
+        [JsonIgnore] public Subs.RoadConditionResponse.Geometry Geometry => _Geometry;
         /// <summary>
         /// Ikonid.
         /// </summary>
@@ -105,10 +115,10 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public String[] Warning => _Warning;
 
-        internal RoadConditionResponse() { }
+        internal RoadConditionData() { }
     }
 
-    public class RoadConditionRequest : BaseTrafikverketRequest
+    public sealed class RoadConditionRequest : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.RoadCondition;
         public override string SchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
@@ -141,11 +151,11 @@ namespace TrafikverketdotNET
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override RoadConditionResponse[] ExecuteRequest() => base.ExecuteRequest("RoadCondition", CurrentSchemaVersion);
+        public override RoadConditionResponse ExecuteRequest() => base.ExecuteRequest("RoadCondition", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override RoadConditionResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("RoadCondition", CurrentSchemaVersion, XMLRequest);
+        public override RoadConditionResponse ExecuteRequest(String XMLRequest) => base.ExecuteRequest("RoadCondition", CurrentSchemaVersion, XMLRequest);
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override RoadConditionResponse[] ExecuteRequest(RoadConditionRequest Request) => base.ExecuteCustomRequest(Request);
+        public override RoadConditionResponse ExecuteRequest(RoadConditionRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

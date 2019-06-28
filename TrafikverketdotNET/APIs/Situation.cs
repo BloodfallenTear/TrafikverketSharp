@@ -1,10 +1,22 @@
 ﻿using System;
+using TrafikverketdotNET.Subs;
 using TrafikverketdotNET.Subs.SituationResponse;
 using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
 {
     public sealed class SituationResponse : BaseTrafikverketResponse
+    {
+        [JsonProperty("Situation")] internal SituationData[] _Data { get; set; }
+        [JsonProperty("INFO")] internal Info _Info { get; set; }
+
+        [JsonIgnore] public SituationData[] Data => _Data;
+        [JsonIgnore] public Info Info => _Info;
+
+        internal SituationResponse() { }
+    }
+
+    public sealed class SituationData
     {
         [JsonProperty("CountryCode")] internal String _CountryCode { get; set; }
         [JsonProperty("Deleted")] internal Boolean _Deleted { get; set; }
@@ -40,10 +52,10 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public DateTime VersionTime => _VersionTime;
 
-        internal SituationResponse() { }
+        internal SituationData() { }
     }
 
-    public class SituationRequest : BaseTrafikverketRequest
+    public sealed class SituationRequest : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.Situation;
         public override string SchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
@@ -76,11 +88,11 @@ namespace TrafikverketdotNET
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override SituationResponse[] ExecuteRequest() => base.ExecuteRequest("Situation", CurrentSchemaVersion);
+        public override SituationResponse ExecuteRequest() => base.ExecuteRequest("Situation", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override SituationResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("Situation", CurrentSchemaVersion, XMLRequest);
+        public override SituationResponse ExecuteRequest(String XMLRequest) => base.ExecuteRequest("Situation", CurrentSchemaVersion, XMLRequest);
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override SituationResponse[] ExecuteRequest(SituationRequest Request) => base.ExecuteCustomRequest(Request);
+        public override SituationResponse ExecuteRequest(SituationRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

@@ -1,4 +1,4 @@
-# Trafikverket.NET v0.30.0
+# Trafikverket.NET v0.30.2
 A C# .NET Standard library for Trafikverket. This is **not** an official Trafikverket library.
 
 ## Documentation
@@ -11,7 +11,7 @@ This project currently only officially supports .NET Standard 2.0.
 For simplicity, you can now download the library via [NuGet](https://www.nuget.org/packages/Trafikverket.NET/)!
 >`Install-Package Trafikverket.NET`
 
-## Usage
+## Us
 ### How to create a basic, unfiltered TrainStation request:
 ```csharp
 Trafikverket Trafikverket = new Trafikverket("Your-Key-Here");

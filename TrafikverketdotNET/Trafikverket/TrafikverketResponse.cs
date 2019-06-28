@@ -1,59 +1,57 @@
-﻿namespace TrafikverketdotNET
+﻿using Newtonsoft.Json;
+
+namespace TrafikverketdotNET
 {
     public class TrafikverketResponse
     {
         #region Internal
-        internal TrainAnnouncementResponse[] _TrainAnnouncementResponse { get; set; }
-        internal TrainMessageResponse[] _TrainMessageResponse { get; set; }
-        internal TrainStationResponse[] _TrainStationResponse { get; set; }
+        [JsonProperty("TrainAnnouncement")] internal TrainAnnouncementResponse[] _TrainAnnouncementResponse { get; set; }
+        [JsonProperty("TrainMessage")] internal TrainMessageResponse[] _TrainMessageResponse { get; set; }
+        [JsonProperty("TrainStation")] internal TrainStationResponse[] _TrainStationResponse { get; set; }
 
-        internal CameraResponse[] _CameraResponse { get; set; }
-        internal FerryAnnouncementResponse[] _FerryAnnouncementResponse { get; set; }
-        internal FerryRouteResponse[] _FerryRouteResponse { get; set; }
-        internal IconResponse[] _IconResponse { get; set; }
-        internal ParkingResponse[] _ParkingResponse { get; set; }
-        internal RoadConditionResponse[] _RoadConditionResponse { get; set; }
-        internal RoadConditionOverviewResponse[] _RoadConditionOverviewResponse { get; set; }
-        internal SituationResponse[] _SituationResponse { get; set; }
-        internal TrafficFlowResponse[] _TrafficFlowResponse { get; set; }
-        internal TrafficSafetyCameraResponse[] _TrafficSafetyCameraResponse { get; set; }
-        internal TravelTimeRouteResponse[] _TravelTimeRouteResponse { get; set; }
-        internal WeatherStationResponse[] _WeatherStationResponse { get; set; }
+        [JsonProperty("Camera")] internal CameraResponse[] _CameraResponse { get; set; }
+        [JsonProperty("FerryAnnouncement")] internal FerryAnnouncementResponse[] _FerryAnnouncementResponse { get; set; }
+        [JsonProperty("FerryRoute")] internal FerryRouteResponse[] _FerryRouteResponse { get; set; }
+        [JsonProperty("Icon")] internal IconResponse[] _IconResponse { get; set; }
+        [JsonProperty("Parking")] internal ParkingResponse[] _ParkingResponse { get; set; }
+        [JsonProperty("RoadCondition")] internal RoadConditionResponse[] _RoadConditionResponse { get; set; }
+        [JsonProperty("RoadConditionOverview")] internal RoadConditionOverviewResponse[] _RoadConditionOverviewResponse { get; set; }
+        [JsonProperty("Situation")] internal SituationResponse[] _SituationResponse { get; set; }
+        [JsonProperty("TrafficFlow")] internal TrafficFlowResponse[] _TrafficFlowResponse { get; set; }
+        [JsonProperty("TrafficSafetyCamera")] internal TrafficSafetyCameraResponse[] _TrafficSafetyCameraResponse { get; set; }
+        [JsonProperty("TravelTimeRoute")] internal TravelTimeRouteResponse[] _TravelTimeRouteResponse { get; set; }
+        [JsonProperty("WeatherStation")] internal WeatherStationResponse[] _WeatherStationResponse { get; set; }
 
-        internal MeasurementData100Response[] _MeasurementData100Response { get; set; }
-        internal MeasurementData20Response[] _MeasurementData20Response { get; set; }
-        internal PavementDataResponse[] _PavementDataResponse { get; set; }
-        internal RoadDataResponse[] _RoadDataResponse { get; set; }
-        internal RoadGeometryResponse[] _RoadGeometryResponse { get; set; }
-
-        internal System.Collections.Generic.Dictionary<ObjectType, Subs.Info> _Info { get; set; }
+        [JsonProperty("MeasurementData100")] internal MeasurementData100Response[] _MeasurementData100Response { get; set; }
+        [JsonProperty("MeasurementData20")] internal MeasurementData20Response[] _MeasurementData20Response { get; set; }
+        [JsonProperty("PavementData")] internal PavementDataResponse[] _PavementDataResponse { get; set; }
+        [JsonProperty("RoadData")] internal RoadDataResponse[] _RoadDataResponse { get; set; }
+        [JsonProperty("RoadGeometryResponses")] internal RoadGeometryResponse[] _RoadGeometryResponse { get; set; }
         #endregion
 
         #region Public
-        public TrainAnnouncementResponse[] TrainAnnouncementResponse => _TrainAnnouncementResponse;
-        public TrainMessageResponse[] TrainMessageResponse => _TrainMessageResponse;
-        public TrainStationResponse[] TrainStationResponse => _TrainStationResponse;
+        [JsonIgnore] public TrainAnnouncementResponse[] TrainAnnouncementResponse => _TrainAnnouncementResponse;
+        [JsonIgnore] public TrainMessageResponse[] TrainMessageResponse => _TrainMessageResponse;
+        [JsonIgnore] public TrainStationResponse[] TrainStationResponse => _TrainStationResponse;
 
-        public CameraResponse[] CameraResponse => _CameraResponse;
-        public FerryAnnouncementResponse[] FerryAnnouncementResponse => _FerryAnnouncementResponse;
-        public FerryRouteResponse[] FerryRouteResponse => _FerryRouteResponse;
-        public IconResponse[] IconResponse => _IconResponse;
-        public ParkingResponse[] ParkingResponse => _ParkingResponse;
-        public RoadConditionResponse[] RoadConditionResponse => _RoadConditionResponse;
-        public RoadConditionOverviewResponse[] RoadConditionOverviewResponse => _RoadConditionOverviewResponse;
-        public SituationResponse[] SituationResponse => _SituationResponse;
-        public TrafficFlowResponse[] TrafficFlowResponse => _TrafficFlowResponse;
-        public TrafficSafetyCameraResponse[] TrafficSafetyCameraResponse => _TrafficSafetyCameraResponse;
-        public TravelTimeRouteResponse[] TravelTimeRouteResponse => _TravelTimeRouteResponse;
-        public WeatherStationResponse[] WeatherStationResponse => _WeatherStationResponse;
+        [JsonIgnore] public CameraResponse[] CameraResponse => _CameraResponse;
+        [JsonIgnore] public FerryAnnouncementResponse[] FerryAnnouncementResponse => _FerryAnnouncementResponse;
+        [JsonIgnore] public FerryRouteResponse[] FerryRouteResponse => _FerryRouteResponse;
+        [JsonIgnore] public IconResponse[] IconResponse => _IconResponse;
+        [JsonIgnore] public ParkingResponse[] ParkingResponse => _ParkingResponse;
+        [JsonIgnore] public RoadConditionResponse[] RoadConditionResponse => _RoadConditionResponse;
+        [JsonIgnore] public RoadConditionOverviewResponse[] RoadConditionOverviewResponse => _RoadConditionOverviewResponse;
+        [JsonIgnore] public SituationResponse[] SituationResponse => _SituationResponse;
+        [JsonIgnore] public TrafficFlowResponse[] TrafficFlowResponse => _TrafficFlowResponse;
+        [JsonIgnore] public TrafficSafetyCameraResponse[] TrafficSafetyCameraResponse => _TrafficSafetyCameraResponse;
+        [JsonIgnore] public TravelTimeRouteResponse[] TravelTimeRouteResponse => _TravelTimeRouteResponse;
+        [JsonIgnore] public WeatherStationResponse[] WeatherStationResponse => _WeatherStationResponse;
 
-        public MeasurementData100Response[] MeasurementData100Response => _MeasurementData100Response;
-        public MeasurementData20Response[] MeasurementData20Response => _MeasurementData20Response;
-        public PavementDataResponse[] PavementDataResponse => _PavementDataResponse;
-        public RoadDataResponse[] RoadDataResponse => _RoadDataResponse;
-        public RoadGeometryResponse[] RoadGeometryResponse => _RoadGeometryResponse;
-
-        public System.Collections.Generic.Dictionary<ObjectType, Subs.Info> Info => _Info;
+        [JsonIgnore] public MeasurementData100Response[] MeasurementData100Response => _MeasurementData100Response;
+        [JsonIgnore] public MeasurementData20Response[] MeasurementData20Response => _MeasurementData20Response;
+        [JsonIgnore] public PavementDataResponse[] PavementDataResponse => _PavementDataResponse;
+        [JsonIgnore] public RoadDataResponse[] RoadDataResponse => _RoadDataResponse;
+        [JsonIgnore] public RoadGeometryResponse[] RoadGeometryResponse => _RoadGeometryResponse;
         #endregion
 
         internal TrafikverketResponse() { }

@@ -1,10 +1,20 @@
 ﻿using System;
-using TrafikverketdotNET.Subs.TravelTimeRouteResponse;
 using Newtonsoft.Json;
 
 namespace TrafikverketdotNET
 {
     public sealed class TravelTimeRouteResponse : BaseTrafikverketResponse
+    {
+        [JsonProperty("TravelTimeRoute")] internal TravelTimeRouteData[] _Data { get; set; }
+        [JsonProperty("INFO")] internal Subs.Info _Info { get; set; }
+
+        [JsonIgnore] public TravelTimeRouteData[] Data => _Data;
+        [JsonIgnore] public Subs.Info Info => _Info;
+
+        internal TravelTimeRouteResponse() { }
+    }
+
+    public sealed class TravelTimeRouteData
     {
         [JsonProperty("AverageFunctionalRoadClass")] internal Int32 _AverageFunctionalRoadClass { get; set; }
         [JsonProperty("CountryCode")] internal String _CountryCode { get; set; }
@@ -12,7 +22,7 @@ namespace TrafikverketdotNET
         [JsonProperty("Deleted")] internal Boolean _Deleted { get; set; }
         [JsonProperty("ExpectedFreeFlowTravelTime")] internal Int32 _ExpectedFreeFlowTravelTime { get; set; }
         [JsonProperty("FreeFlowTravelTime")] internal Int32 _FreeFlowTravelTime { get; set; }
-        [JsonProperty("Geometry")] internal Geometry _Geometry { get; set; }
+        [JsonProperty("Geometry")] internal Subs.TravelTimeRouteResponse.Geometry _Geometry { get; set; }
         [JsonProperty("Id")] internal String _Id { get; set; }
         [JsonProperty("Length")] internal Int32 _Length { get; set; }
         [JsonProperty("MeasureTime")] internal DateTime _MeasureTime { get; set; }
@@ -53,7 +63,7 @@ namespace TrafikverketdotNET
         /// <summary>
         /// Geometrisk punkt i koordinatsystem. Fältet kan användas för geo-frågor.
         /// </summary>
-        [JsonIgnore] public Geometry Geometry => _Geometry;
+        [JsonIgnore] public Subs.TravelTimeRouteResponse.Geometry Geometry => _Geometry;
         /// <summary>
         /// Anger id för sträckan. Fältet är nyckel för objektet.
         /// </summary>
@@ -91,10 +101,10 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public Int32 TravelTime => _TravelTime;
 
-        internal TravelTimeRouteResponse() { }
+        internal TravelTimeRouteData() { }
     }
 
-    public class TravelTimeRouteRequest : BaseTrafikverketRequest
+    public sealed class TravelTimeRouteRequest : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.TravelTimeRoute;
         public override string SchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
@@ -127,11 +137,11 @@ namespace TrafikverketdotNET
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override TravelTimeRouteResponse[] ExecuteRequest() => base.ExecuteRequest("TravelTimeRoute", CurrentSchemaVersion);
+        public override TravelTimeRouteResponse ExecuteRequest() => base.ExecuteRequest("TravelTimeRoute", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override TravelTimeRouteResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TravelTimeRoute", CurrentSchemaVersion, XMLRequest);
+        public override TravelTimeRouteResponse ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TravelTimeRoute", CurrentSchemaVersion, XMLRequest);
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override TravelTimeRouteResponse[] ExecuteRequest(TravelTimeRouteRequest Request) => base.ExecuteCustomRequest(Request);
+        public override TravelTimeRouteResponse ExecuteRequest(TravelTimeRouteRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

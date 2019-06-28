@@ -6,6 +6,17 @@ namespace TrafikverketdotNET
 {
     public sealed class TrafficFlowResponse : BaseTrafikverketResponse
     {
+        [JsonProperty("TrafficFlow")] internal TrafficFlowData[] _Data { get; set; }
+        [JsonProperty("INFO")] internal Info _Info { get; set; }
+
+        [JsonIgnore] public TrafficFlowData[] Data => _Data;
+        [JsonIgnore] public Info Info => _Info;
+
+        internal TrafficFlowResponse() { }
+    }
+
+    public sealed class TrafficFlowData
+    {
         [JsonProperty("AverageVehicleSpeed")] internal Int32 _AverageVehicleSpeed { get; set; }
         [JsonProperty("CountyNo")] internal Int32[] _CountyNo { get; set; }
         [JsonProperty("Deleted")] internal Boolean _Deleted { get; set; }
@@ -74,10 +85,10 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public String VehicleType => _VehicleType;
 
-        internal TrafficFlowResponse() { }
+        internal TrafficFlowData() { }
     }
 
-    public class TrafficFlowRequest : BaseTrafikverketRequest
+    public sealed class TrafficFlowRequest : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.TrafficFlow;
         public override string SchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
@@ -110,11 +121,11 @@ namespace TrafikverketdotNET
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override TrafficFlowResponse[] ExecuteRequest() => base.ExecuteRequest("TrafficFlow", CurrentSchemaVersion);
+        public override TrafficFlowResponse ExecuteRequest() => base.ExecuteRequest("TrafficFlow", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override TrafficFlowResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TrafficFlow", CurrentSchemaVersion, XMLRequest);
+        public override TrafficFlowResponse ExecuteRequest(String XMLRequest) => base.ExecuteRequest("TrafficFlow", CurrentSchemaVersion, XMLRequest);
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override TrafficFlowResponse[] ExecuteRequest(TrafficFlowRequest Request) => base.ExecuteCustomRequest(Request);
+        public override TrafficFlowResponse ExecuteRequest(TrafficFlowRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }

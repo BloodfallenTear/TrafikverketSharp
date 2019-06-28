@@ -6,6 +6,18 @@ namespace TrafikverketdotNET
 {
     public sealed class PavementDataResponse : BaseTrafikverketResponse
     {
+        [JsonProperty("PavementData")] internal PavementDataData[] _Data { get; set; }
+        [JsonProperty("INFO")] internal Info _Info { get; set; }
+
+        [JsonIgnore] public PavementDataData[] Data => _Data;
+        [JsonIgnore] public Info Info => _Info;
+
+
+        internal PavementDataResponse() { }
+    }
+
+    public sealed class PavementDataData
+    {
         [JsonProperty("BallMillValue")] internal Double _BallMillValue { get; set; }
         [JsonProperty("Binder")] internal String _Binder { get; set; }
         [JsonProperty("Contractor")] internal String _Contractor { get; set; }
@@ -135,10 +147,10 @@ namespace TrafikverketdotNET
         /// </summary>
         [JsonIgnore] public DateTime WarrantyIsDue => _WarrantyIsDue;
 
-        internal PavementDataResponse() { }
+        internal PavementDataData() { }
     }
 
-    public class PavementDataRequest : BaseTrafikverketRequest
+    public sealed class PavementDataRequest : BaseTrafikverketRequest
     {
         public override ObjectType ObjectType => ObjectType.PavementData;
         public override string SchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
@@ -175,11 +187,11 @@ namespace TrafikverketdotNET
         public override String CurrentSchemaVersion => Trafikverket.SchemaVersions[this.ObjectType];
 
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override PavementDataResponse[] ExecuteRequest() => base.ExecuteRequest("PavementData", CurrentSchemaVersion);
+        public override PavementDataResponse ExecuteRequest() => base.ExecuteRequest("PavementData", CurrentSchemaVersion);
         /// <param name="XMLRequest">Custom requests must be written in XML, check "https://api.trafikinfo.trafikverket.se/API/TheRequest" in order to create custom requests.</param>
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override PavementDataResponse[] ExecuteRequest(String XMLRequest) => base.ExecuteRequest("PavementData", CurrentSchemaVersion, XMLRequest);
+        public override PavementDataResponse ExecuteRequest(String XMLRequest) => base.ExecuteRequest("PavementData", CurrentSchemaVersion, XMLRequest);
         /// <exception cref="TrafikverketException">Thrown when there's an error returned from Trafikverket.</exception>
-        public override PavementDataResponse[] ExecuteRequest(PavementDataRequest Request) => base.ExecuteCustomRequest(Request);
+        public override PavementDataResponse ExecuteRequest(PavementDataRequest Request) => base.ExecuteCustomRequest(Request);
     }
 }
