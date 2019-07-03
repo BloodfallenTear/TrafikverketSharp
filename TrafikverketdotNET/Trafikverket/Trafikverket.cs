@@ -141,25 +141,9 @@ namespace TrafikverketdotNET
             var trafikverketResp = new TrafikverketResponse();
 
             for(Int32 i = 0; i < array.Count; i++)
-            {
-                switch(Request.Queries[i].ObjectType)
-                {
-                    case ObjectType.TrainAnnouncement:
-                        var tempArrayCopy = trafikverketResp._TrainAnnouncementResponse;
-                        var tempArray = new TrainAnnouncementResponse[tempArrayCopy.Length + 1];
-                        tempArray[tempArray.Length - 1]._Data = JsonConvert.DeserializeObject<TrainAnnouncementData[]>(array[i].ToString());
-                        trafikverketResp._TrainAnnouncementResponse = tempArray;
-                        break;
-                    case ObjectType.TrainStation:
-                        var tempArrayCopy = trafikverketResp._TrainStationResponse;
-                        var tempArray = new TrainAnnouncementResponse[tempArrayCopy.Length + 1];
-                        tempArray[tempArray.Length - 1]._Data = JsonConvert.DeserializeObject<TrainStationData[]>(array[i].ToString());
-                        trafikverketResp._TrainAnnouncementResponse = tempArray;
-                        break;
-                }
-            }
+                trafikverketResp.AddResponse(Request.Queries[i].ObjectType, array[i]);
 
-            return JsonConvert.DeserializeObject<TrafikverketResponse>(resp);
+            return trafikverketResp;
         }
 
 

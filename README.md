@@ -18,21 +18,21 @@ Trafikverket Trafikverket = new Trafikverket("Your-Key-Here");
 TrainStationResponse[] Response = Trafikverket.TrainStation.ExecuteRequest();
 Console.WriteLine(String.Join(",\r\n", Response.Select(x => x.AdvertisedLocationName)));
 ```
-Example Response: Abborrträsk, Almnäs, Astrid Lindgrens värld, Almedal, *[...]*
+Example Ouput: Abborrträsk, Almnäs, Astrid Lindgrens värld, Almedal, *[...]*
 
 ### How to create a more advanced, unfiltered TrainAnnouncement request (this way, you can create multiple queries instead of being restricted to only one like above):
 ```csharp
 TrafikverketResponse Response = Trafikverket.ExecuteRequest(new TrafikverketRequest(new Query(ObjectType.TrainAnnouncement, "1")));
 Console.WriteLine(String.Join(",\r\n", Response.TrainAnnouncementResponse.Select(x => x.LocationSignature)));
 ```
-Example Response: Hel, Sod, Sol, Sci, *[...]*
+Example Ouput: Hel, Sod, Sol, Sci, *[...]*
 
 ### How to create a more advanced, filtered TrainMessage request:
 ```csharp
 TrafikverketResponse Response = Trafikverket.ExecuteRequest(new TrafikverketRequest(new Query(ObjectType.TrainMessage, "1.4", new Filter().AddOperator(new FilterOperator(FilterOperatorType.EQ, "AffectedLocation", "Cst")))));
 Console.WriteLine(String.Join(",\r\n", Response.TrainMessageResponse.Select(x => x.Header)));
 ```
-Example Response: Banarbete, Banarbete, Signalfel, Banarbete, *[...]*
+Example Ouput: Banarbete, Banarbete, Signalfel, Banarbete, *[...]*
 
 ### SchemaVersions Dictionary
 To get which Schema Version the library supports, you can access a dictionary located in the 'Trafikverket' class.
