@@ -1,36 +1,42 @@
-# Trafikverket.NET v0.31.0
+# Trafikverket.NET v1.0.0
 A C# .NET Standard library for Trafikverket. This is **not** an official Trafikverket library.
 
 ## Documentation
 All of the XML documentation found in this API library comes from [Trafikverket](https://api.trafikinfo.trafikverket.se/API/Model).
 
 ## Support
-This project currently only officially supports .NET Standard 2.0.
+This project supports .NET Standard 2.0, .NET Framework 4.5, .NET Framework 4.6 and .NET Framework 4.7.
 
 ## NuGet
-For simplicity, you can now download the library via [NuGet](https://www.nuget.org/packages/Trafikverket.NET/)!
+Download the library via [NuGet](https://www.nuget.org/packages/Trafikverket.NET/)!
 >`Install-Package Trafikverket.NET`
 
 ## Usage
 ### How to create a basic, unfiltered TrainStation request:
 ```csharp
 Trafikverket Trafikverket = new Trafikverket("Your-Key-Here");
-TrainStationResponse[] Response = Trafikverket.TrainStation.ExecuteRequest();
-Console.WriteLine(String.Join(",\r\n", Response.Select(x => x.AdvertisedLocationName)));
+TrainStationResponse TrainStationResponse = Trafikverket.TrainStation.ExecuteRequest();
+Console.WriteLine(String.Join(",\r\n", TrainStationResponse.Data.Select(h => h.AdvertisedLocationName)));
 ```
 Example Ouput: Abborrträsk, Almnäs, Astrid Lindgrens värld, Almedal, *[...]*
 
 ### How to create a more advanced, unfiltered TrainAnnouncement request (this way, you can create multiple queries instead of being restricted to only one like above):
 ```csharp
-TrafikverketResponse Response = Trafikverket.ExecuteRequest(new TrafikverketRequest(new Query(ObjectType.TrainAnnouncement, "1")));
-Console.WriteLine(String.Join(",\r\n", Response.TrainAnnouncementResponse.Select(x => x.LocationSignature)));
+TrafikverketResponse TrafikverketResponse = Trafikverket.ExecuteRequest(new TrafikverketRequest(new Query(ObjectType.TrainAnnouncement, "1")));
+Console.WriteLine(String.Join(",\r\n", TrafikverketResponse.TrainAnnouncementResponse[0].Data.Select(x => x.LocationSignature)));
 ```
 Example Ouput: Hel, Sod, Sol, Sci, *[...]*
 
 ### How to create a more advanced, filtered TrainMessage request:
 ```csharp
-TrafikverketResponse Response = Trafikverket.ExecuteRequest(new TrafikverketRequest(new Query(ObjectType.TrainMessage, "1.4", new Filter().AddOperator(new FilterOperator(FilterOperatorType.EQ, "AffectedLocation", "Cst")))));
-Console.WriteLine(String.Join(",\r\n", Response.TrainMessageResponse.Select(x => x.Header)));
+Filter Filter = new Filter();
+Filter.AddOperator(new FilterOperator(FilterOperatorType.EQ, "AffectedLocation", "Cst"));
+
+Query Query = new Query(ObjectType.TrainMessage, Trafikverket.SchemaVersions[ObjectType.TrainMessage]);
+Query.SetFilter(Filter);
+
+TrafikverketResponse TrafikverketResponse = trafikverket.ExecuteRequest(new TrafikverketRequest(Query));
+Console.WriteLine(String.Join(",\r\n", TrafikverketResponse.TrainMessageResponse[0].Data.Select(x => x.Header)));
 ```
 Example Ouput: Banarbete, Banarbete, Signalfel, Banarbete, *[...]*
 

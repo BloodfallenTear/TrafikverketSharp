@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
@@ -27,6 +28,10 @@ namespace TrafikverketdotNET
                 var content = new StringContent(RequestQuery, Encoding.UTF8, "application/xml");
                 using (var http = new HttpClient())
                 {
+                    #if NET45 || NET46 || NET47
+                    ServicePointManager.Expect100Continue = true;
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+                    #endif
                     var resp = http.PostAsync(URL, content).Result;
                     if (!resp.IsSuccessStatusCode)
                     {

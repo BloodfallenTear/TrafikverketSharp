@@ -111,7 +111,7 @@ namespace TrafikverketdotNET
         public String CreateXMLString() => $"<REQUEST><LOGIN authenticationkey=\"AUTHKEY\"/>{Query.CreateXMLString()}</REQUEST>";
     }
 
-    public abstract class BaseTrafikverket<T, U> : TrafikverketUtils where T : BaseTrafikverketResponse where U : class
+    public abstract class BaseTrafikverket<T, U> : TrafikverketUtils where T : BaseTrafikverketResponse where U : BaseTrafikverketRequest
     {
         protected BaseTrafikverket(String APIKey) : base(APIKey) { }
 

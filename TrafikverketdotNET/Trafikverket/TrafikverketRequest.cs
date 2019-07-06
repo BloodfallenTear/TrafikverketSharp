@@ -8,12 +8,7 @@ namespace TrafikverketdotNET
         public Query[] Queries => _Queries;
 
         public TrafikverketRequest(Query Query) { this._Queries = new Query[] { Query }; }
-        public TrafikverketRequest(params Query[] Queries)
-        {
-            this._Queries = new Query[Queries.Length];
-            for (UInt16 i = 0; i < Queries.Length; i++)
-                this._Queries[i] = Queries[i];
-        }
+        public TrafikverketRequest(params Query[] Queries) { this._Queries = Queries; }
 
         public String CreateXMLString()
         {
