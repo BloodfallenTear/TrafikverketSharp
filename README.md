@@ -35,7 +35,7 @@ Filter.AddOperator(new FilterOperator(FilterOperatorType.EQ, "AffectedLocation",
 Query Query = new Query(ObjectType.TrainMessage, Trafikverket.SchemaVersions[ObjectType.TrainMessage]);
 Query.SetFilter(Filter);
 
-TrafikverketResponse TrafikverketResponse = trafikverket.ExecuteRequest(new TrafikverketRequest(Query));
+TrafikverketResponse TrafikverketResponse = Trafikverket.ExecuteRequest(new TrafikverketRequest(Query));
 Console.WriteLine(String.Join(",\r\n", TrafikverketResponse.TrainMessageResponse[0].Data.Select(x => x.Header)));
 ```
 Example Ouput: Banarbete, Banarbete, Signalfel, Banarbete, *[...]*
