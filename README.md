@@ -49,7 +49,9 @@ Example: `String SchemaVersion = Trafikverket.SchemaVersions[ObjectType.TrainSta
 For every release, you can find the changelog to see what has changed from the previous release to that one under the said release. If a release contains nothing but the 'Included APIs' tab, that means nothing that should concern the user has been changed and a few APIs have been added. If you still are curious for all the things which have been changed from version x to version y, you can check out the commit history since I try to document everything I do there.
 
 ## Dependencies
-This project uses one third-party dependency, which is [Newtonsoft.Json (12.0.2)](https://www.newtonsoft.com/) by user [JamesNK](https://github.com/JamesNK). NuGet Link: [Newtonsoft.Json (12.0.2)](https://www.nuget.org/packages/Newtonsoft.Json/12.0.2/). [Insight](https://github.com/BloodfallenTear/Trafikverket.NET/network/dependencies).
+This project uses the following dependencies: 
+1. [Newtonsoft.Json (12.0.2)](https://www.newtonsoft.com/) by [JamesNK](https://github.com/JamesNK), NuGet Link: [Newtonsoft.Json (12.0.2)](https://www.nuget.org/packages/Newtonsoft.Json/12.0.2/).
+2. [System.Net.Http (4.3.4)](https://www.nuget.org/packages/System.Net.Http/) by Microsoft, NuGet Link: [System.Net.Http (4.3.4)](https://www.nuget.org/packages/System.Net.Http/), (.NET Framework 4.5, .NET Framework 4.6, .NET Framework 4.7 only). 
 
 ## API Implementation List (For more detailed progress head to [Projects](https://github.com/BloodfallenTear/Trafikverket.NET/projects/1)):
 - [x] TrainAnnouncement 1.5 - Tidtabellsinformation, d.v.s information om tåg på trafikplatser (stationer, hållplatser) varje post motsvarar ett visst tåg vid respektive trafikplats.
