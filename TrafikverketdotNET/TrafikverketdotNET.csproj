@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45;net46;net47</TargetFrameworks>
-    <Version>1.0.0</Version>
+    <Version>1.1.0</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company>BloodfallenTear</Company>
     <Authors>BloodfallenTear</Authors>
@@ -11,6 +11,7 @@
     <PackageId>Trafikverket.NET</PackageId>
     <RepositoryUrl>https://github.com/BloodfallenTear/Trafikverket.NET</RepositoryUrl>
     <Description>A C# .NET Standard library for Trafikverket.</Description>
+    <PackageTags>Trafikverket, api-wrapper, csharp-library</PackageTags>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <NoWarn>1701;1702;IDE0002;IDE0049;IDE0060;CS1591</NoWarn>

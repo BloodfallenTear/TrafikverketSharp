@@ -24,6 +24,11 @@ namespace TrafikverketdotNET
         internal UInt32 _Skip { get; set; }
         internal Boolean _LastModified { get; set; }
         internal Int32 _ChangeID { get; set; }
+        internal Boolean _SSEURL { get; set; }
+        internal Filter _Filter { get; set; }
+        internal String[] _Include { get; set; }
+        internal String[] _Exclude { get; set; }
+        internal String _Distinct { get; set; }
 
         public String ID => _ID;
         public Boolean IncludeDeletedObjects => _IncludeDeletedObjects;
@@ -32,15 +37,8 @@ namespace TrafikverketdotNET
         public UInt32 Skip => _Skip;
         public Boolean LastModified => _LastModified;
         public Int32 ChangeID => _ChangeID;
-
-        internal Filter _Filter { get; set; }
-
+        public Boolean SSEURL => _SSEURL;
         public Filter Filter => _Filter;
-
-        internal String[] _Include { get; set; }
-        internal String[] _Exclude { get; set; }
-        internal String _Distinct { get; set; }
-
         public String[] Include => _Include;
         public String[] Exclude => _Exclude;
         public String Distinct => _Distinct;
@@ -51,7 +49,7 @@ namespace TrafikverketdotNET
         protected BaseTrafikverketRequest(Filter Filter) { this._Filter = Filter; this._Query = GetQuery(this.ObjectType, this.SchemaVersion); }
         protected BaseTrafikverketRequest(String ID = null, Boolean IncludeDeletedObjects = false,
                                           UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                          Boolean LastModified = false, Int32 ChangeID = 0,
+                                          Boolean LastModified = false, Int32 ChangeID = 0, Boolean SSEURL = false,
                                           String[] Include = null, String[] Exclude = null, String Distinct = null, Filter Filter = null)
         {
             this._ID = ID;
@@ -61,6 +59,7 @@ namespace TrafikverketdotNET
             this._Skip = Skip;
             this._LastModified = LastModified;
             this._ChangeID = ChangeID;
+            this._SSEURL = SSEURL;
             this._Include = Include;
             this._Exclude = Exclude;
             this._Distinct = Distinct;
@@ -86,6 +85,8 @@ namespace TrafikverketdotNET
                 query.SetLastModified(LastModified);
             if (ChangeID != 0)
                 query.SetChangeID(ChangeID);
+            if (SSEURL)
+                query.SetSSEURL(SSEURL);
             if (Include != null)
                 query.SetInclude(Include);
             if (Exclude != null)
@@ -103,6 +104,7 @@ namespace TrafikverketdotNET
         protected void SetSkip(UInt32 Skip) { this._Skip = Skip; }
         protected void SetLastModified(Boolean LastModified) { this._LastModified = LastModified; }
         protected void SetChangeID(Int32 ChangeID) { this._ChangeID = ChangeID; }
+        protected void SetSSEURL(Boolean SSEURL) { this._SSEURL = SSEURL; }
 
         protected void SetInclude(params String[] Include) { this._Include = Include; }
         protected void SetExclude(params String[] Exclude) { this._Exclude = Exclude; }

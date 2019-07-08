@@ -132,10 +132,10 @@ namespace TrafikverketdotNET
         public MeasurementData100Request(Filter Filter) : base(Filter) { }
         public MeasurementData100Request(String ID = null, Boolean IncludeDeletedObjects = false,
                                          UInt32 Limit = 0, String OrderBy = null, UInt32 Skip = 0,
-                                         Boolean LastModified = false, Int32 ChangeID = 0,
+                                         Boolean LastModified = false, Int32 ChangeID = 0, Boolean SSEURL = false,
                                          String[] Include = null, String[] Exclude = null, String Distinct = null, Filter Filter = null) : base(ID, IncludeDeletedObjects,
-                                                                                                                                                        Limit, OrderBy, Skip, LastModified,
-                                                                                                                                                        ChangeID, Include, Exclude, Distinct, Filter){ }
+                                                                                                                                                Limit, OrderBy, Skip, LastModified,
+                                                                                                                                                ChangeID, SSEURL, Include, Exclude, Distinct, Filter){ }
     }
 
     /// <summary>

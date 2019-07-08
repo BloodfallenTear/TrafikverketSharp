@@ -13,6 +13,12 @@ namespace TrafikverketdotNET
         private UInt32 _Skip { get; set; }
         private Boolean _LastModified { get; set; }
         private Int32 _ChangeID { get; set; }
+        private Boolean _SSEURL { get; set; }
+        private Filter _Filter { get; set; }
+        private String[] _Include { get; set; }
+        private String[] _Exclude { get; set; }
+        private String _Distinct { get; set; }
+
 
         public ObjectType ObjectType => _ObjectType;
         public String SchemaVersion => _SchemaVersion;
@@ -23,15 +29,8 @@ namespace TrafikverketdotNET
         public UInt32 Skip => _Skip;
         public Boolean LastModified => _LastModified;
         public Int32 ChangeID => _ChangeID;
-
-        private Filter _Filter { get; set; }
-
+        public Boolean SSEURL => _SSEURL;
         public Filter Filter => _Filter;
-
-        private String[] _Include { get; set; }
-        private String[] _Exclude { get; set; }
-        private String _Distinct { get; set; }
-
         public String[] Include => _Include;
         public String[] Exclude => _Exclude;
         public String Distinct => _Distinct;
@@ -72,6 +71,8 @@ namespace TrafikverketdotNET
                 xmlString += $" lastmodified=\"{LastModified}\"";
             if (ChangeID != 0)
                 xmlString += $" changeid=\"{ChangeID}\"";
+            if (SSEURL)
+                xmlString += $" sseurl=\"{SSEURL}\"";
 
             if (Filter?.FilterOperators?.Length > 0 || Filter?.FilterGroups?.Length > 0)
                 xmlString += $">{Filter.CreateXMLString()}";
@@ -96,6 +97,7 @@ namespace TrafikverketdotNET
         public void SetSkip(UInt32 Skip) { this._Skip = Skip; }
         public void SetLastModified(Boolean LastModified) { this._LastModified = LastModified; }
         public void SetChangeID(Int32 ChangeID) { this._ChangeID = ChangeID; }
+        public void SetSSEURL(Boolean SSEURL) { this._SSEURL = SSEURL; }
 
         public void SetInclude(params String[] Include) { this._Include = Include; }
         public void SetExclude(params String[] Exclude) { this._Exclude = Exclude; }

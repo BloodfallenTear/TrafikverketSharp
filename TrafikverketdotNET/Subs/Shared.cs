@@ -58,9 +58,11 @@ namespace TrafikverketdotNET.Subs
     {
         [JsonProperty("LASTMODIFIED")] internal LastModified _LastModified { get; set; }
         [JsonProperty("LASTCHANGEID")] internal String _LastChangeID { get; set; }
+        [JsonProperty("SSEURL")] internal String _SSEURL { get; set; }
 
         [JsonIgnore] public LastModified LastModified => _LastModified;
         [JsonIgnore] public String LastChangeID => _LastChangeID;
+        [JsonIgnore] public String SSEURL => _SSEURL;
     }
 
     public sealed class LastModified
