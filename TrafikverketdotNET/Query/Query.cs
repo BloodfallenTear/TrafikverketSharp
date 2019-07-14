@@ -14,11 +14,12 @@ namespace TrafikverketdotNET
         private Boolean _LastModified { get; set; }
         private Int32 _ChangeID { get; set; }
         private Boolean _SSEURL { get; set; }
+
         private Filter _Filter { get; set; }
+
         private String[] _Include { get; set; }
         private String[] _Exclude { get; set; }
         private String _Distinct { get; set; }
-
 
         public ObjectType ObjectType => _ObjectType;
         public String SchemaVersion => _SchemaVersion;
@@ -30,7 +31,9 @@ namespace TrafikverketdotNET
         public Boolean LastModified => _LastModified;
         public Int32 ChangeID => _ChangeID;
         public Boolean SSEURL => _SSEURL;
+
         public Filter Filter => _Filter;
+
         public String[] Include => _Include;
         public String[] Exclude => _Exclude;
         public String Distinct => _Distinct;
@@ -74,7 +77,7 @@ namespace TrafikverketdotNET
             if (SSEURL)
                 xmlString += $" sseurl=\"{SSEURL}\"";
 
-            if (Filter?.FilterOperators?.Length > 0 || Filter?.FilterGroups?.Length > 0)
+            if (Filter?.FilterOperators?.Length > 0 || Filter?.FilterOperators != null || Filter?.FilterGroups != null || Filter?.FilterGroups?.Length > 0)
                 xmlString += $">{Filter.CreateXMLString()}";
             else
                 xmlString += $">";

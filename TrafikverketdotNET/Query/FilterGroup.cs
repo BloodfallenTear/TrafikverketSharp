@@ -15,12 +15,17 @@ namespace TrafikverketdotNET
         public FilterGroup(FilterOperatorGroup FilterGroupOperator)
         {
             this._FilterGroupOperator = FilterGroupOperator;
-            _FilterOperators = default(FilterOperator[]);
-            _FilterGroups = default(FilterGroup[]);
+            this._FilterGroups = null;
+            this._FilterOperators = null;
         }
 
         public FilterGroup AddOperator(FilterOperator FilterOperator)
         {
+            if (_FilterOperators == null)
+            {
+                this._FilterOperators = new FilterOperator[] { FilterOperator };
+                return this;
+            }
             var data = new FilterOperator[_FilterOperators.Length + 1];
             for (UInt16 i = 0; i < _FilterOperators.Length; i++)
                 data[i] = _FilterOperators[i];
@@ -31,23 +36,30 @@ namespace TrafikverketdotNET
 
         public FilterGroup AddGroup(FilterGroup FilterGroup)
         {
+            if (_FilterGroups == null)
+            {
+                this._FilterGroups = new FilterGroup[] { FilterGroup };
+                return this;
+            }
             var data = new FilterGroup[_FilterGroups.Length + 1];
             for (UInt16 i = 0; i < _FilterGroups.Length; i++)
                 data[i] = _FilterGroups[i];
             data[_FilterGroups.Length] = FilterGroup;
             _FilterGroups = data;
-            return this;
+            return FilterGroup;
         }
 
         public String CreateXMLString()
         {
             var xmlString = $"<{FilterGroupOperator}>";
 
-            foreach (var group in FilterGroups)
-                xmlString += $"{group.CreateXMLString()}";
+            if (FilterGroups != null)
+                foreach (var group in FilterGroups)
+                    xmlString += $"{group.CreateXMLString()}";
 
-            foreach (var oper in FilterOperators)
-                xmlString += $"{oper.CreateXMLString()}";
+            if (FilterOperators != null)
+                foreach (var oper in FilterOperators)
+                    xmlString += $"{oper.CreateXMLString()}";
 
             return $"{xmlString}</{FilterGroupOperator}>";
         }

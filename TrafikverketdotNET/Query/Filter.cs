@@ -10,7 +10,7 @@ namespace TrafikverketdotNET
         public FilterOperator[] FilterOperators => _FilterOperators;
         public FilterGroup[] FilterGroups => _FilterGroups;
 
-        public Filter() { _FilterOperators = default(FilterOperator[]); _FilterGroups = default(FilterGroup[]); }
+        public Filter() { this._FilterOperators = null; this._FilterGroups = null; }
 
         public Filter AddOperator(FilterOperator FilterOperator)
         {
@@ -29,9 +29,9 @@ namespace TrafikverketdotNET
 
         public Filter AddGroup(FilterGroup FilterGroup)
         {
-            if(_FilterGroups?.Length == 0)
+            if (_FilterGroups == null)
             {
-                _FilterGroups = new FilterGroup[] { FilterGroup };
+                this._FilterGroups = new FilterGroup[] { FilterGroup };
                 return this;
             }
             var data = new FilterGroup[_FilterGroups.Length + 1];
@@ -45,14 +45,13 @@ namespace TrafikverketdotNET
         public String CreateXMLString()
         {
             String xmlString = null;
-
             if (_FilterGroups != null)
                 foreach (var group in FilterGroups)
                     xmlString += $"{group.CreateXMLString()}";
 
             if (_FilterOperators != null)
                 foreach (var oper in FilterOperators)
-                xmlString += $"{oper.CreateXMLString()}";
+                    xmlString += $"{oper.CreateXMLString()}";
 
             if (xmlString.Length > 0)
                 return $"<FILTER>{xmlString}</FILTER>";
