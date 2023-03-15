@@ -11,11 +11,11 @@ namespace TrafikverketdotNET.Subs.TrainAnnouncementResponse
         /// <summary>
         /// Tågsammansättningskod
         /// </summary>
-        [JsonIgnore] public String Code { get; set; }
+        [JsonIgnore] public String Code => _Code;
         /// <summary>
         /// Tågsammansättning, ex: "Vagnsordning 7, 6, 5, 4, 2, 1"
         /// </summary>
-        [JsonIgnore] public String Description { get; set; }
+        [JsonIgnore] public String Description => _Description;
 
         internal TrainComposition() { }
     }

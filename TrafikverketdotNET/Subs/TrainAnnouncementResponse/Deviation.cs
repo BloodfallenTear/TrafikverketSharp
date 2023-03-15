@@ -11,11 +11,11 @@ namespace TrafikverketdotNET.Subs.TrainAnnouncementResponse
         /// <summary>
         /// Full Orsakskod.
         /// </summary>
-        [JsonIgnore] public String Code { get; set; }
+        [JsonIgnore] public String Code => _Code;
         /// <summary>
         /// Eventuell avvikelse, ex: "Buss ersätter", "Spårändrat", "Kort tåg", "Ej servering" o.s.v.
         /// </summary>
-        [JsonIgnore] public String Description { get; set; }
+        [JsonIgnore] public String Description => _Description;
 
         internal Deviation() { }
     }
