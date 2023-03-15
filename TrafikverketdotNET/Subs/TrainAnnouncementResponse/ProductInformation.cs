@@ -11,11 +11,11 @@ namespace TrafikverketdotNET.Subs.TrainAnnouncementResponse
         /// <summary>
         /// Kod för beskrivning av tåget.
         /// </summary>
-        [JsonIgnore] public String Code { get; set; }
+        [JsonIgnore] public String Code => _Code;
         /// <summary>
         /// Beskrivning av tåget, ex. "Tågkompaniet", "SJ InterCity", "TiB/Tågkomp".
         /// </summary>
-        [JsonIgnore] public String Description { get; set; }
+        [JsonIgnore] public String Description => _Description;
 
         internal ProductInformation() { }
     }
